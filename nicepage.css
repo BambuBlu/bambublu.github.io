@@ -41850,7 +41850,7 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-table-alt-custom-color-14 tr:nth-child(even)
         {
             color: #ffffff;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(60,69,82,0.46);
         }
 
         .u-input.u-custom-color-14,
@@ -41859,7 +41859,7 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-button-style.u-custom-color-14[class*="u-border-"]
         {
             color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: rgba(60,69,82,0.46) !important;
         }
 
         .u-button-style.u-custom-color-14:hover,
@@ -41874,7 +41874,7 @@ a.u-link.u-text-hover-grey-90:hover {
         li.active > .u-button-style.u-button-style.u-custom-color-14[class*="u-border-"]
         {
             color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: rgba(54,62,74,0.46) !important;
         }
 
         .u-hover-custom-color-14:hover,
@@ -41900,11 +41900,11 @@ a.u-link.u-text-hover-grey-90:hover {
         input.u-field-input.u-field-input.u-active-custom-color-14:checked
         {
             color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: rgba(60,69,82,0.46) !important;
         }
 
         a.u-link.u-hover-custom-color-14:hover {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(60,69,82,0.46) !important;
         }
 
         
@@ -43437,14 +43437,14 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-border-custom-color-14.u-field-input.u-field-input,
         .u-separator-custom-color-14:after
         {
-            border-color: rgba(0,0,0,0.5);
-            stroke: rgba(0,0,0,0.5);
+            border-color: rgba(60,69,82,0.46);
+            stroke: rgba(60,69,82,0.46);
         }
 
         .u-button-style.u-border-custom-color-14
         {
-            border-color: rgba(0,0,0,0.5) !important;
-            color: rgba(0,0,0,0.5) !important;
+            border-color: rgba(60,69,82,0.46) !important;
+            color: rgba(60,69,82,0.46) !important;
             background-color: transparent !important;
         }
 
@@ -43452,7 +43452,7 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-button-style.u-border-custom-color-14:focus
         {
             border-color: transparent !important;
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(54,62,74,0.46) !important;
             background-color: transparent !important;
         }
 
@@ -43468,18 +43468,18 @@ a.u-link.u-text-hover-grey-90:hover {
         li.active > a.u-button-style.u-button-style.u-border-active-custom-color-14,
         input.u-field-input.u-field-input.u-border-active-custom-color-14:checked
         {
-            color: rgba(0,0,0,0.5) !important;
-            border-color: rgba(0,0,0,0.5) !important;
+            color: rgba(60,69,82,0.46) !important;
+            border-color: rgba(60,69,82,0.46) !important;
         }
 
         .u-link.u-border-custom-color-14[class*="u-border-"]
         {
-            border-color: rgba(0,0,0,0.5) !important;
+            border-color: rgba(60,69,82,0.46) !important;
         }
 
         .u-link.u-border-custom-color-14[class*="u-border-"]:hover
         {
-            border-color: rgba(0,0,0,0.5) !important;
+            border-color: rgba(54,62,74,0.46) !important;
         }
         
         
@@ -44995,7 +44995,7 @@ a.u-link.u-text-hover-grey-90:hover {
         a.u-button-style.u-text-custom-color-14,
         a.u-button-style.u-text-custom-color-14[class*="u-border-"]
         {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(60,69,82,0.46) !important;
         }
 
         a.u-button-style.u-text-custom-color-14:hover,
@@ -45007,7 +45007,7 @@ a.u-link.u-text-hover-grey-90:hover {
         a.u-button-style.u-button-style.u-text-custom-color-14.active,
         a.u-button-style.u-button-style.u-text-custom-color-14[class*="u-border-"].active
         {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(54,62,74,0.46) !important;
         }
 
         a.u-button-style:hover > .u-text-hover-custom-color-14,
@@ -45034,7 +45034,7 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-popupmenu-items.u-text-hover-custom-color-14 .u-nav-link:hover,
         .u-popupmenu-items.u-popupmenu-items.u-text-active-custom-color-14 .u-nav-link.active
         {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(60,69,82,0.46) !important;
         }
 
         .u-text-custom-color-14 .u-svg-link,
@@ -45043,17 +45043,17 @@ a.u-link.u-text-hover-grey-90:hover {
         .u-button-style.u-button-style.active > .u-text-active-custom-color-14 .u-svg-link,
         .u-text-hover-custom-color-14:focus .u-svg-link
         {
-            fill: rgba(0,0,0,0.5);
+            fill: rgba(60,69,82,0.46);
         }
 
         .u-link.u-text-custom-color-14:hover
         {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(54,62,74,0.46) !important;
         }
 
         a.u-link.u-text-hover-custom-color-14:hover
         {
-            color: rgba(0,0,0,0.5) !important;
+            color: rgba(60,69,82,0.46) !important;
         }
         
         
