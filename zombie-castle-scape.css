@@ -362,7 +362,6 @@
 
   .u-section-1 .u-line-1 {
     margin-top: -97px;
-    height: auto;
     width: auto;
     margin-right: initial;
     margin-left: initial;
@@ -396,14 +395,13 @@
   }
 
   .u-section-1 .u-layout-cell-1 {
-    min-height: 100px;
+    min-height: 208px;
   }
 
   .u-section-1 .u-image-1 {
     height: 193px;
-    width: 340px;
-    margin-left: 0;
-    margin-right: 0;
+    width: 316px;
+    margin-right: auto;
   }
 
   .u-section-1 .u-layout-cell-2 {
@@ -422,7 +420,7 @@
 
   .u-section-1 .u-text-3 {
     margin-top: -477px;
-    font-size: 2.25rem;
+    font-size: 1.125rem;
   }
 
   .u-section-1 .u-text-4 {
