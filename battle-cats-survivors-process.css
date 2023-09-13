@@ -3,12 +3,12 @@
 }
 
 .u-section-1 .u-sheet-1 {
-  min-height: 905px;
+  min-height: 736px;
 }
 
 .u-section-1 .u-text-1 {
   font-size: 2.25rem;
-  margin: 60px 30px 0 7px;
+  margin: 144px 30px 0 7px;
 }
 
 .u-section-1 .u-text-2 {
@@ -28,34 +28,34 @@
 .u-section-1 .u-text-4 {
   font-size: 1.125rem;
   font-weight: 300;
-  margin: 20px 10px 60px 40px;
+  margin: 20px 10px 0 40px;
+}
+
+.u-section-1 .u-image-1 {
+  width: 179px;
+  height: 206px;
+  margin: 46px auto 60px;
 }
 
 @media (max-width: 1199px) {
   .u-section-1 .u-text-1 {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .u-section-1 .u-text-2 {
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .u-section-1 .u-text-3 {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .u-section-1 .u-text-4 {
-    margin-left: 0;
-    margin-right: 0;
+    margin-left: 10px;
   }
 }
 
 @media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 746px;
+  }
+
   .u-section-1 .u-text-1 {
     font-size: 1.875rem;
+    width: auto;
   }
 }
 
@@ -66,8 +66,31 @@
 }
 
 @media (max-width: 575px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 725px;
+  }
+
   .u-section-1 .u-text-1 {
     font-size: 1.5rem;
+  }
+
+  .u-section-1 .u-text-2 {
+    font-size: 0.875rem;
+    width: auto;
+    margin-top: 10px;
+  }
+
+  .u-section-1 .u-text-3 {
+    font-size: 0.875rem;
+    margin-top: 26px;
+  }
+
+  .u-section-1 .u-text-4 {
+    font-size: 0.875rem;
+  }
+
+  .u-section-1 .u-image-1 {
+    margin-top: 26px;
   }
 } .u-section-2 {
   background-image: none;
@@ -315,6 +338,7 @@
   }
 
   .u-section-3 .u-text-3 {
+    margin-top: 20px;
     margin-right: 314px;
     margin-left: 0;
   }
@@ -470,15 +494,19 @@
   }
 
   .u-section-3 .u-text-5 {
-    margin-top: 196px;
+    margin-top: 20px;
   }
 
   .u-section-3 .u-text-6 {
-    margin-top: -196px;
+    margin-top: 20px;
   }
 
   .u-section-3 .u-text-7 {
     margin-top: -514px;
+  }
+
+  .u-section-3 .u-text-8 {
+    margin-top: 20px;
   }
 
   .u-section-3 .u-gallery-1 {
@@ -567,6 +595,10 @@
   .u-section-4 .u-text-3 {
     margin-right: 314px;
     margin-left: 0;
+  }
+
+  .u-section-4 .u-gallery-1 {
+    margin-top: 20px;
   }
 
   .u-section-4 .u-gallery-inner-1 {
