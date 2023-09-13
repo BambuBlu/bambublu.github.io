@@ -335,8 +335,8 @@
 .u-section-2 .u-image-1 {
   width: 270px;
   height: 270px;
-  background-image: url("images/_DSC0109.jpg");
-  background-position: 50% 0%;
+  background-image: url("images/Gata122.jpg");
+  background-position: 50% 50%;
   margin: -82px auto 0 61px;
 }
 
@@ -647,12 +647,11 @@
 
 @media (max-width: 767px) {
   .u-section-2 .u-sheet-1 {
-    min-height: 360px;
+    min-height: 451px;
   }
 
   .u-section-2 .u-layout-wrap-1 {
-    margin-top: 7px;
-    margin-bottom: 7px;
+    margin-bottom: 60px;
   }
 
   .u-section-2 .u-layout-cell-1 {
@@ -1308,7 +1307,15 @@
 
 @media (max-width: 767px) {
   .u-section-3 .u-sheet-1 {
-    min-height: 405px;
+    min-height: 412px;
+  }
+
+  .u-section-3 .u-list-1 {
+    margin-top: 48px;
+    margin-bottom: 1px;
+    width: auto;
+    margin-right: initial;
+    margin-left: initial;
   }
 
   .u-section-3 .u-repeater-1 {
@@ -2164,7 +2171,7 @@
 
   .u-section-5 .u-text-1 {
     font-size: 1.125rem;
-    margin-top: 0;
+    margin-top: 25px;
     margin-right: -260px;
     margin-left: 9px;
   }
@@ -2230,8 +2237,8 @@
   }
 
   .u-section-5 .u-btn-2 {
-    margin-top: -23px;
-    margin-right: -176px;
+    margin-top: -25px;
+    margin-right: -183px;
     margin-left: auto;
   }
 
