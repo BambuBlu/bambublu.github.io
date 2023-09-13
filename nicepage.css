@@ -46561,7 +46561,7 @@ a.u-link.u-text-hover-grey-90:hover {
 
 .u-header .u-layout-wrap-1 {
   width: 529px;
-  margin: 0 10px 0 auto;
+  margin: -1px 10px 0 auto;
 }
 
 .u-header .u-layout-cell-1 {
@@ -46644,7 +46644,7 @@ a.u-link.u-text-hover-grey-90:hover {
 .u-header .u-text-1 {
   font-family: RocletteDisplay-Normal;
   font-size: 1.125rem;
-  margin: -41px 513px 12px 0;
+  margin: -40px 513px 13px 0;
 }
 @media (max-width: 1199px) {
   .u-header .u-sheet-1 {
