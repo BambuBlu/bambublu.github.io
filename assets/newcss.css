@@ -219,6 +219,8 @@ img {
   color: var(--first-color);
 }
 
+/*========ARTICLE BLOG=============*/
+
 .article-title {
   font-size: 1.5rem;
 }
@@ -276,6 +278,8 @@ img {
   order: -2;
 }
 
+/*========SIDE BAR=============*/
+
 .sidebar-widget {
   background-color: var(--container-color);
   border: 1px solid var(--scroll-bar-color);
@@ -332,6 +336,108 @@ img {
   object-fit: cover;
   margin-left: 1rem;
 }
+
+/*========ENTRY BLOG=============*/
+
+.entry-blog {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2.5rem;
+  transition: 0.3s ease;
+}
+
+.entry-blog:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.entry-blog-title {
+  font-size: var(--h2-font-size);
+  margin-bottom: 1rem;
+  color: var(--title-color);
+}
+
+.entry-blog-body {
+  font-size: var(--normal-font-size);
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 1rem 0;
+}
+
+.entry-image {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+.entry-blog-meta {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.entry-blog-date {
+  font-size: var(--small-font-size);
+  color: var(--text-color-light);
+  font-style: italic;
+}
+
+.entry-gif {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.entry-code {
+  background-color: #1e1e1e;
+  color: #f8f8f2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-family: "Fira Code", "Courier New", monospace;
+  font-size: 0.9rem;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+}
+
+.entry-code code {
+  display: block;
+  white-space: pre;
+  min-width: 100%;
+}
+
+
+.entry-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+}
+
+.entry-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+
 
 @media screen and (max-width: 767px) {
   .nav__menu {
@@ -1107,6 +1213,18 @@ img {
   .project__img {
     width: 200px;
   }
+
+  .entry-code {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+}
+
+@media screen and (min-width: 351px) and (max-width: 567px) {
+  .entry-code {
+    font-size: 0.75rem;
+    padding: 0.65rem;
+  }
 }
 
 /* For medium Devices */
@@ -1136,6 +1254,11 @@ img {
     display: grid;
     grid-template-columns: 0.6fr;
     justify-content: center;
+  }
+
+  .entry-code {
+    font-size: 0.8rem;
+    padding: 0.75rem;
   }
 }
 
@@ -1178,6 +1301,11 @@ img {
       height: 60px;
       object-fit: cover;
       margin-left: 1rem;
+    }
+
+    .entry-code {
+      font-size: 0.8rem;
+      padding: 0.75rem;
     }
   }
 
@@ -1397,6 +1525,13 @@ img {
     object-fit: cover;
     border-radius: 0.5rem;
     margin-left: 1rem;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 968px) {
+  .entry-code {
+    font-size: 0.85rem;
+    padding: 0.85rem;
   }
 }
 
