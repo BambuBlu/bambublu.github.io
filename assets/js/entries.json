@@ -1,0 +1,31 @@
+[
+  {
+    "id": "entry-2025-06-12-a",
+    "title": "Developing a Android Password Manager App — Introduction",
+    "date": "2025-06-12",
+    "tags": ["blog", "project", "default"],
+    "content": [
+      {
+        "type": "text",
+        "value": "Welcome to the first post in this series documenting the development of a secure Android password manager app. In this space, I will share the entire process — from initial technical decisions to implementation and testing."
+      },
+      {
+        "type": "text",
+        "value": "The app aims to provide a reliable and practical solution for users to securely store their passwords, leveraging best practices in data encryption, local storage architecture, and user authentication."
+      },
+      {
+        "type": "text",
+        "value": "Beyond technical aspects, I will also cover UI and UX design considerations to ensure the app is not only secure but also intuitive and easy to use."
+      },
+      {
+        "type": "text",
+        "value": "Each update will reflect a step in the iterative development and testing cycle, so anyone interested can follow along and learn alongside this project."
+      },
+      {
+        "type": "text",
+        "value": "Thank you for joining me on this journey!"
+      }
+    ]
+  }
+]
+
