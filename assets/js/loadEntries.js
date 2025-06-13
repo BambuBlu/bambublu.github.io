@@ -12,9 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let entries = [];
     let filteredEntries = [];
-    let currentPage = 1;
+    let currentPage = location.pathname.split("/").pop().replace(".html", "");
+    const jsonPath = `/assets/json/entries_${currentPage}.json`;
 
-    fetch("../assets/js/entries.json")
+    fetch(jsonPath)
         .then(res => res.json())
         .then(data => {
             entries = data;
@@ -99,8 +100,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 const safeTag = tag.toLowerCase().replace(/\s+/g, "-");
                 tagEl.classList.add(safeTag || "default");
-
                 tagEl.textContent = tag;
+
+
+                tagEl.style.cursor = "pointer";
+                tagEl.title = `Filter by "${tag}"`;
+                tagEl.addEventListener("click", () => {
+                    tagFilter.value = tag;
+                    applyFilters();
+
+
+                    document.querySelector(".entry-filter").scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                });
+
                 tagWrapper.appendChild(tagEl);
             });
 
@@ -168,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return btn;
         };
 
-        nav.appendChild(buildButton("« Anterior", currentPage - 1, currentPage === 1));
+        nav.appendChild(buildButton("« Previous", currentPage - 1, currentPage === 1));
 
         let startPage = Math.max(1, currentPage - 1);
         let endPage = Math.min(startPage + 2, totalPages);
@@ -177,10 +192,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         for (let i = startPage; i <= endPage; i++) {
-            nav.appendChild(buildButton(`Página ${i}`, i, false, i === currentPage));
+            nav.appendChild(buildButton(`Page ${i}`, i, false, i === currentPage));
         }
 
-        nav.appendChild(buildButton("Siguiente »", currentPage + 1, currentPage === totalPages));
+        nav.appendChild(buildButton("Next »", currentPage + 1, currentPage === totalPages));
         wrapper.appendChild(nav);
     }
 
@@ -258,6 +273,21 @@ document.addEventListener("DOMContentLoaded", () => {
     tagFilter.addEventListener("change", applyFilters);
     monthFilter.addEventListener("change", applyFilters);
     sortOrder.addEventListener("change", applyFilters);
+
+    const clearBtn = document.getElementById("clearFilters");
+
+    clearBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        tagFilter.value = "all";
+        monthFilter.value = "all";
+        sortOrder.value = "desc";
+        applyFilters();
+
+        document.querySelector(".entry-filter").scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    });
 });
 
 

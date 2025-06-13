@@ -129,46 +129,49 @@
       <!--===================== Blog =====================-->
 
       <section class="blog section" id="blog">
-        <div class="side_container side_container-flex">
+        <div class="container">
 
-          <main role="main">
+          <div class="entry-filter">
+            <input type="text" id="searchInput" placeholder="Search keyword..." />
 
-            <article class="article-recent">
-              <div class="article-recent-main">
-                <h2 class="article-title">Android Password Manager App</h2>
-                <p class="article-body">
-                  This post series outlines the ongoing development of a secure Android-based Password Manager App.
-                  The documentation includes technical decisions regarding data encryption, local storage architecture, user authentication flow, UI/UX considerations,
-                  and implementation using modern Android development practices.
-                  Each update reflects a step in the iterative development and testing process.
-                </p>
-                <a href="subpages/passmanagerapp.html" class="article-read-more">CONTINUE READING</a>
+            <label for="tagFilter">Category:</label>
+            <select id="tagFilter">
+              <option value="all">All</option>
+            </select>
+
+            <label for="monthFilter">Month:</label>
+            <select id="monthFilter">
+              <option value="all">All</option>
+            </select>
+
+            <label for="sortOrder">Sort by:</label>
+            <select id="sortOrder">
+              <option value="desc">Newest</option>
+              <option value="asc">Oldest</option>
+            </select>
+
+            <button id="clearFilters" class="entry-clear-btn">Clear filters</button>
+          </div>
+
+          <div id="projectPaginationTop" class="pagination"></div>
+
+          <div class="blog-main">
+            <main id="projectList"></main>
+
+            <aside class="sidebar">
+              <div class="sidebar-widget">
+                <h2 class="widget-title">Recent Updates</h2>
+                <div id="sidebarRecent" class="sidebar-recent-list"></div>
               </div>
+            </aside>
+          </div>
 
-              <div class="article-recent-secondary">
-                <img src="assets/img/passManagerApp.jpeg" alt="" class="article-image">
-                <p class="article-info">Last update | June 11, 2025</p>
-              </div>
-            </article>
-
-
-          </main>
-
-          <aside class="sidebar">
-
-            <div class="sidebar-widget">
-              <h2 class="widget-title">Recent Updates</h2>
-
-              <a href="subpages/passmanagerapp.html" class="widget-link">
-                <div class="widget-recent-post">
-                  <h3 class="widget-recent-post-title">Android Password Manager App</h3>
-                  <img src="assets/img/passManagerApp.jpeg" alt="" class="widget-image">
-                </div>
-              </a>
-            </div>
-          </aside>
+          <div class="pagination"></div>
         </div>
       </section>
+
+
+
 
       <!--=================== Portfolio ===================-->
       <section class="portfolio section" id="portfolio">
@@ -337,5 +340,7 @@
     <script type="text/javascript" src="assets/css/swiper-bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/2205d59d52.js" crossorigin="anonymous"></script>
     <script src="assets/js/pageScripts.js"></script>
+    <script src="assets/js/loadProjects.js"></script>
+
   </body>
 </html>

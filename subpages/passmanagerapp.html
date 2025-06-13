@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tobias Moscatelli - Blog</title>
-    <link rel="stylesheet" href="../assets/css/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="../assets/css/pageStyles.css" />
+    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/pageStyles.css" />
     <link
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v4.0.8/css/line.css"
@@ -152,9 +153,13 @@
               <option value="desc">Latest</option>
               <option value="asc">Oldest</option>
             </select>
+            <button id="clearFilters" class="entry-clear-btn">Clear filters</button>
           </div>
+
           <div id="pagination-top" class="pagination"></div>
+
           <main role="main" id="entryContainer"></main>
+
           <div id="pagination-bottom" class="pagination"></div>
         </div>
       </section>
