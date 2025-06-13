@@ -365,7 +365,7 @@ img {
 /*========SIDE BAR=============*/
 .sidebar {
   width: 90%;
-  max-width: 300px;
+  max-width: 250px;
   margin: 0 auto;
 }
 
@@ -429,13 +429,16 @@ img {
   -webkit-box-orient: vertical;
   font-weight: 500;
   color: var(--title-color);
+  margin-right: auto;
 }
 
 .widget-post-content {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
   cursor: pointer;
 }
 
@@ -445,6 +448,7 @@ img {
   object-fit: cover;
   border-radius: 0.5rem;
   flex-shrink: 0;
+  margin-left: auto;
 }
 
 /*========ENTRY BLOG=============*/
