@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(jsonPath)
         .then(res => res.json())
         .then(data => {
-            entries = data;
+            entries = data.slice(1);
             generateTagOptions(entries);
             generateMonthOptions(entries);
             applyFiltersFromURL();
@@ -200,7 +200,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function formatDate(iso) {
-        const d = new Date(iso);
+        const [year, month, day] = iso.split("-");
+        const d = new Date(+year, +month - 1, +day);
         return d.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",
