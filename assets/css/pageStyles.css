@@ -659,15 +659,15 @@ img {
   user-select: none;
 }
 
-/* Colors by tag */
-.entry-tag.tag { background-color: #8e44ad; }
-.entry-tag.godot { background-color: #3498db; }
-.entry-tag.project { background-color: #2ecc71; }
+/* Color by tag */
+.entry-tag.kotlin { background-color: #8e44ad; }
+.entry-tag.React-native { background-color: #3498db; }
+.entry-tag.android { background-color: #2ecc71; }
 .entry-tag.dev { background-color: #e67e22; }
 .entry-tag.ui { background-color: #e74c3c; }
-.entry-tag.blog { background-color: #9b59b6; }
+.entry-tag.blog { background-color: #b69559; }
 .entry-tag.test { background-color: #34495e; }
-.entry-tag.default { background-color: #7f8c8d; }
+.entry-tag.project { background-color: #7f8c8d; }
 
 
 /*========PAGINATION BLOG=============*/

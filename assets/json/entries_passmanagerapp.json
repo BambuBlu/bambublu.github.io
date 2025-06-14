@@ -1,9 +1,9 @@
 [
   {
     "id": "entry-2025-06-11-a",
-    "title": "Android Password Manager App",
+    "title": "Password Manager App",
     "date": "2025-06-11",
-    "tags": ["blog", "project", "default"],
+    "tags": ["blog", "project", "kotlin", "android"],
     "content": [
       {
         "type": "image",

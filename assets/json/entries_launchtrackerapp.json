@@ -1,0 +1,19 @@
+[
+  {
+    "id": "entry-2025-06-14-a",
+    "title": "SpaceX Launch Tracker App",
+    "date": "2025-06-14",
+    "tags": ["blog", "project", "React-native"],
+    "content": [
+      {
+        "type": "image",
+        "src": "../assets/img/spaceXApi.jpg",
+        "alt": "Example Image"
+      },
+      {
+        "type": "text",
+        "value": "This project documents the development of a mobile application built with React Native, designed to interact with the official SpaceX API. The app retrieves and displays structured data about rocket launches, providing users with access to detailed mission information, launch timelines, vehicles, and payloads. The technical process includes API integration techniques, asynchronous data fetching, state management, and UI composition optimized for mobile devices. Each entry reflects the architectural choices, implementation challenges, and iterative improvements carried out across the app’s lifecycle."
+      }
+    ]
+  }
+]
