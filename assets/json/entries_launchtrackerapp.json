@@ -52,11 +52,11 @@
       },
       {
         "type": "text",
-        "value": "— This post sets the foundation. Future updates will cover API integration, data handling, UI components, and the decisions made along the way as the app takes shape."
+        "value": "This post sets the foundation. Future updates will cover API integration, data handling, UI components, and the decisions made along the way as the app takes shape."
       },
       {
         "type": "text",
-        "value": "— The idea is to document the full process, including challenges, as transparently as possible."
+        "value": "The idea is to document the full process, including challenges, as transparently as possible."
       },
       {
         "type": "code",
