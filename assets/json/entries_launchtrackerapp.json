@@ -7,7 +7,7 @@
     "content": [
       {
         "type": "image",
-        "src": "../assets/img/spaceXApi.jpg",
+        "src": "../assets/img/spacexapp/spaceXApi.jpg",
         "alt": "Example Image"
       },
       {
@@ -62,6 +62,96 @@
         "type": "code",
         "language": "url",
         "value": "https://github.com/BambuBlu/spacex-launch-tracker-app"
+      }
+    ]
+  },
+  {
+    "id": "entry-2025-06-16-a",
+    "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 1",
+    "date": "2025-06-16",
+    "tags": ["blog", "project"],
+    "content": [
+      {
+        "type": "text",
+        "value": "Now that the foundation of the SpaceX Launch Tracker App is in place, the next step was getting real data into the project. This post covers how the app fetches, in teory, launch data from the SpaceX API, and how I structured that data for quick access and clean rendering."
+      },
+      {
+        "type": "text",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "value": "└ Connecting to the SpaceX API"
+      },
+      {
+        "type": "image",
+        "src": "../assets/img/spacexapp/basicDiagram.jpg",
+        "alt": "Example Image"
+      },
+      {
+        "type": "text",
+        "value": "From the start, the app connects to the public SpaceX API, which provides detailed launch data. The two key endpoints used are:"
+      },
+      {
+        "type": "code",
+        "language": "code",
+        "value": "/launches/past — for completed launches"
+      },
+      {
+        "type": "code",
+        "language": "code",
+        "value": "/launches/upcoming — for planned future launches"
+      },
+      {
+        "type": "text",
+        "value": "When the app starts, both endpoints are queried immediately. The results are stored in two global variables (for now, using simple module-level JS variables), one for past launches and one for upcoming launches."
+      },
+      {
+        "type": "text",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "value": "└ Data Structures and Optimization"
+      },
+      {
+        "type": "image",
+        "src": "../assets/img/spacexapp/basicDiagramCode.jpg",
+        "alt": "Example Image"
+      },
+      {
+        "type": "text",
+        "value": "Rather than working with the full launch objects across the app — which are large and include a lot of unnecessary metadata — I created two additional structures:"
+      },
+      {
+        "type": "code",
+        "language": "code",
+        "value": "A list of launch names (for things like search, random selection, etc.)"
+      },
+      {
+        "type": "code",
+        "language": "code",
+        "value": "A dictionary mapping each launch name to its full object (for fast lookups)"
+      },
+      {
+        "type": "text",
+        "value": "This allows me to keep rendering and navigation fast and lightweight, without repeatedly traversing massive arrays or re-parsing nested objects."
+      },
+      {
+        "type": "text",
+        "value": ""
+      },
+      {
+        "type": "text",
+        "value": "└ Why This Structure?"
+      },
+      {
+        "type": "text",
+        "value": "Fetching and storing the data once — and then slicing it into helper structures — reduces overhead in the UI and navigation layers. Instead of repeatedly filtering or looping through large arrays, the app can look up exactly what it needs when it needs it."
+      },
+      {
+        "type": "text",
+        "value": "This approach also keeps the UI components clean and focused. They don't need to know about the shape of the full API — just the launch name or ID they're working with."
       }
     ]
   }
