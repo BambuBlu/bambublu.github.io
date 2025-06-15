@@ -15,5 +15,54 @@
         "value": "This project documents the development of a mobile application built with React Native, designed to interact with the official SpaceX API. The app retrieves and displays structured data about rocket launches, providing users with access to detailed mission information, launch timelines, vehicles, and payloads. The technical process includes API integration techniques, asynchronous data fetching, state management, and UI composition optimized for mobile devices. Each entry reflects the architectural choices, implementation challenges, and iterative improvements carried out across the app’s lifecycle."
       }
     ]
+  },
+  {
+    "id": "entry-2025-06-15-a",
+    "title": "Project Setup: SpaceX Launch Tracker App",
+    "date": "2025-06-15",
+    "tags": ["blog", "project"],
+    "content": [
+      {
+        "type": "text",
+        "value": "This is the first post in the development log for the SpaceX Launch Tracker App, a mobile application built with React Native that fetches launch data from the public SpaceX API."
+      },
+      {
+        "type": "text",
+        "value": "The goal of the app is to provide users with a simple and accessible way to view information about upcoming and past launches — including mission details, launch dates, rockets, and payloads — all within a clean mobile interface."
+      },
+      {
+        "type": "text",
+        "value": "In this initial stage, I focused on getting the project up and running:"
+      },
+      {
+        "type": "text",
+        "value": "— Setting up the React Native environment"
+      },
+      {
+        "type": "text",
+        "value": "— Installing base dependencies"
+      },
+      {
+        "type": "text",
+        "value": "— Organizing the folder structure"
+      },
+      {
+        "type": "text",
+        "value": "— Defining core tools"
+      },
+      {
+        "type": "text",
+        "value": "— This post sets the foundation. Future updates will cover API integration, data handling, UI components, and the decisions made along the way as the app takes shape."
+      },
+      {
+        "type": "text",
+        "value": "— The idea is to document the full process, including challenges, as transparently as possible."
+      },
+      {
+        "type": "code",
+        "language": "url",
+        "value": "https://github.com/BambuBlu/spacex-launch-tracker-app"
+      }
+    ]
   }
 ]
