@@ -77,7 +77,7 @@
       },
       {
         "type": "text",
-        "value": ""
+        "value": "━━━━━━━━━━━━━━━━━"
       },
       {
         "type": "text",
@@ -108,7 +108,7 @@
       },
       {
         "type": "text",
-        "value": ""
+        "value": "━━━━━━━━━━━━━━━━━"
       },
       {
         "type": "text",
@@ -139,7 +139,7 @@
       },
       {
         "type": "text",
-        "value": ""
+        "value": "━━━━━━━━━━━━━━━━━"
       },
       {
         "type": "text",
@@ -152,6 +152,115 @@
       {
         "type": "text",
         "value": "This approach also keeps the UI components clean and focused. They don't need to know about the shape of the full API — just the launch name or ID they're working with."
+      }
+    ]
+  },
+  {
+    "id": "entry-2025-06-16-a",
+    "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 2",
+    "date": "2025-06-16",
+    "tags": ["blog", "project"],
+    "content": [
+      {
+        "type": "text",
+        "value": "With data fetching and internal organization in place, the next major focus was on structuring the app’s navigation flow and building the first versions of the core screens. This post walks through the screen layout, how routing works with parameters, and some of the reasoning behind key design choices."
+      },
+      {
+        "type": "text",
+        "value": "━━━━━━━━━━━━━━━━━"
+      },
+      {
+        "type": "text",
+        "value": "└ Navigation and Screens Overview"
+      },
+      {
+        "type": "image",
+        "src": "../assets/img/spacexapp/wireScreen.webp",
+        "alt": "Example Image"
+      },
+      {
+        "type": "text",
+        "value": "After fetching data, the app moves into its navigation flow, handled via React Navigation. Here’s how it's structured:"
+      },
+      {
+        "type": "text",
+        "value": "1. Home Screen, the main hub after data is loaded. It offers three ways to view a specific launch:"
+      },
+      {
+        "type": "text",
+        "value": "● Latest Launch – shows the most recent result from the past launches"
+      },
+      {
+        "type": "text",
+        "value": "● Search – allows a user to look up by name"
+      },
+      {
+        "type": "text",
+        "value": "● Random Launch – selects one from either list"
+      },
+      {
+        "type": "text",
+        "value": "It also displays a Stat Sheet that links to the Launch List Screen (filtered views)."
+      },
+      {
+        "type": "text",
+        "value": "2. Launch Screen, this screen shows details about a specific launch. It receives the launch name (or an identifier) as a parameter and:"
+      },
+      {
+        "type": "text",
+        "value": "● Looks up the corresponding full data from the dictionary"
+      },
+      {
+        "type": "text",
+        "value": "● Displays info like mission name, flight number, date, mission patch, and links"
+      },
+      {
+        "type": "text",
+        "value": "● Supports loading a specific launch via: Search - Latest - Random"
+      },
+      {
+        "type": "text",
+        "value": "3. Launch List Screen, this screen lists launches by category:"
+      },
+      {
+        "type": "text",
+        "value": "Completed → past launches"
+      },
+      {
+        "type": "text",
+        "value": "Planned → upcoming launches"
+      },
+      {
+        "type": "text",
+        "value": "It receives a filter parameter and displays a scrollable list, with basic info and tap-to-view navigation into the Launch Screen."
+      },
+      {
+        "type": "text",
+        "value": "4. Persistent Refresh Button, This refresh button appears in the top-right corner of the header on all main screens. Pressing it re-fetches data from the SpaceX API and updates all internal structures without restarting the app."
+      },
+      {
+        "type": "text",
+        "value": "━━━━━━━━━━━━━━━━━"
+      },
+      {
+        "type": "text",
+        "value": "└ Design Decisions"
+      },
+      {
+        "type": "text",
+        "value": "A few key decisions made during this phase:"
+      },
+      {
+        "type": "text",
+        "value": "A few key decisions made during this phase:"
+      },
+      {
+        "type": "text",
+        "value": "Global state via module variables: This is a temporary solution — state management may be refactored later using React Context or Redux if the app grows."
+      },
+      {
+        "type": "text",
+        "value": "Scoped feature set: For now, I’m focusing only on launch data, not covering rockets, payloads, or crew info. The idea is to build something solid, then consider expanding."
       }
     ]
   }
