@@ -129,14 +129,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 case "text":
                     el = document.createElement("p");
                     el.classList.add("entry-blog-body");
-                    el.textContent = block.value;
+
+                    const escapedText = block.value
+                        .replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+                        .replace(/ {2}/g, "&nbsp;&nbsp;")
+                        .replace(/\t/g, "&nbsp;&nbsp;&nbsp;&nbsp;")
+                        .replace(/\n/g, "<br>");
+
+                    el.innerHTML = escapedText;
                     break;
                 case "image":
                 case "gif":
                     el = document.createElement("img");
                     el.src = block.src;
-                    el.alt = block.alt || "";
+                    el.alt = block.alt || "Entry image";
                     el.classList.add(block.type === "gif" ? "entry-gif" : "entry-image");
+                    el.style.cursor = "zoom-in";
                     break;
                 case "code":
                     el = document.createElement("pre");
@@ -154,6 +166,23 @@ document.addEventListener("DOMContentLoaded", () => {
                     iframe.frameBorder = 0;
                     iframe.allowFullscreen = true;
                     el.appendChild(iframe);
+                    break;
+                case "hr":
+                    el = document.createElement("hr");
+                    el.classList.add("entry-divider");
+                    break;
+                case "link":
+                    el = document.createElement("p");
+                    el.classList.add("entry-blog-body");
+
+                    const a = document.createElement("a");
+                    a.href = block.href;
+                    a.textContent = block.text || block.href;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer";
+                    a.classList.add("entry-link");
+
+                    el.appendChild(a);
                     break;
             }
             if (el) mainContent.appendChild(el);
@@ -288,6 +317,25 @@ document.addEventListener("DOMContentLoaded", () => {
             block: "start"
         });
     });
+
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-image");
+    const closeModal = modal.querySelector(".close-modal");
+
+    document.body.addEventListener("click", function (e) {
+        if (e.target.matches(".entry-image, .entry-gif")) {
+            modalImg.src = e.target.src;
+            modal.classList.remove("hidden");
+        } else if (e.target === closeModal || !modal.contains(e.target)) {
+            modal.classList.add("hidden");
+            modalImg.classList.remove("zoomed");
+        }
+    });
+
+    modalImg.addEventListener("click", () => {
+        modalImg.classList.toggle("zoomed");
+    });
+
 });
 
 

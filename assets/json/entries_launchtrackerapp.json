@@ -32,23 +32,11 @@
       },
       {
         "type": "text",
-        "value": "In this initial stage, I focused on getting the project up and running:"
+        "value": "In this initial stage, I focused on getting the project up and running:\n\n **— Setting up the React Native environment**\n\n **— Installing base dependencies**\n\n **— Organizing the folder structure**\n\n **— Defining core tools**"
       },
       {
         "type": "text",
-        "value": "— Setting up the React Native environment"
-      },
-      {
-        "type": "text",
-        "value": "— Installing base dependencies"
-      },
-      {
-        "type": "text",
-        "value": "— Organizing the folder structure"
-      },
-      {
-        "type": "text",
-        "value": "— Defining core tools"
+        "value": ""
       },
       {
         "type": "text",
@@ -59,9 +47,9 @@
         "value": "The idea is to document the full process, including challenges, as transparently as possible."
       },
       {
-        "type": "code",
-        "language": "url",
-        "value": "https://github.com/BambuBlu/spacex-launch-tracker-app"
+        "type": "link",
+        "href": "https://github.com/BambuBlu/spacex-launch-tracker-app",
+        "text": "Github repository link"
       }
     ]
   },
@@ -69,19 +57,18 @@
     "id": "entry-2025-06-16-a",
     "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 1",
     "date": "2025-06-16T08:30:00",
-    "tags": ["blog", "project"],
+    "tags": ["blog", "project", "dev"],
     "content": [
       {
         "type": "text",
         "value": "Now that the foundation of the SpaceX Launch Tracker App is in place, the next step was getting real data into the project. This post covers how the app fetches, in teory, launch data from the SpaceX API, and how I structured that data for quick access and clean rendering."
       },
       {
-        "type": "text",
-        "value": "━━━━━━━━━━━━━━━━━"
+        "type": "hr"
       },
       {
         "type": "text",
-        "value": "└ Connecting to the SpaceX API"
+        "value": "**└ Connecting to the SpaceX API**"
       },
       {
         "type": "image",
@@ -107,12 +94,11 @@
         "value": "When the app starts, both endpoints are queried immediately. The results are stored in two global variables (for now, using simple module-level JS variables), one for past launches and one for upcoming launches."
       },
       {
-        "type": "text",
-        "value": "━━━━━━━━━━━━━━━━━"
+        "type": "hr"
       },
       {
         "type": "text",
-        "value": "└ Data Structures and Optimization"
+        "value": "**└ Data Structures and Optimization**"
       },
       {
         "type": "image",
@@ -124,26 +110,19 @@
         "value": "Rather than working with the full launch objects across the app — which are large and include a lot of unnecessary metadata — I created two additional structures:"
       },
       {
-        "type": "code",
-        "language": "code",
-        "value": "A list of launch names (for things like search, random selection, etc.)"
-      },
-      {
-        "type": "code",
-        "language": "code",
-        "value": "A dictionary mapping each launch name to its full object (for fast lookups)"
+        "type": "text",
+        "value": "    ● A list of launch names (for things like search, random selection, etc.)\n\n    ● A dictionary mapping each launch name to its full object (for fast lookups)"
       },
       {
         "type": "text",
         "value": "This allows me to keep rendering and navigation fast and lightweight, without repeatedly traversing massive arrays or re-parsing nested objects."
       },
       {
-        "type": "text",
-        "value": "━━━━━━━━━━━━━━━━━"
+        "type": "hr"
       },
       {
         "type": "text",
-        "value": "└ Why This Structure?"
+        "value": "**└ Why This Structure?**"
       },
       {
         "type": "text",
@@ -159,19 +138,18 @@
     "id": "entry-2025-06-16-a",
     "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 2",
     "date": "2025-06-16T16:45:00",
-    "tags": ["blog", "project"],
+    "tags": ["blog", "project", "dev"],
     "content": [
       {
         "type": "text",
         "value": "With data fetching and internal organization in place, the next major focus was on structuring the app’s navigation flow and building the first versions of the core screens. This post walks through the screen layout, how routing works with parameters, and some of the reasoning behind key design choices."
       },
       {
-        "type": "text",
-        "value": "━━━━━━━━━━━━━━━━━"
+        "type": "hr"
       },
       {
         "type": "text",
-        "value": "└ Navigation and Screens Overview"
+        "value": "**└ Navigation and Screens Overview**"
       },
       {
         "type": "image",
@@ -184,19 +162,7 @@
       },
       {
         "type": "text",
-        "value": "1. Home Screen, the main hub after data is loaded. It offers three ways to view a specific launch:"
-      },
-      {
-        "type": "text",
-        "value": "● Latest Launch – shows the most recent result from the past launches"
-      },
-      {
-        "type": "text",
-        "value": "● Search – allows a user to look up by name"
-      },
-      {
-        "type": "text",
-        "value": "● Random Launch – selects one from either list"
+        "value": "\n**1. Home Screen**, the main hub after data is loaded. It offers three ways to view a specific launch:\n\n    ● Latest Launch – shows the most recent result from the past launches\n\n    ● Search – allows a user to look up by name\n\n    ● Random Launch – selects one from either list"
       },
       {
         "type": "text",
@@ -204,31 +170,11 @@
       },
       {
         "type": "text",
-        "value": "2. Launch Screen, this screen shows details about a specific launch. It receives the launch name (or an identifier) as a parameter and:"
+        "value": "\n**2. Launch Screen**, this screen shows details about a specific launch. It receives the launch name (or an identifier) as a parameter and:\n\n   ● Looks up the corresponding full data from the dictionary\n\n   ● Displays info like mission name, flight number, date, mission patch, and links\n\n   ● Supports loading a specific launch via: Search - Latest - Random"
       },
       {
         "type": "text",
-        "value": "● Looks up the corresponding full data from the dictionary"
-      },
-      {
-        "type": "text",
-        "value": "● Displays info like mission name, flight number, date, mission patch, and links"
-      },
-      {
-        "type": "text",
-        "value": "● Supports loading a specific launch via: Search - Latest - Random"
-      },
-      {
-        "type": "text",
-        "value": "3. Launch List Screen, this screen lists launches by category:"
-      },
-      {
-        "type": "text",
-        "value": "Completed → past launches"
-      },
-      {
-        "type": "text",
-        "value": "Planned → upcoming launches"
+        "value": "\n**3. Launch List Screen**, this screen lists launches by category:\n\n   Completed → past launches\n   Planned → upcoming launches"
       },
       {
         "type": "text",
@@ -236,31 +182,18 @@
       },
       {
         "type": "text",
-        "value": "4. Persistent Refresh Button, This refresh button appears in the top-right corner of the header on all main screens. Pressing it re-fetches data from the SpaceX API and updates all internal structures without restarting the app."
+        "value": "\n**4. Persistent Refresh Button**, This refresh button appears in the top-right corner of the header on all main screens. Pressing it re-fetches data from the SpaceX API and updates all internal structures without restarting the app."
+      },
+      {
+        "type": "hr"
       },
       {
         "type": "text",
-        "value": "━━━━━━━━━━━━━━━━━"
+        "value": "**└ Design Decisions**"
       },
       {
         "type": "text",
-        "value": "└ Design Decisions"
-      },
-      {
-        "type": "text",
-        "value": "A few key decisions made during this phase:"
-      },
-      {
-        "type": "text",
-        "value": "A few key decisions made during this phase:"
-      },
-      {
-        "type": "text",
-        "value": "Global state via module variables: This is a temporary solution — state management may be refactored later using React Context or Redux if the app grows."
-      },
-      {
-        "type": "text",
-        "value": "Scoped feature set: For now, I’m focusing only on launch data, not covering rockets, payloads, or crew info. The idea is to build something solid, then consider expanding."
+        "value": "A few key decisions made during this phase:\n\n ● Global state via module variables: This is a temporary solution — state management may be refactored later using React Context or Redux if the app grows. \n ● Scoped feature set: For now, I’m focusing only on launch data, not covering rockets, payloads, or crew info. The idea is to build something solid, then consider expanding."
       }
     ]
   }
