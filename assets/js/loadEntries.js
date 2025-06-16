@@ -200,8 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function formatDate(iso) {
-        const [year, month, day] = iso.split("-");
-        const d = new Date(+year, +month - 1, +day);
+        const d = new Date(iso);
         return d.toLocaleDateString("en-US", {
             year: "numeric",
             month: "long",

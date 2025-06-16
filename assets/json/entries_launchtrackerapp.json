@@ -68,7 +68,7 @@
   {
     "id": "entry-2025-06-16-a",
     "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 1",
-    "date": "2025-06-16",
+    "date": "2025-06-16T08:30:00",
     "tags": ["blog", "project"],
     "content": [
       {
@@ -85,7 +85,7 @@
       },
       {
         "type": "image",
-        "src": "../assets/img/spacexapp/basicDiagram.jpg",
+        "src": "../assets/img/spacexapp/basicDiagram.webp",
         "alt": "Example Image"
       },
       {
@@ -116,7 +116,7 @@
       },
       {
         "type": "image",
-        "src": "../assets/img/spacexapp/basicDiagramCode.jpg",
+        "src": "../assets/img/spacexapp/basicDiagramCode.webp",
         "alt": "Example Image"
       },
       {
@@ -158,7 +158,7 @@
   {
     "id": "entry-2025-06-16-a",
     "title": "App Flow and Architecture: Structuring the SpaceX Launch Tracker — 2",
-    "date": "2025-06-16",
+    "date": "2025-06-16T16:45:00",
     "tags": ["blog", "project"],
     "content": [
       {
