@@ -1,0 +1,63 @@
+[
+  {
+    "title": "Password Manager App",
+    "description": "A secure mobile app for storing encrypted passwords locally using modern Android practices.",
+    "image": "assets/img/passManagerApp.jpeg",
+    "links": [
+      {
+        "text": "Blog Page",
+        "url": "subpages/passmanagerapp.html"
+      }
+    ]
+  },
+  {
+    "title": "SpaceX Launch Tracker",
+    "description": "Browse and filter SpaceX launches in real time, connected to the public API.",
+    "image": "assets/img/spacexapp/spaceXApi.jpg",
+    "links": [
+      {
+        "text": "Blog Page",
+        "url": "subpages/launchtrackerapp.html"
+      },
+      {
+        "text": "GitHub Repo",
+        "url": "https://github.com/BambuBlu/spacex-launch-tracker-app"
+      }
+    ]
+  },
+  {
+    "title": "BattleCats Survivors",
+    "description": "Mobile game application, BattleCats Survivors immerses you in an arcade shooter roguelite experience, placing you in command of a formidable cat squadron that instinctively strikes down nearby adversaries.",
+    "image": "assets/img/portfolio1.png",
+    "links": [
+      {
+        "text": "Playstore",
+        "url": "https://play.google.com/store/apps/details?id=com.battlecats.survivors"
+      }
+    ]
+  },
+  {
+    "title": "Sexy or Ugly Detector",
+    "description": "Mobile application, Sexy or Ugly Detector is a prank app for you to have fun playing with friends. It simulates reading your finger to detect if you're attractive, but it's just a joke simulation.",
+    "image": "assets/img/portfolio2.jpg",
+    "links": [
+      {
+        "text": "Playstore",
+        "url": "https://play.google.com/store/apps/details?id=com.fingerscanner.sexyhotnessscan&pcampaignid=web_share"
+      }
+    ]
+  },
+  {
+    "title": "Gun Idle Clicker",
+    "description": "Mobile application, Gun Idle Clicker is a casual tap game where you build and upgrade powerful weapons just by tapping the screen. Earn coins, unlock new guns, and level up your arsenal.",
+    "image": "assets/img/portfolio3.jpg",
+    "links": [
+      {
+        "text": "Playstore",
+        "url": "https://play.google.com/store/apps/details?id=com.guntapgames.machinegunclicker"
+      }
+    ]
+  }
+]
+
+
