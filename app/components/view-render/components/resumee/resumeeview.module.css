@@ -1,3 +1,39 @@
+/* --- SOLUCIÓN DEL PUNTERO (Fuerza bruta para ganar al cursor:none) --- */
+.wrapper,
+.wrapper :global(*) {
+  cursor: auto !important;
+}
+
+/* Forzamos el cursor default en las áreas neutras */
+.wrapper,
+.cv_frame,
+.paper_controls {
+  cursor: default !important;
+}
+
+/* Forzamos la manito en todos los elementos interactivos */
+.lang_btn,
+.download_btn,
+.wrapper :global(button),
+.wrapper :global(a) {
+  cursor: pointer !important;
+}
+
+/* Cursor de texto para las áreas de lectura y selección */
+.summary_text, 
+.bullet_list, 
+.skills_list, 
+.name, 
+.contact, 
+.role_title, 
+.degree, 
+.reference_text {
+  user-select: text !important;
+  cursor: text !important;
+}
+
+/* --- ESTILOS VISUALES ORIGINALES --- */
+
 .wrapper {
   height: 100vh;
   width: 100vw;
@@ -7,7 +43,6 @@
   background-color: transparent;
   padding: 0 20px;
   box-sizing: border-box;
-  cursor: default;
 }
 
 .cv_frame {
@@ -17,7 +52,6 @@
   position: relative;
   border-radius: 8px;
   box-sizing: border-box;
-  cursor: default;
 }
 
 .paper_controls {
@@ -29,7 +63,6 @@
   justify-content: space-between; 
   align-items: center;
   z-index: 50;
-  cursor: default;
 }
 
 .lang_group {
@@ -45,7 +78,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer !important;
   transition: all 0.2s ease;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   opacity: 0.5;
@@ -74,7 +106,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  cursor: pointer !important;
   transition: all 0.2s ease;
   text-decoration: none;
   font-family: inherit;
@@ -112,12 +143,6 @@
   border-radius: 8px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  cursor: auto;
-}
-
-.summary_text, .bullet_list, .skills_list, .name, .contact, .role_title, .degree, .reference_text {
-  user-select: text;
-  cursor: text;
 }
 
 .header { text-align: center; margin-bottom: 30px; padding-top: 48px; }
@@ -133,7 +158,6 @@
 
 .section { margin-bottom: 24px; }
 .section_title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; color: #111827; border-bottom: 2px solid #e5e7eb; padding-bottom: 4px; margin-bottom: 12px; }
-.summary_text, .reference_text { font-size: 0.95rem; line-height: 1.5; color: #374151; }
 .skills_list { list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6; color: #374151; }
 .skills_list li { margin-bottom: 4px; }
 .role_entry, .education_entry { margin-bottom: 20px; }
@@ -175,7 +199,7 @@
   .lang_btn img { width: 20px; height: 15px; }
   
   .download_btn { padding: 6px 10px; font-size: 0.8rem; }
-  .download_btn span { display: none; }
+  .download_btn :global(span) { display: none; }
 
   .name { font-size: 1.6rem; margin-top: 25px; } 
   .header p { font-size: 0.8rem; }

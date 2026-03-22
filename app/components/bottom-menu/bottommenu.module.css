@@ -1,3 +1,20 @@
+/* --- SOLUCIÓN DEL PUNTERO (Evita que el cursor:none del juego lo oculte) --- */
+.bottom-menu,
+.bottom-menu :global(*),
+.controls,
+.controls :global(*) {
+  cursor: auto !important;
+}
+
+/* Forzamos la manito en los botones del menú y controles */
+.menu-item,
+.control-btn,
+.bottom-menu :global(button),
+.bottom-menu :global(a) {
+  cursor: pointer !important;
+}
+
+/* --- ESTILOS VISUALES ORIGINALES --- */
 .bottom-menu {
   position: fixed;
   bottom: 30px;
@@ -21,8 +38,6 @@
   border: none;
   background: transparent;
   color: #aaa;
-  cursor: pointer;
-  border-radius: 999px;
   user-select: none; 
   -webkit-tap-highlight-color: transparent; 
   text-decoration: none;
@@ -83,7 +98,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.2s ease;
   outline: none;
   position: relative;
@@ -164,7 +178,7 @@
     padding: 10px 10px; 
   }
 
-  .icon-wrapper svg {
+  .icon-wrapper :global(svg) {
     width: 20px;
     height: 20px;
   }
@@ -203,5 +217,5 @@
 @media (max-width: 380px) {
   .bottom-menu { gap: 2px; }
   .menu-item { padding: 10px 8px; }
-  .icon-wrapper svg { width: 18px; height: 18px; }
+  .icon-wrapper :global(svg) { width: 18px; height: 18px; }
 }

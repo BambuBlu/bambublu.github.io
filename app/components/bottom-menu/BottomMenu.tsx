@@ -1,7 +1,12 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import styles from "./bottommenu.module.css"
+import { useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react"
+import { useAppContext } from "@/app/context/AppContext"
 import { 
   BriefcaseBusiness, Home, NotebookPen, 
   SquareUser, Github, Linkedin,
@@ -9,17 +14,8 @@ import {
   Gamepad2
 } from "lucide-react"
 
-const items = [
-  { id: "home", label: "Home", icon: <Home size={22} strokeWidth={2} /> },
-  { id: "projects", label: "Projects", icon: <BriefcaseBusiness size={22} strokeWidth={2} /> },
-  { id: "resumee", label: "Resumee", icon: <SquareUser size={22} strokeWidth={2} /> },
-  { id: "game", label: "Mini Game!", icon: <Gamepad2 size={22} strokeWidth={2} /> },
-  { id: "blog", label: "Blog", icon: <NotebookPen size={22} strokeWidth={2} /> },
-  { id: "github", label: "GitHub", icon: <Github size={22} strokeWidth={2} />, url: "https://github.com/BambuBlu" },
-  { id: "linkedin", label: "LinkedIn", icon: <Linkedin size={22} strokeWidth={2} />, url: "https://www.linkedin.com/in/tobiasmoscatelli" },
-];
-
 export function BottomMenu() {
+  const { lang, toggleLanguage, t } = useAppContext();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   
   const [score, setScore] = useState(0);
@@ -28,22 +24,28 @@ export function BottomMenu() {
   const [isIdle, setIsIdle] = useState(false);
   const [currentView, setCurrentView] = useState("home"); 
 
+  const items = [
+    { id: "home", label: t.nav.home, icon: <Home size={22} strokeWidth={2} /> },
+    { id: "projects", label: t.nav.projects, icon: <BriefcaseBusiness size={22} strokeWidth={2} /> },
+    { id: "resumee", label: t.nav.resume, icon: <SquareUser size={22} strokeWidth={2} /> },
+    { id: "game", label: t.nav.game, icon: <Gamepad2 size={22} strokeWidth={2} /> },
+    { id: "blog", label: t.nav.blog, icon: <NotebookPen size={22} strokeWidth={2} /> },
+    { id: "github", label: "GitHub", icon: <Github size={22} strokeWidth={2} />, url: "https://github.com/BambuBlu" },
+    { id: "linkedin", label: "LinkedIn", icon: <Linkedin size={22} strokeWidth={2} />, url: "https://www.linkedin.com/in/tobiasmoscatelli" },
+  ];
+
   useEffect(() => {
     const handleGlobalViewChange = (e: Event) => {
       const newView = (e as CustomEvent).detail;
       setCurrentView(newView);
     };
-
     window.addEventListener("changeView", handleGlobalViewChange);
     return () => window.removeEventListener("changeView", handleGlobalViewChange);
   }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio_highscore");
-    if (saved) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setHighScore(parseInt(saved));
-    }
+    if (saved) setHighScore(parseInt(saved));
 
     const audio = new Audio("/audio/bg-music.mp3");
     audio.loop = true;
@@ -53,7 +55,6 @@ export function BottomMenu() {
     const handleScoreUpdate = (e: Event) => {
       const newScore = (e as CustomEvent).detail;
       setScore(newScore);
-      
       setHighScore((prev) => {
         if (newScore > prev) {
           localStorage.setItem("portfolio_highscore", newScore.toString());
@@ -64,7 +65,6 @@ export function BottomMenu() {
     };
 
     window.addEventListener("updateGameScore", handleScoreUpdate);
-    
     return () => {
       window.removeEventListener("updateGameScore", handleScoreUpdate);
       audio.pause();
@@ -75,11 +75,7 @@ export function BottomMenu() {
     const newState = !isMuted;
     setIsMuted(newState);
     if (audioRef.current) {
-      if (newState) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(() => {});
-      }
+      newState ? audioRef.current.pause() : audioRef.current.play().catch(() => {});
     }
     window.dispatchEvent(new CustomEvent("toggleMute", { detail: newState }));
   };
@@ -90,9 +86,13 @@ export function BottomMenu() {
     window.dispatchEvent(new CustomEvent("toggleIdle", { detail: newState }));
   };
 
-  const handleItemClick = (item: typeof items[0]) => {
+  const router = useRouter();
+
+  const handleItemClick = (item: any) => {
     if (item.url) {
       window.open(item.url, '_blank');
+    } else if (item.id === "blog") {
+      router.push('/blog');
     } else {
       if (item.id === currentView) return;
       setCurrentView(item.id);
@@ -107,6 +107,9 @@ export function BottomMenu() {
       </div>
 
       <div className={styles["controls"]}>
+        <button data-ui onClick={toggleLanguage} className={styles["control-btn"]} style={{ color: "#788cff" }}>
+          <span style={{ fontSize: '9px', fontWeight: '800' }}>{lang === 'es' ? 'EN' : 'ES'}</span>
+        </button>
         <button data-ui onClick={toggleMute} className={styles["control-btn"]} style={{ color: isMuted ? "#ff4b4b" : "#4ade80" }}>
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </button>

@@ -1,3 +1,31 @@
+/* --- SOLUCIÓN DEL PUNTERO --- */
+/* Forzamos el cursor default en todo el componente para ganarle al none del fondo */
+.wrapper,
+.wrapper :global(*) {
+  cursor: auto !important;
+}
+
+/* Forzamos la manito en elementos interactivos */
+.card,
+.action_btn,
+.close_btn,
+.wrapper :global(a),
+.wrapper :global(button) {
+  cursor: pointer !important;
+}
+
+/* Permitimos cursor de texto para mejorar la UX al leer */
+.title, 
+.subtitle, 
+.card_content h3, 
+.card_content p, 
+.modal_info h2, 
+.modal_desc {
+  cursor: text !important;
+  user-select: text !important;
+}
+
+/* --- ESTILOS VISUALES --- */
 .wrapper {
   height: 100vh;
   width: 100vw;
@@ -7,7 +35,6 @@
   box-sizing: border-box;
   padding: 0 20px;
   background-color: transparent;
-  cursor: default;
 }
 
 .center_wrapper {
@@ -28,7 +55,6 @@
   border-radius: 32px;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
   animation: popup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
   display: flex;
   flex-direction: column;
   overflow: hidden; 
@@ -46,14 +72,13 @@
   align-items: center;
   gap: 40px;
   box-sizing: border-box; 
-
   scrollbar-width: none;
   -ms-overflow-style: none;
   -webkit-overflow-scrolling: touch;
-
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
 }
+
 .scroll_content::-webkit-scrollbar { display: none; }
 
 @keyframes popup {
@@ -95,7 +120,6 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 20px;
   overflow: hidden;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -162,6 +186,7 @@
   line-height: 1.5;
 }
 
+/* --- MODAL POPUP --- */
 .modal_backdrop {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -203,7 +228,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 10;
   backdrop-filter: blur(4px);
   transition: background 0.2s;
@@ -294,6 +318,7 @@
 }
 .action_btn.primary:hover { background: #788cff; color: white; border-color: #788cff; }
 
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
   .wrapper { 
     padding: 0 12px;
