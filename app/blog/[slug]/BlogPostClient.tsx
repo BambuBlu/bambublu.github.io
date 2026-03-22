@@ -15,7 +15,6 @@ export default function BlogPostClient({ post }: { post: any }) {
       <article className={styles.container}>
         <nav className={styles.nav_header}>
           
-          {/* Lado izquierdo: Botón volver y Breadcrumbs */}
           <div className={styles.nav_left}>
             <Link href="/blog" className={styles.back_btn}>
               <ArrowLeft size={18} />
@@ -31,8 +30,7 @@ export default function BlogPostClient({ post }: { post: any }) {
             </div>
           </div>
 
-          {/* Lado derecho: Botón de Idioma */}
-          <button onClick={toggleLanguage} className={styles.lang_toggle_btn}>
+          <button aria-label="Change language" onClick={toggleLanguage} className={styles.lang_toggle_btn}>
             <Languages size={16} />
             <span>{lang === 'es' ? 'EN' : 'ES'}</span>
           </button>

@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 "use client"
 
+import Image from "next/image";
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ExternalLink, Github } from "lucide-react"
@@ -43,7 +44,14 @@ export function ProjectsView() {
                   whileHover={{ y: -8, scale: 0.98 }}
                 >
                   <div className={styles.card_image}>
-                    <img src={project.image} alt={project.title} loading="lazy" />
+                    <Image 
+                      src={project.image} 
+                      alt={`Captura del proyecto ${project.title}`} 
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: "cover" }}
+                      priority={index < 4}
+                    />
                     <div className={styles.card_overlay}><span className={styles.category_pill}>{project.category}</span></div>
                   </div>
                   <div className={styles.card_content}><h3>{project.title}</h3><p>{project.shortDesc}</p></div>
@@ -58,8 +66,15 @@ export function ProjectsView() {
         {selectedProject && (
           <div className={styles.modal_backdrop} onClick={() => setSelectedProject(null)}>
             <motion.div className={styles.modal_content} onClick={(e) => e.stopPropagation()} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-              <button className={styles.close_btn} onClick={() => setSelectedProject(null)}><X size={20} /></button>
-              <div className={styles.modal_image_container}><img src={selectedProject.image} alt={selectedProject.title} /></div>
+              <button aria-label="Close Modal Button" className={styles.close_btn} onClick={() => setSelectedProject(null)}><X size={20} /></button>
+              <div className={styles.modal_image_container}>
+                <Image 
+                  src={selectedProject.image} 
+                  alt={selectedProject.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
               <div className={styles.modal_info}>
                 <span className={styles.modal_category}>{selectedProject.category}</span>
                 <h2>{selectedProject.title}</h2>

@@ -57,7 +57,7 @@ export function GameView() {
           </div>
 
           <div className={styles.action_area}>
-            <button onClick={() => setIsPlaying(true)} className={styles.play_btn}>
+            <button aria-label="Start Mini Game" onClick={() => setIsPlaying(true)} className={styles.play_btn}>
               <Play fill="currentColor" size={20} /> {t.game.start}
             </button>
             <p className={styles.footer_note}>{t.game.exitNote}</p>

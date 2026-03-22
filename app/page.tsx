@@ -1,5 +1,3 @@
-"use client"
-
 import { BottomMenu, ViewRenderer, Header, GameBackground } from "./components"
 
 export default function Home() {

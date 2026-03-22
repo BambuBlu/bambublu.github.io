@@ -42,8 +42,8 @@ export function HeroView() {
           <span className={styles.desktop_only}>{t.hero.desktopOnly}</span>
         </p>
         <div className={styles.actions}>
-          <button data-ui onClick={() => changeView("projects")} className={styles.primary_btn}>{t.hero.viewWork}</button>
-          <button data-ui onClick={() => changeView("resumee")} className={styles.secondary_btn}>{t.hero.viewResume}</button>
+          <button aria-label="View Projects" data-ui onClick={() => changeView("projects")} className={styles.primary_btn}>{t.hero.viewWork}</button>
+          <button aria-label="View Resumee" data-ui onClick={() => changeView("resumee")} className={styles.secondary_btn}>{t.hero.viewResume}</button>
         </div>
         <div className={styles.tech_stack}>
           {techs.map((tech, i) => (

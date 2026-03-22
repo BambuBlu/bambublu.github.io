@@ -32,7 +32,7 @@ export default function BlogClient({ posts }: { posts: any[] }) {
               </div>
             </div>
             
-            <button onClick={toggleLanguage} className={styles.lang_toggle_btn}>
+            <button aria-label="Change language" onClick={toggleLanguage} className={styles.lang_toggle_btn}>
               <Languages size={16} />
               <span>{lang === 'es' ? 'EN' : 'ES'}</span>
             </button>

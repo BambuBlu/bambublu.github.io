@@ -166,6 +166,7 @@ export function ResumeeView() {
         <div className={styles.paper_controls}>
           <div className={styles.lang_group}>
             <button 
+              aria-label="Change language"
               data-ui
               type="button"
               onClick={(e) => changeLang(e, "es")} 
@@ -175,6 +176,7 @@ export function ResumeeView() {
               <img src="svg/flag-ar.svg" alt="ES" width={24} height={18} />
             </button>
             <button 
+              aria-label="Change language"
               data-ui
               type="button"
               onClick={(e) => changeLang(e, "en")} 
@@ -185,12 +187,11 @@ export function ResumeeView() {
             </button>
           </div>
 
-          <a data-ui href={`/docs/TobiasMoscatelliCV_${lang}.pdf`} download className={styles.download_btn}>
+          <a aria-label="Resume Download Button" data-ui href={`/docs/TobiasMoscatelliCV_${lang}.pdf`} download className={styles.download_btn}>
             <Download size={14} /> <span>{t.download}</span>
           </a>
         </div>
 
-        {/* Contenedor scrolleable */}
         <div className={styles.scroll_container} data-ui>
           <div className={styles.paper}>
             <header className={styles.header}>

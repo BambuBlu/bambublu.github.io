@@ -107,13 +107,13 @@ export function BottomMenu() {
       </div>
 
       <div className={styles["controls"]}>
-        <button data-ui onClick={toggleLanguage} className={styles["control-btn"]} style={{ color: "#788cff" }}>
+        <button aria-label="Change language" data-ui onClick={toggleLanguage} className={styles["control-btn"]} style={{ color: "#788cff" }}>
           <span style={{ fontSize: '9px', fontWeight: '800' }}>{lang === 'es' ? 'EN' : 'ES'}</span>
         </button>
-        <button data-ui onClick={toggleMute} className={styles["control-btn"]} style={{ color: isMuted ? "#ff4b4b" : "#4ade80" }}>
+        <button aria-label="Change volume" data-ui onClick={toggleMute} className={styles["control-btn"]} style={{ color: isMuted ? "#ff4b4b" : "#4ade80" }}>
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </button>
-        <button data-ui onClick={toggleIdle} className={styles["control-btn"]} style={{ color: isIdle ? "#f39c12" : "#fff" }}>
+        <button aria-label="Pause Mini Game" data-ui onClick={toggleIdle} className={styles["control-btn"]} style={{ color: isIdle ? "#f39c12" : "#fff" }}>
           {isIdle ? <Play size={16} /> : <Pause size={16} />}
         </button>
       </div>
@@ -127,10 +127,12 @@ export function BottomMenu() {
 
       {items.map((item) => (
         <button 
+          aria-label="Menu Button"
           key={item.id}
           data-ui
           onClick={() => handleItemClick(item)}
           className={`${styles["menu-item"]} ${currentView === item.id ? styles.active : ""}`}
+          rel="noopener noreferrer"
         >
           <span className={styles["tooltip"]}>{item.label}</span>
           <span className={styles["icon-wrapper"]}>{item.icon}</span>

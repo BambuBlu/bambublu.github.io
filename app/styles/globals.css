@@ -15,8 +15,14 @@ body {
   margin: 0;
   background: #263942;
   color: #f5f5f5;
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
   overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2, h3, h4, h5, h6, button, input, p, span {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
 .section {
@@ -55,18 +61,4 @@ body {
   width: 100%;
   border-radius: 8px;
   margin-bottom: 12px;
-}
-
-@font-face {
-  font-family: "Disolve_normal";
-  src: url("/fonts/Disolve_regular.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Disolve_light";
-  src: url("/fonts/Disolve_light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
 }
