@@ -1,0 +1,256 @@
+.wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+}
+
+.glass_container {
+  width: 100%;
+  max-width: 800px;
+  background: rgba(20, 20, 20, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: popup 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.content_inner {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
+}
+
+@keyframes popup {
+  from { opacity: 0; transform: scale(0.95) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.warning_badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 500px;
+}
+
+.tutorial_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+.tutorial_card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.tutorial_card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-4px);
+}
+
+.icon_wrapper {
+  background: rgba(120, 140, 255, 0.1);
+  color: #788cff;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+
+.card_text h3 {
+  color: white;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.card_text p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.action_area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.play_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 16px 40px;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
+}
+
+.play_btn:hover {
+  background: #dc2626;
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6);
+}
+
+.play_btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.footer_note {
+  text-align: center;
+  color: #ef4444;
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* --- OPTIMIZACIÓN EXTREMA PARA MOBILE (MÁS COMPACTO) --- */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 0 12px;
+  }
+  
+  .glass_container {
+    border-radius: 20px;
+    /* Aseguramos que se mantenga alejado del bottom menu */
+    margin-bottom: 30px; 
+    /* Y le damos un max-height que respete la cabecera también */
+    max-height: calc(100vh - 160px); 
+  }
+
+  .content_inner {
+    /* Padding general muy reducido para encoger el recuadro */
+    padding: 16px 12px;
+    gap: 16px; /* Menos espacio entre secciones (Header, Grid, Botón) */
+  }
+
+  .warning_badge { 
+    margin-bottom: 6px; 
+    font-size: 0.65rem; 
+    padding: 4px 10px; 
+  }
+  
+  .title { 
+    font-size: 1.4rem; /* Título más chico */
+    margin-bottom: 4px; 
+  }
+  
+  .subtitle { 
+    font-size: 0.8rem; /* Subtítulo reducido */
+    line-height: 1.2; 
+  }
+
+  .tutorial_grid { 
+    grid-template-columns: 1fr; 
+    gap: 6px; /* Tarjetas casi pegadas */
+  }
+  
+  .tutorial_card { 
+    padding: 8px 12px; /* Interior de la tarjeta súper apretado */
+    flex-direction: row; 
+    align-items: center; 
+    gap: 10px; 
+    border-radius: 12px;
+  }
+  
+  .icon_wrapper { 
+    margin-bottom: 0; 
+    width: 32px; /* Iconos más pequeños */
+    height: 32px;
+    border-radius: 10px;
+  }
+  
+  .icon_wrapper svg { width: 16px; height: 16px; }
+
+  .card_text h3 { font-size: 0.9rem; margin-bottom: 2px; }
+  .card_text p { font-size: 0.7rem; line-height: 1.2; }
+
+  .action_area { 
+    gap: 8px; /* Menos aire encima y debajo del botón */
+  }
+  
+  .play_btn { 
+    width: 100%; 
+    padding: 10px 16px; /* Botón más bajo */
+    font-size: 0.95rem; 
+    border-radius: 10px;
+  }
+
+  .footer_note { font-size: 0.65rem; }
+}
+
+/* Para pantallas hiper pequeñas (como el iPhone SE) */
+@media (max-width: 380px) {
+  .glass_container {
+    max-height: calc(100vh - 140px);
+  }
+  .content_inner { padding: 12px 10px; gap: 12px; }
+  .title { font-size: 1.2rem; }
+  .tutorial_card { padding: 6px 10px; gap: 8px; }
+  .icon_wrapper { width: 28px; height: 28px; }
+  .icon_wrapper svg { width: 14px; height: 14px; }
+  .play_btn { padding: 8px; font-size: 0.85rem; }
+}
