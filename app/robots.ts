@@ -1,3 +1,5 @@
+export const dynamic = 'force-static'; // <--- AÑADE ESTA LÍNEA
+
 import { MetadataRoute } from 'next'
  
 export default function robots(): MetadataRoute.Robots {
