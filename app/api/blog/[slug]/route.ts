@@ -1,53 +1,56 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { NextResponse } from 'next/server';
-import { Client } from '@notionhq/client';
-import { NotionToMarkdown } from 'notion-to-md';
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
-const n2m = new NotionToMarkdown({ notionClient: notion });
+const NOTION_TOKEN = process.env.NOTION_TOKEN || '';
 const DATABASE_ID = process.env.NOTION_DATABASE_ID || '';
 
-export const revalidate = 60;
-
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ slug: string }> }
-) {
-  if (!DATABASE_ID) return NextResponse.json({ error: 'Falta ID' }, { status: 500 });
-
+export async function GET(request: Request, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response = await (notion.databases as any).query({
-      database_id: DATABASE_ID,
-      filter: {
-        property: 'Slug',
-        rich_text: {
-          equals: slug,
-        },
+    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${NOTION_TOKEN}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        filter: { property: 'Slug', rich_text: { equals: slug } }
+      }),
     });
 
-    if (!response.results.length) {
-      return NextResponse.json({ error: 'Post no encontrado' }, { status: 404 });
-    }
+    const data = await res.json();
+    if (!data.results.length) return NextResponse.json({ error: 'Post no encontrado' }, { status: 404 });
 
-    const page = response.results[0];
+    const page = data.results[0];
+    const pageId = page.id;
 
-    const mdBlocks = await n2m.pageToMarkdown(page.id);
-    const mdString = n2m.toMarkdownString(mdBlocks);
+    const blocksRes = await fetch(`https://api.notion.com/v1/blocks/${pageId}/children`, {
+      headers: {
+        'Authorization': `Bearer ${NOTION_TOKEN}`,
+        'Notion-Version': '2022-06-28',
+      },
+    });
+    const blocksData = await blocksRes.json();
 
-    const post = {
-      id: page.id,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const content = blocksData.results.map((block: any) => {
+      if (block.type === 'paragraph') return block.paragraph.rich_text[0]?.plain_text || '';
+      if (block.type === 'heading_2') return `## ${block.heading_2.rich_text[0]?.plain_text}`;
+      if (block.type === 'code') return `\`\`\`${block.code.language}\n${block.code.rich_text[0]?.plain_text}\n\`\`\``;
+      if (block.type === 'bulleted_list_item') return `* ${block.bulleted_list_item.rich_text[0]?.plain_text}`;
+      return '';
+    }).join('\n\n');
+
+    return NextResponse.json({
       title: page.properties.Name?.title[0]?.plain_text || 'Sin título',
-      summary: page.properties.Summary?.rich_text[0]?.plain_text || '',
-      date: page.properties.Date?.date?.start || page.created_time,
-      content: mdString.parent 
-    };
+      content: content,
+      date: page.properties['Last Edited Time']?.last_edited_time || page.last_edited_time,
+      readTime: page.properties.Time?.rich_text[0]?.plain_text || '5 min'
+    });
 
-    return NextResponse.json(post);
   } catch (error) {
-    console.error("Notion API Error:", error);
-    return NextResponse.json({ error: 'Error al cargar el post' }, { status: 500 });
+    return NextResponse.json({ error: 'Error interno' }, { status: 500 });
   }
 }

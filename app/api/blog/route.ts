@@ -45,7 +45,8 @@ export async function GET() {
         title: page.properties.Name?.title[0]?.plain_text || 'Sin título',
         slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
         summary: page.properties.Summary?.rich_text[0]?.plain_text || '',
-        date: page.properties.Date?.date?.start || page.created_time,
+        date: page.properties['Last Edited Time']?.last_edited_time || page.last_edited_time,
+        readTime: page.properties.Time?.rich_text[0]?.plain_text || '5 min'
       };
     });
 
