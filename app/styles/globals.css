@@ -1,0 +1,64 @@
+* {
+  cursor: none;
+}
+
+[data-ui] {
+  user-select: auto;
+}
+
+canvas {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  color: #f5f5f5;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h2, h3, h4, h5, h6, button, input, p, span {
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.section {
+  padding: 120px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.subtitle {
+  margin-top: 16px;
+  color: #aaa;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 40px;
+}
+
+.grid {
+  display: grid;
+  gap: 24px;
+}
+
+.card {
+  background: #111;
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}

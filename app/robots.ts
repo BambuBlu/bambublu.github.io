@@ -1,0 +1,13 @@
+export const dynamic = 'force-static'; // <--- AÑADE ESTA LÍNEA
+
+import { MetadataRoute } from 'next'
+ 
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: '*',
+      allow: '/',
+    },
+    sitemap: 'https://www.tobiasmoscatelli.com/sitemap.xml',
+  }
+}
