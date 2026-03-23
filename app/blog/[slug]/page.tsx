@@ -1,6 +1,8 @@
+import { Suspense } from 'react';
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
+import LoadingSlug from "./Loading";
 import { remark } from 'remark';
 import html from 'remark-html';
 
@@ -17,7 +19,6 @@ export async function generateStaticParams() {
   const res = await fetch(`${baseUrl}/api/blog`);
   
   if (!res.ok) return [];
-  
    
   const posts = await res.json();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -54,8 +55,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+async function BlogPostFetcher({ slug }: { slug: string }) {
   const post = await getNotionPostBySlug(slug);
 
   if (!post) return notFound();
@@ -85,12 +85,22 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   };
 
   return (
-<>
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <BlogPostClient post={postWithHtml} slug={slug} />
     </>
+  );
+}
+
+export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+
+  return (
+    <Suspense fallback={<LoadingSlug />}>
+      <BlogPostFetcher slug={slug} />
+    </Suspense>
   );
 }

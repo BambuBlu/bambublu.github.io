@@ -1,5 +1,7 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import BlogClient from "./BlogClient";
+import LoadingBlogIndex from "./loading";
 
 export const metadata: Metadata = {
   title: 'Bitácora de Desarrollo',
@@ -18,9 +20,12 @@ async function getNotionPosts() {
   return res.json();
 }
 
-export default async function BlogIndex() {
+async function BlogDataFetcher() {
   const posts = await getNotionPosts();
+  return <BlogClient posts={posts} />;
+}
 
+export default function BlogIndex() {
   return (
     <>
       <script
@@ -39,7 +44,9 @@ export default async function BlogIndex() {
           })
         }}
       />
-      <BlogClient posts={posts} />
+      <Suspense fallback={<LoadingBlogIndex />}>
+        <BlogDataFetcher />
+      </Suspense>
     </>
   )
 }
