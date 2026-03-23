@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
-import LoadingSlug from "./Loading";
+import LoadingSlug from "./loading";
 import { remark } from 'remark';
 import html from 'remark-html';
 
