@@ -1,0 +1,20 @@
+.wrapper {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.skeleton_container {
+  transition: opacity 0.4s ease-out;
+}
+
+.skeleton_hidden {
+  opacity: 0 !important;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}

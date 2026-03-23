@@ -3,13 +3,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
-import Image from "next/image";
 import { useState, useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { X, ExternalLink, Github, BookOpen } from "lucide-react"
 import { useAppContext } from "@/app/context/AppContext"
 import styles from "./projectsview.module.css"
+import ImageWithSkeleton from "@/app/components/skeleton/ImageWithSkeleton";
 
 export function ProjectsView() {
   const { t, lang, unlockAchievement } = useAppContext();
@@ -67,13 +67,14 @@ export function ProjectsView() {
                     whileHover={{ y: -8, scale: 0.98 }}
                   >
                     <div className={styles.card_image}>
-                      <Image 
+                      <ImageWithSkeleton 
                         src={project.image} 
                         alt={project.title} 
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         style={{ objectFit: "cover" }}
                         priority={index < 4}
+                        borderRadius="inherit"
                       />
                       <div className={styles.card_overlay}><span className={styles.category_pill}>{project.category}</span></div>
                     </div>
@@ -108,12 +109,13 @@ export function ProjectsView() {
                 </button>
                 
                 <div className={styles.modal_image_container}>
-                  <Image 
+                  <ImageWithSkeleton 
                     src={selectedProject.image} 
                     alt={selectedProject.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 700px"
                     style={{ objectFit: "cover", borderTopLeftRadius: "24px", borderTopRightRadius: "24px" }}
+                    borderRadius="24px 24px 0 0"
                   />
                   <div className={styles.modal_image_gradient}></div>
                 </div>
