@@ -85,12 +85,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   };
 
   return (
-    <>
+<>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlogPostClient post={postWithHtml} />
+      <BlogPostClient post={postWithHtml} slug={slug} />
     </>
   );
 }

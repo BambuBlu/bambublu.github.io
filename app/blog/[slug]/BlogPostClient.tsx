@@ -7,15 +7,15 @@ import styles from "./blogpost.module.css";
 import { useAppContext } from "@/app/context/AppContext";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function BlogPostClient({ post }: { post: any }) {
+export default function BlogPostClient({ post, slug }: { post: any, slug: string }) {
   const { t, lang, toggleLanguage } = useAppContext();
   
   const [views, setViews] = useState<number>(0);
   const [claps, setClaps] = useState<number>(0);
   const [hasClapped, setHasClapped] = useState<boolean>(false);
 
-  useEffect(() => {
-    fetch(`/api/stats?slug=${post.slug}`)
+useEffect(() => {
+    fetch(`/api/stats?slug=${slug}`) 
       .then(res => res.json())
       .then(data => {
         if (data.views !== undefined) setViews(data.views);
@@ -26,21 +26,22 @@ export default function BlogPostClient({ post }: { post: any }) {
       fetch('/api/stats', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ slug: post.slug, action: 'view' })
+        body: JSON.stringify({ slug: slug, action: 'view' })
       });
     }, 3000);
 
     return () => clearTimeout(viewTimer);
-  }, [post.slug]);
+  }, [slug]);
 
   const handleClap = async () => {
     if (hasClapped) return;
     setHasClapped(true);
     setClaps(prev => prev + 1);
+
     await fetch('/api/stats', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ slug: post.slug, action: 'clap' })
+      body: JSON.stringify({ slug: slug, action: 'clap' }) 
     });
   };
 
