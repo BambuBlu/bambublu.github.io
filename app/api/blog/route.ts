@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
-import { Client } from '@notionhq/client';
+import * as NotionLog from '@notionhq/client'; 
 
-const notion = new Client({ auth: process.env.NOTION_TOKEN });
+const notion = new NotionLog.Client({ auth: process.env.NOTION_TOKEN });
 const DATABASE_ID = process.env.NOTION_DATABASE_ID || '';
 
 export const revalidate = 60;
@@ -12,8 +13,7 @@ export async function GET() {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response = await (notion.databases as any).query({
+    const response = await (notion as any).databases.query({
       database_id: DATABASE_ID,
       filter: {
         property: 'Published',
@@ -29,11 +29,9 @@ export async function GET() {
       ],
     });
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const posts = response.results.map((page: any) => {
       return {
         id: page.id,
-        // Usamos "Name" en lugar de "Title" para coincidir con tu Notion
         title: page.properties.Name?.title[0]?.plain_text || 'Sin título',
         slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
         summary: page.properties.Summary?.rich_text[0]?.plain_text || '',
@@ -42,8 +40,8 @@ export async function GET() {
     });
 
     return NextResponse.json(posts);
-  } catch (error) {
-    console.error("Notion API Error:", error);
-    return NextResponse.json({ error: 'Fallo al conectar con Notion' }, { status: 500 });
+  } catch (error: any) {
+    console.error("Notion API Error Detail:", error.message || error);
+    return NextResponse.json({ error: 'Fallo al conectar con Notion', details: error.message }, { status: 500 });
   }
 }
