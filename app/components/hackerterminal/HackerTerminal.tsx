@@ -112,7 +112,7 @@ export function HackerTerminal() {
         newOutput.push({ type: 'response', text: lang === 'es' ? t.terminal.spotifyLoading : t.terminal.spotifyLoading });
         setOutput(newOutput); setInput('');
         
-        fetch('/.netlify/functions/spotify')
+        fetch('/api/spotify')
           .then(res => res.json())
           .then(data => {
               if (data.isPlaying) {

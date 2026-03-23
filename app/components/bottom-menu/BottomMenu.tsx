@@ -13,6 +13,14 @@ import {
   Gamepad2, Code
 } from "lucide-react"
 
+if (typeof window !== "undefined") {
+  console.log(
+    `%cTerminalOS v${process.env.APP_VERSION} \nhttps://www.linkedin.com/in/tobiasmoscatelli`,
+    "color: #4ade80; font-size: 16px; font-weight: bold; font-family: monospace;",
+    "color: #a1a1aa; font-size: 12px; font-family: sans-serif;"
+  );
+}
+
 const TARGET_VOL = 0.3;
 const FADE_STEP = 0.05;
 const FADE_SPEED = 40;
