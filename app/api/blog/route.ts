@@ -47,7 +47,9 @@ export async function GET() {
         summary: page.properties.Summary?.rich_text[0]?.plain_text || '',
         date: page.properties['Last Edited Time']?.last_edited_time || page.last_edited_time,
         readTime: page.properties.Time?.rich_text[0]?.plain_text || '5 min',
-        language: page.properties.Language?.select?.name || 'en'
+        language: page.properties.Language?.select?.name || 'en',
+        category: page.properties.Category?.select?.name || 'DevLog',
+        tags: page.properties.Tags?.multi_select?.map((t: any) => t.name) || []
       };
     });
 
