@@ -108,21 +108,52 @@ export function HackerTerminal() {
     }
 
     if (mainCmd === 'spotify') {
+        const subAction = args[1]?.toLowerCase();
         setIsExecuting(true);
-        newOutput.push({ type: 'response', text: lang === 'es' ? t.terminal.spotifyLoading : t.terminal.spotifyLoading });
+
+        // Definir qué pedir y qué mensaje mostrar
+        let url = '/api/spotify';
+        if (subAction === '--top') {
+            url = '/api/spotify?action=top';
+            newOutput.push({ type: 'response', text: t.terminal.spotifyTopLoading });
+        } else if (subAction === '--playlist') {
+            url = '/api/spotify?action=playlist';
+            newOutput.push({ type: 'response', text: t.terminal.spotifyPlaylistLoading });
+        } else {
+            newOutput.push({ type: 'response', text: t.terminal.spotifyLoading });
+        }
+        
         setOutput(newOutput); setInput('');
         
-        fetch('/api/spotify')
+        fetch(url)
           .then(res => res.json())
           .then(data => {
-              if (data.isPlaying) {
-                  const msg = lang === 'es'
-                    ? `\n Tobias está escuchando ahora mismo:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}`
-                    : `\n Tobias is currently listening to:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}`;
-                  
+              if (data.type === 'top') {
+                  let msg = lang === 'es' ? `\n TOP 5 CANCIONES (Último mes):\n` : `\n TOP 5 TRACKS (Last month):\n`;
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  data.tracks.forEach((t: any, idx: number) => { msg += ` ${idx + 1}. ${t.title} - ${t.artist}\n`; });
                   setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#1db954' }]);
-              } else {
-                  setOutput(prev => [...prev, { type: 'response', text: `\n${t.terminal.spotifyNotPlaying}`, colorOverride: '#94a3b8' }]);
+              } 
+              else if (data.type === 'playlist') {
+                  const msg = lang === 'es' 
+                    ? `\n PLAYLIST RECOMENDADA:\n Nombre: ${data.name}\n Seguidores: ${data.followers}\n Desc: ${data.description}\n Link: ${data.url}`
+                    : `\n RECOMMENDED PLAYLIST:\n Name: ${data.name}\n Followers: ${data.followers}\n Desc: ${data.description}\n Link: ${data.url}`;
+                  setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#1db954' }]);
+              } 
+              else {
+                  if (data.type === 'now') {
+                      const msg = lang === 'es'
+                        ? `\n Tobias está escuchando ahora:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}`
+                        : `\n Tobias is currently listening to:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}`;
+                      setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#1db954' }]);
+                  } else if (data.type === 'recent') {
+                      const msg = lang === 'es'
+                        ? `\n Tobias está offline. Última canción escuchada:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}`
+                        : `\n Tobias is offline. Last played track:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}`;
+                      setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#94a3b8' }]);
+                  } else {
+                      setOutput(prev => [...prev, { type: 'response', text: `\n${t.terminal.spotifyNotPlaying}`, colorOverride: '#94a3b8' }]);
+                  }
               }
               setIsExecuting(false);
           })

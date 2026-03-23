@@ -102,6 +102,8 @@ terminal: {
     buyUsage: " Usage: buy <classic|drone>",
     buySuccess: " Transaction sent. If you have the points, the item will be equipped automatically.",
     buyFail: " Item not found in the catalog. Type 'shop' to view the list.",
+    spotifyTopLoading: "Analyzing Tobias's playback history...",
+    spotifyPlaylistLoading: "Downloading playlist coordinates...",
   },
   shop: {
     title: "Black Market Hangar",

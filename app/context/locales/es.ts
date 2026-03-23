@@ -102,6 +102,8 @@ terminal: {
     buyUsage: "Uso: buy <classic|drone>",
     buySuccess: "Transacción enviada. Si tienes los puntos, el objeto se equipará automáticamente.",
     buyFail: "Objeto no encontrado en el catálogo. Escribe 'shop' para ver la lista.",
+    spotifyTopLoading: "Analizando historial de reproducciones de Tobias...",
+    spotifyPlaylistLoading: "Descargando coordenadas de la playlist...",
   },
   shop: {
     title: "Hangar Clandestino",
