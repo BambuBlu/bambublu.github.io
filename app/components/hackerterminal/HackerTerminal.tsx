@@ -109,22 +109,35 @@ export function HackerTerminal() {
 
     if (mainCmd === 'spotify') {
         const subAction = args[1]?.toLowerCase();
+        
+        if (subAction === 'help' || subAction === '--help') {
+            const msg = lang === 'es' 
+              ? `\n COMANDOS DE SPOTIFY:\n- spotify            : Muestra lo que estoy escuchando ahora (o lo último).\n- spotify --top      : Mi Top 5 de canciones del mes.\n- spotify --playlist : Mi playlist recomendada para codear.`
+              : `\n SPOTIFY COMMANDS:\n- spotify            : Shows what I'm listening to right now (or recently).\n- spotify --top      : My Top 5 tracks of the month.\n- spotify --playlist : My recommended coding playlist.`;
+            newOutput.push({ type: 'response', text: msg, colorOverride: '#1db954' });
+            setOutput(newOutput); setInput('');
+            return;
+        }
+
         setIsExecuting(true);
 
-        // Definir qué pedir y qué mensaje mostrar
         let url = '/api/spotify';
         if (subAction === '--top') {
             url = '/api/spotify?action=top';
-            newOutput.push({ type: 'response', text: t.terminal.spotifyTopLoading });
+            newOutput.push({ type: 'response', text: lang === 'es' ? 'Analizando historial de reproducciones de Tobias...' : "Analyzing Tobias's playback history..." });
         } else if (subAction === '--playlist') {
             url = '/api/spotify?action=playlist';
-            newOutput.push({ type: 'response', text: t.terminal.spotifyPlaylistLoading });
+            newOutput.push({ type: 'response', text: lang === 'es' ? 'Descargando coordenadas de la playlist...' : 'Downloading playlist coordinates...' });
         } else {
-            newOutput.push({ type: 'response', text: t.terminal.spotifyLoading });
+            newOutput.push({ type: 'response', text: lang === 'es' ? 'Conectando a la base de datos musical de Tobias...' : "Connecting to Tobias's musical database..." });
         }
         
         setOutput(newOutput); setInput('');
         
+        const tipText = lang === 'es' 
+          ? `\n\n Tip: Prueba 'spotify --top' o 'spotify --playlist'` 
+          : `\n\n Tip: Try 'spotify --top' or 'spotify --playlist'`;
+
         fetch(url)
           .then(res => res.json())
           .then(data => {
@@ -136,29 +149,29 @@ export function HackerTerminal() {
               } 
               else if (data.type === 'playlist') {
                   const msg = lang === 'es' 
-                    ? `\n PLAYLIST RECOMENDADA:\n Nombre: ${data.name}\n Seguidores: ${data.followers}\n Desc: ${data.description}\n Link: ${data.url}`
-                    : `\n RECOMMENDED PLAYLIST:\n Name: ${data.name}\n Followers: ${data.followers}\n Desc: ${data.description}\n Link: ${data.url}`;
+                    ? `\n PLAYLIST RECOMENDADA:\n Nombre: ${data.name}\n Seguidores: ${data.followers}\n Desc: ${data.description || 'Sin descripción'}\n Link: ${data.url}`
+                    : `\n RECOMMENDED PLAYLIST:\n Name: ${data.name}\n Followers: ${data.followers}\n Desc: ${data.description || 'No description'}\n Link: ${data.url}`;
                   setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#1db954' }]);
               } 
               else {
                   if (data.type === 'now') {
                       const msg = lang === 'es'
-                        ? `\n Tobias está escuchando ahora:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}`
-                        : `\n Tobias is currently listening to:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}`;
+                        ? `\n Tobias está escuchando ahora:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}${tipText}`
+                        : `\n Tobias is currently listening to:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}${tipText}`;
                       setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#1db954' }]);
                   } else if (data.type === 'recent') {
                       const msg = lang === 'es'
-                        ? `\n Tobias está offline. Última canción escuchada:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}`
-                        : `\n Tobias is offline. Last played track:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}`;
+                        ? `\n Tobias está offline. Última canción escuchada:\n Canción: ${data.title}\n Artista: ${data.artist}\n Link: ${data.songUrl}${tipText}`
+                        : `\n Tobias is offline. Last played track:\n Song: ${data.title}\n Artist: ${data.artist}\n Link: ${data.songUrl}${tipText}`;
                       setOutput(prev => [...prev, { type: 'response', text: msg, colorOverride: '#94a3b8' }]);
                   } else {
-                      setOutput(prev => [...prev, { type: 'response', text: `\n${t.terminal.spotifyNotPlaying}`, colorOverride: '#94a3b8' }]);
+                      setOutput(prev => [...prev, { type: 'response', text: `\nSpotify API Error/No Data.${tipText}`, colorOverride: '#94a3b8' }]);
                   }
               }
               setIsExecuting(false);
           })
           .catch(() => { 
-              setOutput(prev => [...prev, { type: 'error', text: t.terminal.apiError }]); 
+              setOutput(prev => [...prev, { type: 'error', text: lang === 'es' ? 'Error de conexión con Spotify.' : 'Connection error with Spotify.' }]); 
               setIsExecuting(false); 
           });
         return;
