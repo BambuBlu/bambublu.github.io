@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Tigre",
+			"country": {
+				"code": "AR",
+				"name": "Argentina"
+			},
+			"subdivision": {
+				"code": "B",
+				"name": "Buenos Aires"
+			},
+			"timezone": "America/Argentina/Buenos_Aires",
+			"latitude": -34.4231,
+			"longitude": -58.583,
+			"postalCode": "1646"
+		},
+		"timestamp": 1774274210907
+	}
+}
