@@ -65,6 +65,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
 
   const postWithHtml = {
       ...post,
+      slug: slug,
       contentHtml: contentHtml,
       category: post.category || 'Development',
       readTime: post.readTime || '5 min' 
