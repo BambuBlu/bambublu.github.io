@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import styles from './Skeleton.module.css';
+import styles from './skeleton.module.css';
 
 interface SkeletonProps {
   width?: string | number;
