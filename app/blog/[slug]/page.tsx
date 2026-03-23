@@ -1,18 +1,34 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import BlogPostClient from "./BlogPostClient";
+import { remark } from 'remark';
+import html from 'remark-html';
 
-export function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
+async function getNotionPostBySlug(slug: string) {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/blog/${slug}`, { next: { revalidate: 60 } });
+  
+  if (!res.ok) return null;
+  return res.json();
+}
+
+export async function generateStaticParams() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/blog`);
+  
+  if (!res.ok) return [];
+  
+   
+  const posts = await res.json();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return posts.map((post: any) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getNotionPostBySlug(slug);
 
   if (!post) {
     return { title: 'Post no encontrado' };
@@ -23,32 +39,42 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     alternates: {
       canonical: `/blog/${slug}`, 
     },
-    description: post.excerpt,
+    description: post.summary,
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.summary,
       type: 'article',
       publishedTime: new Date(post.date).toISOString(),
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
-      description: post.excerpt,
+      description: post.summary, 
     }
   };
 }
 
 export default async function BlogPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = await getPostBySlug(slug);
+  const post = await getNotionPostBySlug(slug);
 
   if (!post) return notFound();
+
+  const processedContent = await remark().use(html).process(post.content || '');
+  const contentHtml = processedContent.toString();
+
+  const postWithHtml = {
+      ...post,
+      contentHtml: contentHtml,
+      category: post.category || 'Development',
+      readTime: post.readTime || '5 min' 
+  };
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": post.title,
-    "description": post.excerpt,
+    "description": post.summary,
     "datePublished": new Date(post.date).toISOString(),
     "author": [{
         "@type": "Person",
@@ -63,7 +89,7 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlogPostClient post={post} />
+      <BlogPostClient post={postWithHtml} />
     </>
   );
 }

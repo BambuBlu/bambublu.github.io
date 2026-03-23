@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import { getAllPosts } from "@/lib/posts";
 import BlogClient from "./BlogClient";
 
 export const metadata: Metadata = {
@@ -7,8 +6,21 @@ export const metadata: Metadata = {
   description: 'Artículos, tutoriales y reflexiones sobre programación, React, Next.js y desarrollo de videojuegos.',
 };
 
-export default function BlogIndex() {
-  const posts = getAllPosts();
+async function getNotionPosts() {
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/api/blog`, { next: { revalidate: 60 } });
+  
+  if (!res.ok) {
+    console.error("Error al obtener los posts de Notion");
+    return [];
+  }
+  
+  return res.json();
+}
+
+export default async function BlogIndex() {
+  const posts = await getNotionPosts();
+
   return (
     <>
       <script
@@ -27,7 +39,7 @@ export default function BlogIndex() {
           })
         }}
       />
-      <BlogClient posts={posts} />;
+      <BlogClient posts={posts} />
     </>
   )
 }
