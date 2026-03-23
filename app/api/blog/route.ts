@@ -1,35 +1,45 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
-import * as NotionLog from '@notionhq/client'; 
 
-const notion = new NotionLog.Client({ auth: process.env.NOTION_TOKEN });
+const NOTION_TOKEN = process.env.NOTION_TOKEN || '';
 const DATABASE_ID = process.env.NOTION_DATABASE_ID || '';
 
 export const revalidate = 60;
 
 export async function GET() {
-  if (!DATABASE_ID) {
-    return NextResponse.json({ error: 'Falta el ID de la base de datos' }, { status: 500 });
+  if (!NOTION_TOKEN || !DATABASE_ID) {
+    return NextResponse.json({ error: 'Configuración incompleta (Token/ID)' }, { status: 500 });
   }
 
   try {
-    const response = await (notion as any).databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        property: 'Published',
-        checkbox: {
-          equals: true, 
-        },
+    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${NOTION_TOKEN}`,
+        'Notion-Version': '2022-06-28',
+        'Content-Type': 'application/json',
       },
-      sorts: [
-        {
-          property: 'Date',
-          direction: 'descending', 
+      body: JSON.stringify({
+        filter: {
+          property: 'Published',
+          checkbox: { equals: true },
         },
-      ],
+        sorts: [
+          { property: 'Date', direction: 'descending' },
+        ],
+      }),
+      next: { revalidate: 60 }
     });
 
-    const posts = response.results.map((page: any) => {
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Notion API Direct Error:", errorData);
+      return NextResponse.json({ error: 'Notion respondió con error', details: errorData }, { status: res.status });
+    }
+
+    const data = await res.json();
+
+    const posts = data.results.map((page: any) => {
       return {
         id: page.id,
         title: page.properties.Name?.title[0]?.plain_text || 'Sin título',
@@ -41,7 +51,7 @@ export async function GET() {
 
     return NextResponse.json(posts);
   } catch (error: any) {
-    console.error("Notion API Error Detail:", error.message || error);
-    return NextResponse.json({ error: 'Fallo al conectar con Notion', details: error.message }, { status: 500 });
+    console.error("Fetch Error:", error.message);
+    return NextResponse.json({ error: 'Fallo crítico de conexión', details: error.message }, { status: 500 });
   }
 }
