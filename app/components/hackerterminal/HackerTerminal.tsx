@@ -281,6 +281,24 @@ export function HackerTerminal() {
         newOutput.push({ type: 'response', text: t.terminal.motherlode, colorOverride: '#fcd34d' });
         window.dispatchEvent(new CustomEvent('addCheatScore', { detail: 100 }));
         break;
+      case 'shop':
+        newOutput.push({ type: 'response', text: t.terminal.shopList, colorOverride: '#fcd34d' }); // Color dorado
+        break;
+      case 'buy':
+        const itemToBuy = args[1]?.toLowerCase();
+        
+        if (!itemToBuy) {
+            newOutput.push({ type: 'error', text: t.terminal.buyUsage });
+        } else if (itemToBuy === 'classic') {
+            window.dispatchEvent(new CustomEvent('purchaseItem', { detail: { item: 'classic', cost: 100 }}));
+            newOutput.push({ type: 'response', text: t.terminal.buySuccess, colorOverride: '#4ade80' });
+        } else if (itemToBuy === 'drone') {
+            window.dispatchEvent(new CustomEvent('purchaseItem', { detail: { item: 'drone', cost: 500 }}));
+            newOutput.push({ type: 'response', text: t.terminal.buySuccess, colorOverride: '#4ade80' });
+        } else {
+            newOutput.push({ type: 'error', text: t.terminal.buyFail });
+        }
+        break;
       default:
         newOutput.push({ type: 'error', text: t.terminal.notFound.replace('{cmd}', mainCmd) });
     }

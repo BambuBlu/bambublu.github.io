@@ -98,6 +98,10 @@ terminal: {
     apiError: "Error de conexión con el servidor remoto.",
     spotifyLoading: "Conectando a la base de datos musical de Tobias...",
     spotifyNotPlaying: "Tobias no está escuchando música en este momento.",
+    shopList: "HANGAR CLANDESTINO\n\nObjetos disponibles:\n- classic (100 pts) : Nave clásica\n- drone (500 pts)   : Dron auto-apuntado\n\nUso: buy <objeto>",
+    buyUsage: "Uso: buy <classic|drone>",
+    buySuccess: "Transacción enviada. Si tienes los puntos, el objeto se equipará automáticamente.",
+    buyFail: "Objeto no encontrado en el catálogo. Escribe 'shop' para ver la lista.",
   },
   shop: {
     title: "Hangar Clandestino",

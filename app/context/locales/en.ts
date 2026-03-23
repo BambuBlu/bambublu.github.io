@@ -98,6 +98,10 @@ terminal: {
     apiError: "Connection error with remote server.",
     spotifyLoading: "Connecting to Tobias's musical database...",
     spotifyNotPlaying: "Tobias is not listening to music right now.",
+    shopList: " BLACK MARKET HANGAR\n\nAvailable items:\n- classic (100 pts) : Classic Ship\n- drone (500 pts)   : Auto-aim Drone\n\nUsage: buy <item>",
+    buyUsage: " Usage: buy <classic|drone>",
+    buySuccess: " Transaction sent. If you have the points, the item will be equipped automatically.",
+    buyFail: " Item not found in the catalog. Type 'shop' to view the list.",
   },
   shop: {
     title: "Black Market Hangar",
