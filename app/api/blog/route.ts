@@ -46,7 +46,8 @@ export async function GET() {
         slug: page.properties.Slug?.rich_text[0]?.plain_text || page.id,
         summary: page.properties.Summary?.rich_text[0]?.plain_text || '',
         date: page.properties['Last Edited Time']?.last_edited_time || page.last_edited_time,
-        readTime: page.properties.Time?.rich_text[0]?.plain_text || '5 min'
+        readTime: page.properties.Time?.rich_text[0]?.plain_text || '5 min',
+        language: page.properties.Language?.select?.name || 'en'
       };
     });
 
