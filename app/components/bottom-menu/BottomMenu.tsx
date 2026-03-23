@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/set-state-in-effect */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
 import styles from "./bottommenu.module.css"
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { useAppContext } from "@/app/context/AppContext";
 
 import { 
@@ -15,9 +13,15 @@ import {
   Gamepad2, Code
 } from "lucide-react"
 
+const TARGET_VOL = 0.3;
+const FADE_STEP = 0.05;
+const FADE_SPEED = 40;
+
 export function BottomMenu() {
   const { lang, toggleLanguage, t, trackMuteToggle, unlockAchievement } = useAppContext();
+  
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null); 
   
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0); 
@@ -40,23 +44,84 @@ export function BottomMenu() {
     { id: "linkedin", label: "LinkedIn", icon: <Linkedin size={22} strokeWidth={2} />, url: "https://www.linkedin.com/in/tobiasmoscatelli" },
   ];
 
-  useEffect(() => {
-    const handleGlobalViewChange = (e: Event) => {
-      const newView = (e as CustomEvent).detail;
-      setCurrentView(newView);
-    };
-    window.addEventListener("changeView", handleGlobalViewChange);
-    return () => window.removeEventListener("changeView", handleGlobalViewChange);
+  const performFadeIn = useCallback((audio: HTMLAudioElement) => {
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+    audio.play().catch(() => {});
+    
+    fadeIntervalRef.current = setInterval(() => {
+      if (audio.volume < TARGET_VOL - 0.01) {
+        audio.volume = Math.min(TARGET_VOL, audio.volume + FADE_STEP);
+      } else {
+        audio.volume = TARGET_VOL;
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+      }
+    }, FADE_SPEED);
   }, []);
 
+  const performFadeOutAndSwitch = useCallback((audio: HTMLAudioElement, newSrc: string, shouldPlay: boolean) => {
+    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+    
+    if (audio.paused || audio.volume === 0) {
+      audio.src = newSrc;
+      audio.load();
+      audio.volume = 0;
+      if (shouldPlay) performFadeIn(audio);
+      return;
+    }
+
+    fadeIntervalRef.current = setInterval(() => {
+      if (audio.volume > 0.01) {
+        audio.volume = Math.max(0, audio.volume - FADE_STEP);
+      } else {
+        audio.volume = 0;
+        audio.pause();
+        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+        
+        audio.src = newSrc;
+        audio.load();
+        if (shouldPlay) performFadeIn(audio);
+      }
+    }, FADE_SPEED);
+  }, [performFadeIn]);
+
+
+  const updateAudioTrack = useCallback((forcePlay = false, bypassMute = false) => {
+    if (!audioRef.current) return;
+    
+    let targetTrack = "/audio/bg-music.mp3";
+    
+    if (isBossActiveRef.current) targetTrack = "/audio/boss-theme.mp3"; 
+    else if (isMatrixRef.current && isHardcoreRef.current) targetTrack = "/audio/matrix-arcade.mp3";
+    else if (isMatrixRef.current && !isHardcoreRef.current) targetTrack = "/audio/matrix-bg.mp3";
+    else if (!isMatrixRef.current && isHardcoreRef.current) targetTrack = "/audio/arcade-music.mp3";
+
+    const audio = audioRef.current;
+    const currentSrc = new URL(audio.src, window.location.origin).pathname;
+    const shouldPlay = forcePlay || (!isMuted && !bypassMute);
+
+    if (currentSrc !== targetTrack) {
+        performFadeOutAndSwitch(audio, targetTrack, shouldPlay);
+    } else {
+        if (shouldPlay && audio.paused) {
+            performFadeIn(audio);
+        }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMuted, performFadeOutAndSwitch, performFadeIn]);
+
   useEffect(() => {
+    const handleGlobalViewChange = (e: Event) => setCurrentView((e as CustomEvent).detail);
+    window.addEventListener("changeView", handleGlobalViewChange);
+    
     const saved = localStorage.getItem("portfolio_highscore");
     if (saved) setHighScore(parseInt(saved));
 
-    const audio = new Audio("/audio/bg-music.mp3");
-    audio.loop = true;
-    audio.volume = 0.3;
-    audioRef.current = audio;
+    if (!audioRef.current) {
+        const audio = new Audio("/audio/bg-music.mp3");
+        audio.loop = true;
+        audio.volume = 0; 
+        audioRef.current = audio;
+    }
 
     const handleScoreUpdate = (e: Event) => {
       const newScore = (e as CustomEvent).detail;
@@ -72,31 +137,26 @@ export function BottomMenu() {
     };
 
     window.addEventListener("updateGameScore", handleScoreUpdate);
+    
     return () => {
+      window.removeEventListener("changeView", handleGlobalViewChange);
       window.removeEventListener("updateGameScore", handleScoreUpdate);
-      audio.pause();
     };
   }, [unlockAchievement]);
 
   useEffect(() => {
-    const updateAudioTrack = (forcePlay = false) => {
-      if (!audioRef.current) return;
-      let targetTrack = "/audio/bg-music.mp3";
-      
-      if (isBossActiveRef.current) targetTrack = "/audio/boss-theme.mp3"; 
-      else if (isMatrixRef.current && isHardcoreRef.current) targetTrack = "/audio/matrix-arcade.mp3";
-      else if (isMatrixRef.current && !isHardcoreRef.current) targetTrack = "/audio/matrix-bg.mp3";
-      else if (!isMatrixRef.current && isHardcoreRef.current) targetTrack = "/audio/arcade-music.mp3";
-
-      if (!audioRef.current.src.endsWith(targetTrack)) audioRef.current.src = targetTrack;
-      if (forcePlay) audioRef.current.play().catch(() => {});
-      else if (!isMuted) audioRef.current.play().catch(() => {});
+    const handleDifficultyChange = (e: Event) => { 
+        isHardcoreRef.current = (e as CustomEvent).detail === "hard"; 
+        updateAudioTrack(); 
     };
-
-    const handleDifficultyChange = (e: Event) => { isHardcoreRef.current = (e as CustomEvent).detail === "hard"; updateAudioTrack(); };
+    
     const handleMatrixToggle = () => {
       isMatrixRef.current = !isMatrixRef.current;
-      if (isMatrixRef.current) { setIsMuted(false); window.dispatchEvent(new CustomEvent("toggleMute", { detail: false })); updateAudioTrack(true); }
+      if (isMatrixRef.current) { 
+          setIsMuted(false); 
+          window.dispatchEvent(new CustomEvent("toggleMute", { detail: false })); 
+          updateAudioTrack(true); 
+      }
       else updateAudioTrack();
     };
 
@@ -107,7 +167,10 @@ export function BottomMenu() {
       updateAudioTrack(true);
     };
 
-    const handleBossDefeated = () => { isBossActiveRef.current = false; updateAudioTrack(); };
+    const handleBossDefeated = () => { 
+        isBossActiveRef.current = false; 
+        updateAudioTrack(); 
+    };
 
     window.addEventListener("setGameDifficulty", handleDifficultyChange);
     window.addEventListener("toggleMatrixMode", handleMatrixToggle);
@@ -120,12 +183,29 @@ export function BottomMenu() {
       window.removeEventListener("spawnKonamiBoss", handleBossSpawn);
       window.removeEventListener("bossDefeated", handleBossDefeated);
     };
-  }, [isMuted]);
+  }, [updateAudioTrack]);
 
   const toggleMute = () => {
     const newState = !isMuted;
     setIsMuted(newState);
-    if (audioRef.current) { newState ? audioRef.current.pause() : audioRef.current.play().catch(() => {}); }
+    
+    if (audioRef.current) {
+        const audio = audioRef.current;
+        if (newState) {
+            if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+            fadeIntervalRef.current = setInterval(() => {
+              if (audio.volume > 0.01) {
+                audio.volume = Math.max(0, audio.volume - FADE_STEP);
+              } else {
+                audio.volume = 0;
+                audio.pause();
+                if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
+              }
+            }, FADE_SPEED);
+        } else {
+            updateAudioTrack(true);
+        }
+    }
     window.dispatchEvent(new CustomEvent("toggleMute", { detail: newState }));
     trackMuteToggle();
   };
