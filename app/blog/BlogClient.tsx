@@ -47,15 +47,20 @@ export default function BlogClient({ posts }: { posts: any[] }) {
           {filteredPosts.map((post) => (
             <article key={post.slug} className={styles.post_card}>
               <div className={styles.post_meta}>
-                <span className={styles.category}>{post.category}</span>
+                <span className={styles.category}>{post.category || 'DevLog'}</span>
                 <div className={styles.time_info}>
-                  <span><Calendar size={14} /> {post.date}</span>
-                  <span><Clock size={14} /> {post.readTime}</span>
+                  <span>
+                    <Calendar size={14} /> 
+                    {new Date(post.date).toLocaleDateString(lang === 'es' ? 'es-AR' : 'en-US', {
+                      day: 'numeric', month: 'short', year: 'numeric'
+                    })}
+                  </span>
+                  <span><Clock size={14} /> {post.readTime || '5 min'}</span>
                 </div>
               </div>
               
               <h2 className={styles.post_title}>{post.title}</h2>
-              <p className={styles.post_excerpt}>{post.excerpt}</p>
+              <p className={styles.post_excerpt}>{post.summary}</p>
               
               <Link href={`/blog/${post.slug}`} className={styles.read_more}>
                 {t.blog.readMore} <ChevronRight size={16} />

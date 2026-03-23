@@ -25,7 +25,7 @@ export async function GET() {
           checkbox: { equals: true },
         },
         sorts: [
-          { property: 'Date', direction: 'descending' },
+          { property: 'Last Edited Time', direction: 'descending' },
         ],
       }),
       next: { revalidate: 60 }

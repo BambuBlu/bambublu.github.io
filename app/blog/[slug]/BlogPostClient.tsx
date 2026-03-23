@@ -39,9 +39,14 @@ export default function BlogPostClient({ post }: { post: any }) {
 
         <header className={styles.post_header}>
           <div className={styles.meta_tags}>
-            <span className={styles.category_pill}>{post.category}</span>
+            <span className={styles.category_pill}>{post.category || 'Development'}</span>
             <div className={styles.time_info}>
-              <span><Calendar size={14} /> {post.date}</span>
+              <span>
+                <Calendar size={14} /> 
+                {new Date(post.date).toLocaleDateString(lang === 'es' ? 'es-AR' : 'en-US', {
+                  day: 'numeric', month: 'long', year: 'numeric'
+                })}
+              </span>
               <span><Clock size={14} /> {post.readTime}</span>
             </div>
           </div>
