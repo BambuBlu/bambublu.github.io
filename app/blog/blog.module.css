@@ -1,4 +1,3 @@
-/* Recuperamos el cursor default globalmente para esta página */
 .blog_wrapper {
   min-height: 100vh;
   width: 100vw;
@@ -19,7 +18,6 @@
   cursor: pointer !important;
 }
 
-/* Fondo estático ligero para simular el espacio sin usar el Canvas */
 .static_space_bg {
   position: fixed;
   inset: 0;

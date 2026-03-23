@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useAppContext } from "@/app/context/AppContext"
 import { MousePointerClick, Move, Target, Trophy, AlertTriangle, Play } from "lucide-react"
 import styles from "./gameview.module.css"
+import { Crosshair } from "@/app/components/crosshair"
 
 export function GameView() {
   const { t } = useAppContext();
@@ -29,6 +30,7 @@ export function GameView() {
 
   return (
     <section className={styles.wrapper}>
+      <Crosshair />
       <div className={styles.glass_container} data-ui>
         <div className={styles.content_inner}>
           <div className={styles.header}>

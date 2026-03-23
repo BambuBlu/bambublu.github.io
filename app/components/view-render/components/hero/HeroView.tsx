@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useAppContext } from "@/app/context/AppContext"
 import { Atom, FileType, Zap, Database, Smartphone, Gamepad2, Palette, Users } from "lucide-react"
 import styles from "./heroview.module.css"
+import { Crosshair } from "@/app/components/crosshair"
 
 export function HeroView() {
   const { t } = useAppContext();
@@ -32,6 +33,7 @@ export function HeroView() {
 
   return (
     <section className={styles.hero}>
+      <Crosshair />
       <div className={styles.glow} style={{ left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%` }} />
       <div className={styles.content}>
         <div className={styles.badge}>{t.hero.badge}</div>

@@ -1,17 +1,14 @@
-/* --- SOLUCIÓN DEL PUNTERO (Fuerza bruta para ganar al cursor:none) --- */
 .wrapper,
 .wrapper :global(*) {
   cursor: auto !important;
 }
 
-/* Forzamos el cursor default en las áreas neutras */
 .wrapper,
 .cv_frame,
 .paper_controls {
   cursor: default !important;
 }
 
-/* Forzamos la manito en todos los elementos interactivos */
 .lang_btn,
 .download_btn,
 .wrapper :global(button),
@@ -19,7 +16,6 @@
   cursor: pointer !important;
 }
 
-/* Cursor de texto para las áreas de lectura y selección */
 .summary_text, 
 .bullet_list, 
 .skills_list, 
@@ -31,8 +27,6 @@
   user-select: text !important;
   cursor: text !important;
 }
-
-/* --- ESTILOS VISUALES ORIGINALES --- */
 
 .wrapper {
   height: 100vh;
@@ -145,13 +139,49 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.header { text-align: center; margin-bottom: 30px; padding-top: 48px; }
-.name { font-size: 2.2rem; font-weight: 700; margin-bottom: 6px; color: #111827; letter-spacing: -0.5px; }
+.header { 
+  margin-bottom: 30px; 
+  padding-top: 20px; 
+  border-bottom: 2px solid #e5e7eb; 
+  padding-bottom: 24px;
+}
+
+.header_content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.profile_image_container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 24px; 
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  border: 4px solid #ffffff; 
+}
+
+.header_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.name { 
+  font-size: 2.4rem; 
+  font-weight: 800; 
+  margin-bottom: 4px; 
+  color: #111827; 
+  letter-spacing: -0.5px; 
+  margin-top: 0;
+}
 
 .location, .contact { 
-  font-size: 0.9rem; 
+  font-size: 0.95rem; 
   color: #4b5563; 
-  margin: 3px 0; 
+  margin: 2px 0; 
   overflow-wrap: break-word; 
   word-wrap: break-word; 
 }
@@ -201,8 +231,22 @@
   .download_btn { padding: 6px 10px; font-size: 0.8rem; }
   .download_btn :global(span) { display: none; }
 
-  .name { font-size: 1.6rem; margin-top: 25px; } 
-  .header p { font-size: 0.8rem; }
+  .header_content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .profile_image_container {
+    width: 90px;
+    height: 90px;
+    border-radius: 20px;
+    margin: 0 auto;
+  }
+
+  .name { font-size: 1.8rem; margin-top: 0; } 
+  .header_info p { font-size: 0.85rem; }
   .section_title { font-size: 1rem; }
 
   .role_header { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; }

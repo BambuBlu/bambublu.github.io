@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
+import Image from "next/image"
 import { Download } from "lucide-react"
 import styles from "./resumeeview.module.css"
+import { useAppContext } from "@/app/context/AppContext"
 
 const resumeData = {
   en: {
@@ -152,12 +154,30 @@ const resumeData = {
 
 export function ResumeeView() {
   const [lang, setLang] = useState<"en" | "es">("en")
+  const { unlockAchievement } = useAppContext()
   const t = resumeData[lang]
 
   const changeLang = (e: React.MouseEvent, selectedLang: "en" | "es") => {
     e.stopPropagation();
     setLang(selectedLang);
   }
+
+  const clickCount = useRef(0);
+  const clickTimer = useRef<NodeJS.Timeout | null>(null);
+
+  const handleSecretClick = () => {
+    clickCount.current += 1;
+    
+    if (clickTimer.current) clearTimeout(clickTimer.current);
+    if (clickCount.current >= 5) {
+      unlockAchievement('stalker');
+      clickCount.current = 0;
+    } else {
+      clickTimer.current = setTimeout(() => {
+        clickCount.current = 0;
+      }, 1500);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -194,10 +214,25 @@ export function ResumeeView() {
 
         <div className={styles.scroll_container} data-ui>
           <div className={styles.paper}>
+            
             <header className={styles.header}>
-              <h1 className={styles.name}>{t.header.name}</h1>
-              <p className={styles.location}>{t.header.location}</p>
-              <p className={styles.contact}>{t.header.contact}</p>
+              <div className={styles.header_content}>
+                <div className={styles.profile_image_container} onClick={handleSecretClick} style={{ cursor: 'pointer' }}>
+                  <Image 
+                    src="/img/pro.jpg" 
+                    alt="Tobias Moscatelli" 
+                    fill 
+                    style={{ objectFit: "cover" }}
+                    sizes="120px"
+                    priority
+                  />
+                </div>
+                <div className={styles.header_info}>
+                  <h1 className={styles.name}>{t.header.name}</h1>
+                  <p className={styles.location}>{t.header.location}</p>
+                  <p className={styles.contact}>{t.header.contact}</p>
+                </div>
+              </div>
             </header>
 
             <section className={styles.section}>

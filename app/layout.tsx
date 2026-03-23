@@ -47,9 +47,9 @@ export const metadata: Metadata = {
   authors: [{ name: 'Tobias Moscatelli' }],
   creator: 'Tobias Moscatelli',
   icons: {
-    icon: '/search-logo.svg',
-    shortcut: '/search-logo.svg',
-    apple: '/search-logo.svg',
+    icon: 'svg/search-logo.svg',
+    shortcut: 'svg/search-logo.svg',
+    apple: 'svg/search-logo.svg',
   },
   openGraph: {
     type: 'website',
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     siteName: 'Tobias Portfolio',
     images: [
       {
-        url: '/og-image.jpg', 
+        url: 'img/pro.jpg', 
         width: 1200,
         height: 630,
         alt: 'Previsualización del Portfolio de Tobias',
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Tobias | Software Engineer & Game Developer',
     description: 'Portfolio interactivo espacial construido con Next.js y Canvas.',
-    images: ['/og-image.jpg'],
+    images: ['img/pro.jpg'],
   },
 };
 
