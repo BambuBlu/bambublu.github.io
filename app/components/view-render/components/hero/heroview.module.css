@@ -203,15 +203,16 @@
 
   .glow { display: none; }
   
-.content { 
+  .content { 
     padding: 32px 20px; 
     border-radius: 28px;
     width: 90%;
     max-width: 90%;
-    min-height: 400px; 
+    min-height: 400px;
     margin-bottom: 80px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(20, 20, 20, 0.85); 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .title { font-size: 2.2rem; }

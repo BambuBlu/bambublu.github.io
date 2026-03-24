@@ -38,7 +38,8 @@
   -webkit-backdrop-filter: blur(10px);
   padding: 10px;
   border-radius: 50%;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   width: 48px;
   height: 48px;
@@ -118,7 +119,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
   box-sizing: border-box; 
 }
 
@@ -238,7 +239,6 @@
   }
 }
 
-
 .shop_btn {
   position: fixed;
   top: 80px;
@@ -251,7 +251,7 @@
   padding: 10px;
   border-radius: 50%;
   cursor: pointer !important;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   width: 48px;
   height: 48px;
@@ -301,7 +301,7 @@
   font-weight: bold;
   cursor: pointer !important;
   pointer-events: auto !important;
-  transition: all 0.2s;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .buy_btn:hover:not(:disabled) {
