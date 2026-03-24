@@ -31,7 +31,7 @@ export function Header() {
         //@ts-ignore
         fetchpriority="high"
       >
-        Tobías Moscatelli
+        Tobias Moscatelli
       </h1>
     </header>
   )
