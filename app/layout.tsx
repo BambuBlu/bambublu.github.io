@@ -13,7 +13,7 @@ const disolveFont = localFont({
     }
   ],
   variable: '--font-disolve',
-  display: 'block',
+  display: 'swap',
   preload: true,
 });
 
