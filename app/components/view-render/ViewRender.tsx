@@ -1,13 +1,12 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { HeroView } from "./components"
+import { HeroView, ResumeeView } from "./components" 
 import dynamic from "next/dynamic"
 import styles from "./viewrender.module.css" 
 
 const ProjectsView = dynamic(() => import('./components').then(mod => mod.ProjectsView))
 const GameView = dynamic(() => import('./components').then(mod => mod.GameView))
-const ResumeeView = dynamic(() => import('./components').then(mod => mod.ResumeeView))
 
 export function ViewRenderer() {
   const [view, setView] = useState("home")
@@ -25,17 +24,21 @@ export function ViewRenderer() {
         <HeroView />
       </div>
 
-      <div className={`${styles.view} ${view === "projects" ? styles.active : ""}`}>
-        <ProjectsView />
-      </div>
-
-      <div className={`${styles.view} ${view === "game" ? styles.active : ""}`}>
-        <GameView />
-      </div>
-
       <div className={`${styles.view} ${view === "resumee" ? styles.active : ""}`}>
         <ResumeeView />
       </div>
+
+      {view === "projects" && (
+        <div className={`${styles.view} ${styles.active}`}>
+          <ProjectsView />
+        </div>
+      )}
+
+      {view === "game" && (
+        <div className={`${styles.view} ${styles.active}`}>
+          <GameView />
+        </div>
+      )}
 
     </div>
   )
