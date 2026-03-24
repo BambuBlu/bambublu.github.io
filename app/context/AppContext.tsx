@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
-import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
 import { HackerTerminal } from '../components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, X, Lock, ShoppingCart, Rocket, Cpu, CheckCircle2 } from 'lucide-react';
@@ -8,21 +10,17 @@ import { es } from './locales/es';
 import { en } from './locales/en';
 
 const translations = { es, en };
-
 const ALL_ACHIEVEMENTS = ['first_blood', 'curious', 'stalker', 'konami', 'polyglot', 'dj', 'reader'] as const;
 type AchievementId = typeof ALL_ACHIEVEMENTS[number];
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const AppContext = createContext<any>(null);
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<'es' | 'en'>('en');
   const [unlockedAchievements, setUnlockedAchievements] = useState<AchievementId[]>([]);
   const [activeToast, setActiveToast] = useState<{ id: string, title: string, desc: string } | null>(null);
-  
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [isShopOpen, setIsShopOpen] = useState(false); 
-  
   const [isTouchDevice, setIsTouchDevice] = useState(false); 
   const [currentScore, setCurrentScore] = useState(0);
   const [purchasedItems, setPurchasedItems] = useState<string[]>([]);
@@ -30,19 +28,47 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const langToggles = useRef(0);
   const muteToggles = useRef(0);
 
+  const t = translations[lang];
+
+  const unlockAchievement = useCallback((id: AchievementId) => {
+    setUnlockedAchievements(prev => {
+      if (prev.includes(id)) return prev; 
+      const newAchievements = [...prev, id];
+      localStorage.setItem('portfolio_achievements', JSON.stringify(newAchievements));
+      
+      const currentT = translations[lang];
+      const achievementData = (currentT.achievements as any)[id];
+      
+      setActiveToast({ id, title: achievementData.title, desc: achievementData.desc });
+      setTimeout(() => setActiveToast(null), 4000);
+      
+      try {
+        const audio = new Audio('/audio/achievement.mp3');
+        audio.volume = 0.6;
+        audio.play().catch(() => {});
+      } catch (e) {}
+      
+      return newAchievements;
+    });
+  }, [lang]);
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    const timer = setTimeout(() => {
       const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia("(pointer: coarse)").matches;
       setIsTouchDevice(isTouch);
-    }
+    }, 100); 
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    const savedAch = localStorage.getItem('portfolio_achievements');
-    if (savedAch) setUnlockedAchievements(JSON.parse(savedAch));
-    
-    const savedShop = localStorage.getItem('portfolio_shop');
-    if (savedShop) setPurchasedItems(JSON.parse(savedShop));
+    const timer = setTimeout(() => {
+      const savedAch = localStorage.getItem('portfolio_achievements');
+      if (savedAch) setUnlockedAchievements(JSON.parse(savedAch));
+      
+      const savedShop = localStorage.getItem('portfolio_shop');
+      if (savedShop) setPurchasedItems(JSON.parse(savedShop));
+    }, 200);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -72,6 +98,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   useEffect(() => {
+    if (isTouchDevice) return; 
+
     const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     let konamiIndex = 0;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -82,34 +110,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           window.dispatchEvent(new CustomEvent('spawnKonamiBoss'));
           konamiIndex = 0;
         }
-      } else {
-        konamiIndex = 0;
-      }
+      } else { konamiIndex = 0; }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang]);
-
-  const t = translations[lang];
-
-  const unlockAchievement = (id: AchievementId) => {
-    setUnlockedAchievements(prev => {
-      if (prev.includes(id)) return prev; 
-      const newAchievements = [...prev, id];
-      localStorage.setItem('portfolio_achievements', JSON.stringify(newAchievements));
-      const achievementData = (t.achievements as unknown as Record<string, { title: string, desc: string }>)[id];
-      setActiveToast({ id, title: achievementData.title, desc: achievementData.desc });
-      setTimeout(() => setActiveToast(null), 4000);
-      try {
-        const audio = new Audio('/audio/achievement.mp3');
-        audio.volume = 0.6;
-        audio.play().catch(() => {});
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (e) {}
-      return newAchievements;
-    });
-  };
+  }, [isTouchDevice, unlockAchievement]);
 
   const toggleLanguage = () => {
     setLang(prev => prev === 'es' ? 'en' : 'es');
@@ -172,16 +177,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {isPanelOpen && (
           <>
-            <motion.div ref={stopHoverPropagation} data-ui="true" className={styles.panel_backdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsPanelOpen(false)} onTouchStart={(e) => e.stopPropagation()} />
-            <motion.div ref={stopHoverPropagation} data-ui="true" className={styles.panel_content} initial={{ x: '100%', opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: '100%', opacity: 0 }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} onTouchStart={(e) => e.stopPropagation()} >
+            <motion.div className={styles.panel_backdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsPanelOpen(false)} />
+            <motion.div className={styles.panel_content} initial={{ x: '100%' }} animate={{ x: 0 }} exit={{ x: '100%' }} transition={{ type: 'tween', duration: 0.3 }} >
               <div className={styles.panel_header}>
                 <h3 className={styles.panel_title}><Trophy color="#f39c12" /> {t.achievements.panelTitle} ({unlockedAchievements.length}/{ALL_ACHIEVEMENTS.length})</h3>
-                <button className={styles.close_btn} onClick={() => setIsPanelOpen(false)} onTouchStart={(e) => e.stopPropagation()} style={{ padding: '10px', margin: '-10px' }} ><X size={24} /></button>
+                <button className={styles.close_btn} onClick={() => setIsPanelOpen(false)}><X size={24} /></button>
               </div>
               <div className={styles.achievements_list}>
                 {ALL_ACHIEVEMENTS.map(id => {
                   const isUnlocked = unlockedAchievements.includes(id);
-                  const data = (t.achievements as unknown as Record<string, { title: string, desc: string }>)[id];
+                  const data = (t.achievements as any)[id];
                   return (
                     <div key={id} className={`${styles.achievement_card} ${isUnlocked ? styles.card_unlocked : styles.card_locked}`}>
                       <div className={isUnlocked ? styles.icon_unlocked : styles.icon_locked}>{isUnlocked ? <Trophy size={20} /> : <Lock size={20} />}</div>
@@ -201,11 +206,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {isShopOpen && (
           <>
-            <motion.div ref={stopHoverPropagation} data-ui="true" className={styles.panel_backdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsShopOpen(false)} onTouchStart={(e) => e.stopPropagation()} />
-            <motion.div ref={stopHoverPropagation} data-ui="true" className={styles.panel_content} style={{ left: 0, borderRight: '1px solid rgba(255, 255, 255, 0.1)', borderLeft: 'none' }} initial={{ x: '-100%', opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: '-100%', opacity: 0 }} transition={{ type: 'spring', damping: 25, stiffness: 200 }} onTouchStart={(e) => e.stopPropagation()} >
+            <motion.div className={styles.panel_backdrop} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsShopOpen(false)} />
+            <motion.div className={styles.panel_content} style={{ left: 0, borderRight: '1px solid rgba(255, 255, 255, 0.1)', borderLeft: 'none' }} initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ type: 'tween', duration: 0.3 }} >
               <div className={styles.panel_header}>
                 <h3 className={styles.panel_title} style={{ color: '#fcd34d' }}><ShoppingCart color="#fcd34d" /> {t.shop.title}</h3>
-                <button className={styles.close_btn} onClick={() => setIsShopOpen(false)} onTouchStart={(e) => e.stopPropagation()} style={{ padding: '10px', margin: '-10px' }} ><X size={24} /></button>
+                <button className={styles.close_btn} onClick={() => setIsShopOpen(false)}><X size={24} /></button>
               </div>
               <p style={{ color: 'rgba(255,255,255,0.7)', marginTop: '-10px', marginBottom: '20px' }}>{t.shop.desc}</p>
               
@@ -235,7 +240,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
                                 className={styles.buy_btn} 
                                 onClick={() => handleBuy(item.id, item.cost)}
                                 disabled={!canAfford}
-                                title={canAfford ? t.shop.buy : t.shop.insufficient}
                               >
                                 {item.cost} pts
                               </button>
@@ -252,7 +256,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
       <AnimatePresence>
         {activeToast && (
-          <motion.div ref={stopHoverPropagation} data-ui="true" className={styles.toast_container} initial={{ opacity: 0, x: 50, scale: 0.9 }} animate={{ opacity: 1, x: 0, scale: 1 }} exit={{ opacity: 0, x: 20, scale: 0.9 }} onTouchStart={(e) => e.stopPropagation()} >
+          <motion.div className={styles.toast_container} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} >
             <div className={styles.toast_icon}><Trophy size={24} color="#f39c12" /></div>
             <div>
               <p className={styles.toast_label}>{t.achievements.unlocked}</p>
