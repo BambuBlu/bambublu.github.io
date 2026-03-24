@@ -54,19 +54,26 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
       <div className={styles.static_space_bg} />
 
       <article className={styles.container}>
+        {/* 👇 ESTRUCTURA CORREGIDA PARA COINCIDIR CON EL CSS 👇 */}
         <nav className={styles.nav_header}>
-          <div className={styles.nav_left}>
-            <Link href="/blog" className={styles.back_btn}><ArrowLeft size={18} /><span>{t.blog.back}</span></Link>
-            <div className={styles.breadcrumb}>
-              <Link href="/" className={styles.crumb_link}>{t.blog.crumbTerm}</Link><ChevronRight size={14} className={styles.crumb_icon} />
-              <Link href="/blog" className={styles.crumb_link}>{t.blog.crumbBlog}</Link><ChevronRight size={14} className={styles.crumb_icon} />
-              <span className={styles.crumb_active}>{post.title.substring(0, 20)}...</span> 
-            </div>
+          <div className={styles.nav_actions}>
+            <Link href="/blog" className={styles.back_btn}>
+              <ArrowLeft size={18} /><span>{t.blog.back}</span>
+            </Link>
+            <button aria-label="Change language" onClick={toggleLanguage} className={styles.lang_toggle_btn}>
+              <Languages size={16} /><span>{lang === 'es' ? 'EN' : 'ES'}</span>
+            </button>
           </div>
-          <button aria-label="Change language" onClick={toggleLanguage} className={styles.lang_toggle_btn}>
-            <Languages size={16} /><span>{lang === 'es' ? 'EN' : 'ES'}</span>
-          </button>
+          
+          <div className={styles.breadcrumb}>
+            <Link href="/" className={styles.crumb_link}>{t.blog.crumbTerm}</Link>
+            <ChevronRight size={14} className={styles.crumb_icon} />
+            <Link href="/blog" className={styles.crumb_link}>{t.blog.crumbBlog}</Link>
+            <ChevronRight size={14} className={styles.crumb_icon} />
+            <span className={styles.crumb_active}>{post.title}</span> 
+          </div>
         </nav>
+        {/* 👆 FIN DE LA ESTRUCTURA CORREGIDA 👆 */}
 
         <header className={styles.post_header}>
           <div className={styles.meta_tags}>
