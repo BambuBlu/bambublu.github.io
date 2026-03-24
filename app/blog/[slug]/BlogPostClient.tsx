@@ -60,7 +60,7 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
             <div className={styles.breadcrumb}>
               <Link href="/" className={styles.crumb_link}>{t.blog.crumbTerm}</Link><ChevronRight size={14} className={styles.crumb_icon} />
               <Link href="/blog" className={styles.crumb_link}>{t.blog.crumbBlog}</Link><ChevronRight size={14} className={styles.crumb_icon} />
-              <span className={styles.crumb_active}>{post.title.substring(0, 20)}...</span>
+              <span className={styles.crumb_active}>{post.title.substring(0, 20)}...</span> 
             </div>
           </div>
           <button aria-label="Change language" onClick={toggleLanguage} className={styles.lang_toggle_btn}>
