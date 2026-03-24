@@ -19,6 +19,7 @@ const disolveFont = localFont({
   ],
   variable: '--font-disolve',
   display: 'swap',
+  preload: true,
 });
 
 const geistSans = Geist({

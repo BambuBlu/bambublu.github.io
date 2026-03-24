@@ -326,7 +326,7 @@ export function HackerTerminal() {
         window.dispatchEvent(new CustomEvent('addCheatScore', { detail: 100 }));
         break;
       case 'shop':
-        newOutput.push({ type: 'response', text: t.terminal.shopList, colorOverride: '#fcd34d' }); // Color dorado
+        newOutput.push({ type: 'response', text: t.terminal.shopList, colorOverride: '#fcd34d' });
         break;
       case 'buy':
         const itemToBuy = args[1]?.toLowerCase();

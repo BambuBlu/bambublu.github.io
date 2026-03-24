@@ -1,4 +1,4 @@
-export const dynamic = 'force-static'; // <--- AÑADE ESTA LÍNEA
+export const dynamic = 'force-static';
 
 import { MetadataRoute } from 'next'
  

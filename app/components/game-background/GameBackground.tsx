@@ -15,7 +15,6 @@ type Particle = { x: number; y: number; vx: number; vy: number; life: number; co
 type Boss = { x: number; y: number; vx: number; vy: number; hp: number; maxHp: number; type: 'normal' | 'konami'; width: number; height: number; shootTimer: number; hitTimer: number }
 type BossBullet = { x: number; y: number; vx: number; vy: number; life: number; type: 'normal' | 'konami' }
 
-// NUEVO: Tipo para textos flotantes
 type FloatingText = { x: number; y: number; text: string; life: number; color: string; vy: number }
 
 export const GameBackground = memo(function GameBackground() {
@@ -42,14 +41,12 @@ export const GameBackground = memo(function GameBackground() {
     let powerUpType: 'none' | 'spread' = 'none'
     let powerUpTimer = 0
     
-    // SISTEMA DE HANGAR Y DRON
     let warpFactor = 1;
     let shipSkin: 'normal' | 'classic' = 'normal';
     let hasDrone = false;
     let droneAngle = 0;
     let droneShootTimer = 0;
 
-    // CARGAR INVENTARIO AL INICIAR
     const savedItems = JSON.parse(localStorage.getItem('portfolio_shop') || '[]');
     if (savedItems.includes('classic')) shipSkin = 'classic';
     if (savedItems.includes('drone')) hasDrone = true;
@@ -86,7 +83,7 @@ export const GameBackground = memo(function GameBackground() {
     const bullets: Bullet[] = []
     let asteroids: Asteroid[] = [] 
     const particles: Particle[] = []
-    const floatingTexts: FloatingText[] = [] // Array para textos flotantes
+    const floatingTexts: FloatingText[] = []
 
     let bosses: Boss[] = []
     let bossBullets: BossBullet[] = []
@@ -255,7 +252,6 @@ export const GameBackground = memo(function GameBackground() {
         else ctx.shadowColor = isHardcore ? "rgba(239, 68, 68, 0.9)" : "rgba(180,200,255,0.9)"
       }
       
-      // SKIN DE LA NAVE
       if (shipSkin === 'classic') {
           ctx.beginPath(); ctx.moveTo(12, 0); ctx.lineTo(-10, 10); ctx.lineTo(-5, 0); ctx.lineTo(-10, -10); ctx.closePath();
       } else {
@@ -269,7 +265,6 @@ export const GameBackground = memo(function GameBackground() {
       ctx.lineWidth = isHardcore || powerUpType === 'spread' || isMatrixMode ? 2 : 1
       ctx.stroke()
 
-      // Fuego interior de la nave (solo si es normal)
       if (shipSkin === 'normal') {
           ctx.beginPath(); ctx.moveTo(-8, 0); ctx.lineTo(-18 - Math.random() * (isHardcore ? 8 : 4), 3); ctx.lineTo(-18 - Math.random() * (isHardcore ? 8 : 4), -3); ctx.closePath();
           if (isMatrixMode) ctx.fillStyle = isHardcore ? "rgba(239, 68, 68, 0.5)" : "rgba(74, 222, 128, 0.5)"
@@ -278,7 +273,6 @@ export const GameBackground = memo(function GameBackground() {
       }
       ctx.restore()
 
-      // DRON COMPAÑERO
       if (hasDrone) {
           droneAngle += 0.05;
           const dX = Math.cos(droneAngle) * 40;
@@ -440,7 +434,6 @@ export const GameBackground = memo(function GameBackground() {
         if (p.life <= 0) particles.splice(i, 1)
       }
 
-      // DIBUJAR TEXTOS FLOTANTES
       for (let i = floatingTexts.length - 1; i >= 0; i--) {
           const ft = floatingTexts[i];
           ft.y += ft.vy; ft.life--;
@@ -612,7 +605,6 @@ export const GameBackground = memo(function GameBackground() {
       shipY += (mouseY - shipY) * 0.12
       angle = Math.atan2(mouseY - shipY, mouseX - shipX)
 
-      // PROPULSORES (Fuego de la nave al moverse rápido)
       const distToMouse = Math.hypot(mouseX - shipX, mouseY - shipY);
       if (distToMouse > 5 && Math.random() < 0.6) {
           const backX = shipX - Math.cos(angle) * 8;

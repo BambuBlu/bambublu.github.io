@@ -158,7 +158,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         <Trophy size={20} />
       </button>
 
-      {/* BOTÓN TIENDA (HANGAR) */}
       <button 
         ref={stopHoverPropagation}
         data-ui="true"
