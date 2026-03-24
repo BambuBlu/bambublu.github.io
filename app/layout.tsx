@@ -39,42 +39,57 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Tobias | Software Engineer & Game Developer',
-    template: '%s | Tobias',
+    default: 'Tobias Moscatelli | Software Engineer & Game Developer',
+    template: '%s | Tobias Moscatelli',
   },
-  description: 'Portfolio interactivo de Tobias. Construyendo universos digitales a través de código escalable y experiencias inmersivas.',
-  keywords: ['Software Engineer', 'Game Developer', 'React', 'Next.js', 'Godot', 'Portfolio', 'TypeScript'],
-  authors: [{ name: 'Tobias Moscatelli' }],
+  description: 'Portfolio interactivo de Tobias Moscatelli. Construyendo universos digitales a través de código escalable y experiencias inmersivas en React, Next.js y Godot.',
+  keywords: ['Software Engineer', 'Game Developer', 'React', 'Next.js', 'Godot', 'Portfolio', 'TypeScript', 'Frontend', 'Tobias Moscatelli'],
+  authors: [{ name: 'Tobias Moscatelli', url: SITE_URL }], 
   creator: 'Tobias Moscatelli',
-  icons: {
-    icon: 'svg/search-logo.svg',
-    shortcut: 'svg/search-logo.svg',
-    apple: 'svg/search-logo.svg',
+  publisher: 'Tobias Moscatelli', 
+  
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+
+  icons: {
+    icon: '/svg/search-logo.svg',
+    shortcut: '/svg/search-logo.svg',
+    apple: '/svg/search-logo.svg',
+  },
+  
   openGraph: {
     type: 'website',
-    locale: 'es_ES',
+    locale: 'en_US',
+    alternateLocale: 'es_ES',
     url: SITE_URL,
-    title: 'Tobias | Software Engineer & Game Developer',
-    description: 'Portfolio interactivo espacial construido con Next.js y Canvas.',
-    siteName: 'Tobias Portfolio',
+    title: 'Tobias Moscatelli | Software Engineer & Game Developer',
+    description: 'Portfolio interactivo espacial construido con Next.js y Canvas. Explora mis proyectos, artículos y mi universo digital.',
+    siteName: 'Tobias Moscatelli - Portfolio',
     images: [
       {
-        url: 'img/pro.jpg', 
+        url: '/img/pro.jpg',
         width: 1200,
         height: 630,
-        alt: 'Previsualización del Portfolio de Tobias',
+        alt: 'Previsualización del Portfolio de Tobias Moscatelli',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tobias | Software Engineer & Game Developer',
+    title: 'Tobias Moscatelli | Software Engineer & Game Developer',
     description: 'Portfolio interactivo espacial construido con Next.js y Canvas.',
-    images: ['img/pro.jpg'],
+    images: ['/img/pro.jpg'],
   },
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

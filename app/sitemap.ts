@@ -1,33 +1,46 @@
-export const dynamic = 'force-static';
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MetadataRoute } from 'next';
-import { getAllPosts } from '@/lib/posts';
 
-const SITE_URL = 'https://www.tobiasmoscatelli.com';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tobiasmoscatelli.com';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
+export const dynamic = 'force-static'; 
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const routes: MetadataRoute.Sitemap = [
     {
       url: `${SITE_URL}`,
       lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
+      changeFrequency: 'monthly',
       priority: 1,
     },
     {
       url: `${SITE_URL}/blog`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
+      changeFrequency: 'weekly',
       priority: 0.8,
     },
   ];
 
-  const posts = getAllPosts();
-  const postRoutes = posts.map((post) => ({
-    url: `${SITE_URL}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly' as const,
-    priority: 0.6,
-  }));
+  try {
+    const res = await fetch(`${SITE_URL}/api/blog`, { next: { revalidate: 3600 } });
+    
+    if (!res.ok) {
+      console.error('Error al generar el sitemap: No se pudo conectar a la API del blog');
+      return routes;
+    }
 
-  return [...routes, ...postRoutes];
+    const posts = await res.json();
+
+    const postRoutes: MetadataRoute.Sitemap = posts.map((post: any) => ({
+      url: `${SITE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.date || new Date()),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    }));
+
+    return [...routes, ...postRoutes];
+  } catch (error) {
+    console.error('Error procesando el sitemap:', error);
+    return routes;
+  }
 }
