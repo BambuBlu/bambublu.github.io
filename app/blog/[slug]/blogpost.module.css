@@ -1,4 +1,4 @@
-.prose :global([data-rmiz]) {
+.prose :global([data-rmiz-wrap]) {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
@@ -15,7 +15,8 @@
 
 .post_wrapper {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
   position: relative;
   display: flex;
   justify-content: center;

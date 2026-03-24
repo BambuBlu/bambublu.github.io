@@ -14,23 +14,25 @@ export default function LoadingBlogIndex() {
       <div className={styles.container}>
         
         <header className={styles.header}>
-          <div className={styles.top_bar}>
-            <div className={styles.nav_left}>
+          <nav className={styles.nav_header}>
+            <div className={styles.nav_actions}>
               <div className={styles.back_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
-                <ArrowLeft size={20} />
+                <ArrowLeft size={18} />
                 <span>{t.blog.back}</span>
               </div>
-              <div className={styles.breadcrumb}>
-                <span className={styles.crumb_link}>{t.blog.crumbTerm}</span>
-                <ChevronRight size={14} className={styles.crumb_icon} />
-                <span className={styles.crumb_active}>{t.blog.crumbBlog}</span>
+              <div className={styles.lang_toggle_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
+                <Languages size={16} />
+                <span>{lang === 'es' ? 'EN' : 'ES'}</span>
               </div>
             </div>
-            <div className={styles.lang_toggle_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
-              <Languages size={16} />
-              <span>{lang === 'es' ? 'EN' : 'ES'}</span>
+            
+            <div className={styles.breadcrumb}>
+              <span className={styles.crumb_link}>{t.blog.crumbTerm}</span>
+              <ChevronRight size={14} className={styles.crumb_icon} />
+              <span className={styles.crumb_active}>{t.blog.crumbBlog}</span>
             </div>
-          </div>
+          </nav>
+
           <h1 className={styles.title}>{t.blog.title}</h1>
           <p className={styles.subtitle}>{t.blog.subtitle}</p>
         </header>

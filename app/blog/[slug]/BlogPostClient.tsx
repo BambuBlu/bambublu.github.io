@@ -54,7 +54,6 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
       <div className={styles.static_space_bg} />
 
       <article className={styles.container}>
-        {/* 👇 ESTRUCTURA CORREGIDA PARA COINCIDIR CON EL CSS 👇 */}
         <nav className={styles.nav_header}>
           <div className={styles.nav_actions}>
             <Link href="/blog" className={styles.back_btn}>
@@ -73,7 +72,6 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
             <span className={styles.crumb_active}>{post.title}</span> 
           </div>
         </nav>
-        {/* 👆 FIN DE LA ESTRUCTURA CORREGIDA 👆 */}
 
         <header className={styles.post_header}>
           <div className={styles.meta_tags}>
@@ -97,7 +95,7 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
 
                 return (
                   <figure style={{ margin: '40px 0', width: '100%', boxSizing: 'border-box' }}>
-                    <Zoom classDialog="dark_zoom" zoomMargin={150}>
+                    <Zoom classDialog="dark_zoom" zoomMargin={45}> 
                       <ImageWithSkeleton
                         src={props.src as string}
                         alt={props.alt || 'Imagen del blog'}

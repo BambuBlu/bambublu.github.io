@@ -1,6 +1,7 @@
 .blog_wrapper {
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  overflow-x: hidden;
   position: relative;
   display: flex;
   justify-content: center;

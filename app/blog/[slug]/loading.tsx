@@ -12,25 +12,25 @@ export default function LoadingSlug() {
       <div className={styles.static_space_bg} />
 
       <article className={styles.container}>
+        
         <nav className={styles.nav_header}>
-          <div className={styles.nav_left}>
+          <div className={styles.nav_actions}>
             <div className={styles.back_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
               <ArrowLeft size={18} />
               <span>{t.blog.back}</span>
             </div>
-            
-            <div className={styles.breadcrumb}>
-              <span className={styles.crumb_link}>{t.blog.crumbTerm}</span>
-              <ChevronRight size={14} className={styles.crumb_icon} />
-              <span className={styles.crumb_link}>{t.blog.crumbBlog}</span>
-              <ChevronRight size={14} className={styles.crumb_icon} />
-              <Skeleton width="100px" height="16px" borderRadius="4px" />
+            <div className={styles.lang_toggle_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
+              <Languages size={16} />
+              <span>{lang === 'es' ? 'EN' : 'ES'}</span>
             </div>
           </div>
 
-          <div className={styles.lang_toggle_btn} style={{ pointerEvents: 'none', opacity: 0.7 }}>
-            <Languages size={16} />
-            <span>{lang === 'es' ? 'EN' : 'ES'}</span>
+          <div className={styles.breadcrumb}>
+            <span className={styles.crumb_link}>{t.blog.crumbTerm}</span>
+            <ChevronRight size={14} className={styles.crumb_icon} />
+            <span className={styles.crumb_link}>{t.blog.crumbBlog}</span>
+            <ChevronRight size={14} className={styles.crumb_icon} />
+            <Skeleton width="100px" height="16px" borderRadius="4px" />
           </div>
         </nav>
 
@@ -51,11 +51,6 @@ export default function LoadingSlug() {
           <Skeleton width="100%" height="350px" borderRadius="16px" style={{ margin: '32px 0' }} />
 
           <Skeleton width="40%" height="32px" borderRadius="8px" style={{ marginTop: '40px', marginBottom: '24px' }} />
-
-          <Skeleton width="100%" height="22px" style={{ marginBottom: '12px' }} />
-          <Skeleton width="100%" height="22px" style={{ marginBottom: '12px' }} />
-          <Skeleton width="100%" height="22px" style={{ marginBottom: '12px' }} />
-          <Skeleton width="50%" height="22px" style={{ marginBottom: '32px' }} />
         </section>
       </article>
     </main>
