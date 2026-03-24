@@ -29,9 +29,10 @@ export default function ImageWithSkeleton({
         aspectRatio,
         position: props.fill ? 'absolute' : 'relative', 
         inset: props.fill ? 0 : undefined,
-        width: '100%',
-        height: props.fill ? '100%' : 'auto',
+        width: props.fill ? '100%' : (props.style?.width || '100%'),
+        height: props.fill ? '100%' : (props.style?.height || 'auto'),
         overflow: 'hidden',
+        ...props.style, 
       }}
     >
       <div 
@@ -47,6 +48,7 @@ export default function ImageWithSkeleton({
         className={className} 
         onLoad={() => setIsLoaded(true)}
         {...props}
+        style={{ objectFit: props.style?.objectFit, width: '100%', height: '100%' }}
       />
     </div>
   );

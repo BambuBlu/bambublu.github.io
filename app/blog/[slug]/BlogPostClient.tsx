@@ -4,9 +4,11 @@ import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ChevronRight, Languages, Eye, Heart } from "lucide-react";
 import Giscus from "@giscus/react";
 import ReactMarkdown from 'react-markdown';
+import Zoom from 'react-medium-image-zoom'; 
 import styles from "./blogpost.module.css";
 import { useAppContext } from "@/app/context/AppContext";
 import ImageWithSkeleton from "@/app/components/skeleton/ImageWithSkeleton";
+import 'react-medium-image-zoom/dist/styles.css';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BlogPostClient({ post, slug }: { post: any, slug: string }) {
@@ -82,19 +84,28 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
         <section className={styles.prose}>
           <ReactMarkdown
             components={{
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               img: ({ node, ...props }) => {
-                // Validación estricta para Next.js Image y TypeScript
                 if (!props.src) return null;
 
                 return (
-                  <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', margin: '32px 0' }}>
-                    <ImageWithSkeleton
-                      src={props.src as string}
-                      alt={props.alt || 'Imagen del blog'}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      borderRadius="16px"
-                    />
+                  <div style={{ margin: '32px 0' }} className={styles.image_container}>
+                    <Zoom classDialog="dark_zoom">
+                      <ImageWithSkeleton
+                        src={props.src as string}
+                        alt={props.alt || 'Imagen del blog'}
+                        width={1920}
+                        height={1080}
+                        style={{ 
+                          width: '100%', 
+                          height: 'auto',
+                          aspectRatio: '16/9',
+                          objectFit: 'cover',
+                          cursor: 'zoom-in'
+                        }}
+                        borderRadius="16px"
+                      />
+                    </Zoom>
                     {props.alt && (
                       <span style={{ display: 'block', textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '12px' }}>
                         {props.alt}
