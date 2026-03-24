@@ -1,32 +1,31 @@
 "use client"
 
-import { useEffect } from "react"
-import { motion, useMotionValue, useTransform } from "framer-motion"
+import { useEffect, useRef } from "react"
 import styles from "./header.module.css"
 
 export function Header() {
-  const intensity = useMotionValue(0)
-
-  const textShadow = useTransform(
-    intensity,
-    (val: number) => `0 0 ${20 * val}px rgba(180,200,255,${val})`
-  )
+  const logoRef = useRef<HTMLHeadingElement>(null)
 
   useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
-      const val = Math.abs(e.clientX - window.innerWidth / 2) / window.innerWidth
-      intensity.set(0.3 + val * 0.7)
+      if (!logoRef.current) return;
+      const val = Math.abs(e.clientX - window.innerWidth / 2) / window.innerWidth;
+      const intensity = 0.3 + val * 0.7;
+      logoRef.current.style.textShadow = `0 0 ${20 * intensity}px rgba(180,200,255,${intensity})`;
     }
 
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [intensity])
+  }, [])
 
   return (
     <header className={styles.header}>
-      <motion.h1 className={styles.logo} style={{ textShadow }}>
+      <h1 ref={logoRef} className={styles.logo}>
         Tobías Moscatelli
-      </motion.h1>
+      </h1>
     </header>
   )
 }
