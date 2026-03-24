@@ -359,6 +359,8 @@ export function HackerTerminal() {
             data-ui="true"
             className={styles.terminal_trigger_btn}
             onClick={() => setIsOpen(true)}
+            onPointerDown={(e) => e.stopPropagation()} 
+            onTouchStart={(e) => e.stopPropagation()}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
@@ -379,6 +381,7 @@ export function HackerTerminal() {
             exit={{ y: '-100%', opacity: 0 }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             onPointerDown={(e) => e.stopPropagation()} 
+            onTouchStart={(e) => e.stopPropagation()}
             style={{ borderBottomColor: themeColor }}
           >
             <div className={styles.terminal_header}>
