@@ -10,12 +10,7 @@ const disolveFont = localFont({
       path: '../public/fonts/Disolve_regular.ttf',
       weight: '400',
       style: 'normal',
-    },
-    {
-      path: '../public/fonts/Disolve_light.ttf',
-      weight: '300',
-      style: 'normal',
-    },
+    }
   ],
   variable: '--font-disolve',
   display: 'swap',
@@ -101,6 +96,7 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${disolveFont.variable} h-full antialiased`}
     >
+      <head> <link rel="preload" href="/fonts/disolve.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /> </head>
       <body className="min-h-full flex flex-col font-sans">
         <script
           type="application/ld+json"
