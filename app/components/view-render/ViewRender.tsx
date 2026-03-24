@@ -1,8 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { HeroView, ResumeeView, ProjectsView, GameView } from "./components"
+import { HeroView } from "./components"
+import dynamic from "next/dynamic"
 import styles from "./viewrender.module.css" 
+
+const ProjectsView = dynamic(() => import('./components').then(mod => mod.ProjectsView))
+const GameView = dynamic(() => import('./components').then(mod => mod.GameView))
+const ResumeeView = dynamic(() => import('./components').then(mod => mod.ResumeeView))
 
 export function ViewRenderer() {
   const [view, setView] = useState("home")
