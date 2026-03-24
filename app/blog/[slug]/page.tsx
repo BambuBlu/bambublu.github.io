@@ -3,8 +3,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import BlogPostClient from "./BlogPostClient";
 import LoadingSlug from "./loading";
-import { remark } from 'remark';
-import html from 'remark-html';
 
 async function getNotionPostBySlug(slug: string) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
@@ -60,13 +58,9 @@ async function BlogPostFetcher({ slug }: { slug: string }) {
 
   if (!post) return notFound();
 
-  const processedContent = await remark().use(html).process(post.content || '');
-  const contentHtml = processedContent.toString();
-
-  const postWithHtml = {
+  const postData = {
       ...post,
       slug: slug,
-      contentHtml: contentHtml,
       category: post.category || 'Development',
       readTime: post.readTime || '5 min' 
   };
@@ -90,7 +84,7 @@ async function BlogPostFetcher({ slug }: { slug: string }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <BlogPostClient post={postWithHtml} slug={slug} />
+      <BlogPostClient post={postData} slug={slug} />
     </>
   );
 }

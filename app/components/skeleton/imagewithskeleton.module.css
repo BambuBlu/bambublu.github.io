@@ -1,7 +1,5 @@
 .wrapper {
   display: block;
-  width: 100%;
-  height: auto;
 }
 
 .skeleton_container {
@@ -10,11 +8,4 @@
 
 .skeleton_hidden {
   opacity: 0 !important;
-}
-
-.image {
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
 }

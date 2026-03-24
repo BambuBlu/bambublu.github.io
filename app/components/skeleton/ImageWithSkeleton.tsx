@@ -1,7 +1,7 @@
 "use client"
 import { useState } from 'react';
 import Image, { ImageProps } from 'next/image';
-import Skeleton from './Skeleton';
+import Skeleton from './Skeleton'; 
 import styles from './imagewithskeleton.module.css';
 
 interface ImageWithSkeletonProps extends ImageProps {
@@ -27,7 +27,10 @@ export default function ImageWithSkeleton({
       style={{
         borderRadius,
         aspectRatio,
-        position: props.fill ? 'relative' : undefined, 
+        position: props.fill ? 'absolute' : 'relative', 
+        inset: props.fill ? 0 : undefined,
+        width: '100%',
+        height: props.fill ? '100%' : 'auto',
         overflow: 'hidden',
       }}
     >
@@ -41,7 +44,7 @@ export default function ImageWithSkeleton({
       <Image
         src={src}
         alt={alt}
-        className={`${styles.image} ${className}`}
+        className={className} 
         onLoad={() => setIsLoaded(true)}
         {...props}
       />

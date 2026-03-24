@@ -3,8 +3,10 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, ChevronRight, Languages, Eye, Heart } from "lucide-react";
 import Giscus from "@giscus/react";
+import ReactMarkdown from 'react-markdown';
 import styles from "./blogpost.module.css";
 import { useAppContext } from "@/app/context/AppContext";
+import ImageWithSkeleton from "@/app/components/skeleton/ImageWithSkeleton";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BlogPostClient({ post, slug }: { post: any, slug: string }) {
@@ -14,7 +16,7 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
   const [claps, setClaps] = useState<number>(0);
   const [hasClapped, setHasClapped] = useState<boolean>(false);
 
-useEffect(() => {
+  useEffect(() => {
     fetch(`/api/stats?slug=${slug}`) 
       .then(res => res.json())
       .then(data => {
@@ -77,10 +79,35 @@ useEffect(() => {
           <h1 className={styles.title}>{post.title}</h1>
         </header>
 
-        <section 
-          className={styles.prose} 
-          dangerouslySetInnerHTML={{ __html: post.contentHtml }} 
-        />
+        <section className={styles.prose}>
+          <ReactMarkdown
+            components={{
+              img: ({ node, ...props }) => {
+                // Validación estricta para Next.js Image y TypeScript
+                if (!props.src) return null;
+
+                return (
+                  <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', margin: '32px 0' }}>
+                    <ImageWithSkeleton
+                      src={props.src as string}
+                      alt={props.alt || 'Imagen del blog'}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      borderRadius="16px"
+                    />
+                    {props.alt && (
+                      <span style={{ display: 'block', textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '12px' }}>
+                        {props.alt}
+                      </span>
+                    )}
+                  </div>
+                );
+              },
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
+        </section>
 
         <div className={styles.interaction_section}>
           <button 
@@ -102,7 +129,7 @@ useEffect(() => {
             repoId="R_kgDOKH_uPw" 
             category="General"
             categoryId="DIC_kwDOKH_uP84C5H0l" 
-            mapping="title"
+            mapping="pathname" 
             term="Welcome to @giscus/react component!"
             reactionsEnabled="1"
             emitMetadata="0"
