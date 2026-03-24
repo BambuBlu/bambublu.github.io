@@ -547,6 +547,28 @@
     padding: 16px 12px;
     font-size: 1rem;
   }
+
+  .sort_overlay {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  .sort_menu {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    margin: 0;
+    border-radius: 24px 24px 0 0;
+    padding: 16px 20px 40px 20px;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+    box-sizing: border-box;
+    overscroll-behavior: none;
+  }
 }
 
 .top_bar {
@@ -607,4 +629,12 @@
 .crumb_active {
   color: white;
   font-weight: 500;
+}
+
+.sort_overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: transparent;
+  touch-action: none;
 }

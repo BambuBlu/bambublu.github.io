@@ -1,5 +1,5 @@
 "use client"
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import Fuse from "fuse.js";
 import { ArrowLeft, Calendar, Clock, ChevronRight, Languages, Search, Tag as TagIcon, X, Filter, ChevronDown, Check } from "lucide-react";
@@ -70,6 +70,14 @@ export default function BlogClient({ posts }: { posts: any[] }) {
     );
   };
 
+  // Bloqueo estricto del scroll del fondo al abrir el menú
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.body.style.overflow = isSortOpen ? 'hidden' : 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [isSortOpen]);
+
   return (
     <main className={styles.blog_wrapper}>
       <div className={styles.static_space_bg} />
@@ -116,10 +124,16 @@ export default function BlogClient({ posts }: { posts: any[] }) {
                 <ChevronDown size={16} className={`${styles.sort_icon} ${isSortOpen ? styles.sort_icon_open : ''}`} />
               </button>
 
-              {isSortOpen && <div className={styles.sort_overlay} onClick={() => setIsSortOpen(false)} />}
+              {isSortOpen && (
+                <div 
+                  className={styles.sort_overlay} 
+                  onClick={() => setIsSortOpen(false)} 
+                  onTouchStart={() => setIsSortOpen(false)}
+                />
+              )}
 
               <div className={`${styles.sort_menu} ${isSortOpen ? styles.sort_menu_open : ''}`}>
-                <div className={styles.sort_menu_handle} />
+                <div className={styles.sort_menu_handle} onClick={() => setIsSortOpen(false)} onTouchStart={() => setIsSortOpen(false)} />
                 <span className={styles.sort_menu_title}>{lang === 'es' ? "Ordenar por" : "Sort by"}</span>
                 
                 <button 
