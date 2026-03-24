@@ -124,7 +124,9 @@ export function BottomMenu() {
     if (saved) setHighScore(parseInt(saved));
 
     if (!audioRef.current) {
-        const audio = new Audio("/audio/bg-music.mp3");
+        const audio = new Audio();
+        audio.preload = "none"; 
+        audio.src = "/audio/bg-music.mp3";
         audio.loop = true;
         audio.volume = 0; 
         audioRef.current = audio;

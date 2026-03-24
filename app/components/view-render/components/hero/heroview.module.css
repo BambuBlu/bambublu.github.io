@@ -184,6 +184,12 @@
     display: none;
   }
 
+  .name {
+    animation: none;
+    background-size: 100% auto;
+    will-change: auto;
+  }
+
   .subtitle {
     font-size: 0.95rem;
     margin-top: 16px;

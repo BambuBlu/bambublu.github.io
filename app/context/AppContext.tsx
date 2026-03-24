@@ -187,7 +187,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
                     <div key={id} className={`${styles.achievement_card} ${isUnlocked ? styles.card_unlocked : styles.card_locked}`}>
                       <div className={isUnlocked ? styles.icon_unlocked : styles.icon_locked}>{isUnlocked ? <Trophy size={20} /> : <Lock size={20} />}</div>
                       <div className={styles.card_info}>
-                        <h4 className={isUnlocked ? styles.title_unlocked : styles.title_locked}>{isUnlocked ? data.title : t.achievements.locked}</h4>
+                        <p className={isUnlocked ? styles.title_unlocked : styles.title_locked}>{isUnlocked ? data.title : t.achievements.locked}</p>
                         <p>{isUnlocked ? data.desc : t.achievements.lockedDesc}</p>
                       </div>
                     </div>
@@ -224,7 +224,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
                       <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
                           {item.icon}
                           <div className={styles.shop_item_info}>
-                              <h4>{item.name}</h4>
+                              <p>{item.name}</p>
                               <p>{item.desc}</p>
                           </div>
                       </div>
@@ -257,7 +257,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             <div className={styles.toast_icon}><Trophy size={24} color="#f39c12" /></div>
             <div>
               <p className={styles.toast_label}>{t.achievements.unlocked}</p>
-              <h4 className={styles.toast_title}>{activeToast.title}</h4>
+              <p className={styles.toast_title}>{activeToast.title}</p>
               <p className={styles.toast_desc}>{activeToast.desc}</p>
             </div>
           </motion.div>
