@@ -89,7 +89,7 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
                 if (!props.src) return null;
 
                 return (
-                  <figure style={{ margin: '40px 0', width: '100%' }}>
+                  <figure style={{ margin: '40px 0', width: '100%', boxSizing: 'border-box' }}>
                     <Zoom classDialog="dark_zoom" zoomMargin={150}>
                       <ImageWithSkeleton
                         src={props.src as string}
@@ -98,9 +98,11 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
                         height={1080}
                         style={{ 
                           width: '100%', 
+                          maxWidth: '100%', 
                           height: 'auto', 
                           objectFit: 'cover',
-                          cursor: 'zoom-in'
+                          cursor: 'zoom-in',
+                          display: 'block'
                         }}
                         borderRadius="16px"
                       />

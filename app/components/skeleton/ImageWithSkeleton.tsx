@@ -19,7 +19,7 @@ export default function ImageWithSkeleton({
 
   const wrapperStyle = props.fill
     ? { position: 'absolute' as const, inset: 0, borderRadius, overflow: 'hidden' }
-    : { position: 'relative' as const, width: '100%', height: 'auto', borderRadius, overflow: 'hidden' };
+    : { position: 'relative' as const, width: '100%', maxWidth: '100%', height: 'auto', borderRadius, overflow: 'hidden', boxSizing: 'border-box' as const };
 
   return (
     <div style={wrapperStyle}>
@@ -41,7 +41,7 @@ export default function ImageWithSkeleton({
         alt={alt}
         className={className}
         onLoad={() => setIsLoaded(true)}
-        style={{ ...style, display: 'block' }} 
+        style={{ ...style, display: 'block', maxWidth: '100%' }} 
         {...props}
       />
     </div>
