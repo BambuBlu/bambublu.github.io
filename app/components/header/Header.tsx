@@ -30,6 +30,7 @@ export function Header() {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-ignore
         fetchpriority="high"
+        style={{ fontSize: 'var(--logo-size, 48px)', minHeight: '1.2em' }}
       >
         Tobías Moscatelli
       </h1>

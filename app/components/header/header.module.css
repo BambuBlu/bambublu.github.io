@@ -9,20 +9,20 @@
 }
 
 .logo {
-    font-family: var(--font-disolve), sans-serif; 
+    font-family: var(--font-disolve), Arial, sans-serif; 
     font-size: 48px;
     letter-spacing: 0.1em;
     color: white;
     text-shadow: 0 0 10px rgba(180,200,255,0.4); 
     transition: text-shadow 0.2s ease;
-    text-rendering: optimizeSpeed; 
-    font-display: swap; 
-    contain: layout paint;
+    contain: layout paint; 
+    content-visibility: auto;
 }
-
 @media (max-width: 768px) { 
     .logo { 
+        --logo-size: 1.5rem; 
         font-size: 1.5rem; 
         text-shadow: 0 0 8px rgba(180,200,255,0.5) !important;
-    } 
+        -webkit-font-smoothing: auto; 
+    }
 }
