@@ -89,17 +89,16 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
                 if (!props.src) return null;
 
                 return (
-                  <div style={{ margin: '32px 0' }} className={styles.image_container}>
-                    <Zoom classDialog="dark_zoom">
+                  <figure style={{ margin: '40px 0', width: '100%' }}>
+                    <Zoom classDialog="dark_zoom" zoomMargin={150}>
                       <ImageWithSkeleton
                         src={props.src as string}
                         alt={props.alt || 'Imagen del blog'}
-                        width={1920}
+                        width={1920} 
                         height={1080}
                         style={{ 
                           width: '100%', 
-                          height: 'auto',
-                          aspectRatio: '16/9',
+                          height: 'auto', 
                           objectFit: 'cover',
                           cursor: 'zoom-in'
                         }}
@@ -107,11 +106,11 @@ export default function BlogPostClient({ post, slug }: { post: any, slug: string
                       />
                     </Zoom>
                     {props.alt && (
-                      <span style={{ display: 'block', textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '12px' }}>
+                      <figcaption style={{ display: 'block', textAlign: 'center', fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', marginTop: '16px' }}>
                         {props.alt}
-                      </span>
+                      </figcaption>
                     )}
-                  </div>
+                  </figure>
                 );
               },
             }}

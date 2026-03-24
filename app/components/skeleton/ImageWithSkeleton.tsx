@@ -1,43 +1,37 @@
 "use client"
 import { useState } from 'react';
 import Image, { ImageProps } from 'next/image';
-import Skeleton from './Skeleton'; 
-import styles from './imagewithskeleton.module.css';
+import Skeleton from './Skeleton';
 
 interface ImageWithSkeletonProps extends ImageProps {
-  containerClassName?: string;
   borderRadius?: string | number;
-  aspectRatio?: string | number;
 }
 
 export default function ImageWithSkeleton({
   src,
   alt,
-  containerClassName = '',
   borderRadius = '12px',
-  aspectRatio,
   className = '',
-  ...props 
+  style,
+  ...props
 }: ImageWithSkeletonProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const wrapperStyle = props.fill
+    ? { position: 'absolute' as const, inset: 0, borderRadius, overflow: 'hidden' }
+    : { position: 'relative' as const, width: '100%', height: 'auto', borderRadius, overflow: 'hidden' };
+
   return (
-    <div
-      className={`${styles.wrapper} ${containerClassName}`}
-      style={{
-        borderRadius,
-        aspectRatio,
-        position: props.fill ? 'absolute' : 'relative', 
-        inset: props.fill ? 0 : undefined,
-        width: props.fill ? '100%' : (props.style?.width || '100%'),
-        height: props.fill ? '100%' : (props.style?.height || 'auto'),
-        overflow: 'hidden',
-        ...props.style, 
-      }}
-    >
-      <div 
-        className={`${styles.skeleton_container} ${isLoaded ? styles.skeleton_hidden : ''}`}
-        style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}
+    <div style={wrapperStyle}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          opacity: isLoaded ? 0 : 1,
+          transition: 'opacity 0.4s ease-out',
+          pointerEvents: 'none',
+        }}
       >
         <Skeleton width="100%" height="100%" borderRadius="inherit" />
       </div>
@@ -45,10 +39,10 @@ export default function ImageWithSkeleton({
       <Image
         src={src}
         alt={alt}
-        className={className} 
+        className={className}
         onLoad={() => setIsLoaded(true)}
+        style={{ ...style, display: 'block' }} 
         {...props}
-        style={{ objectFit: props.style?.objectFit, width: '100%', height: '100%' }}
       />
     </div>
   );
