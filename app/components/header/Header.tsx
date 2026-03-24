@@ -23,7 +23,14 @@ export function Header() {
 
   return (
     <header className={styles.header}>
-      <h1 ref={logoRef} id="hero-logo" className={styles.logo}>
+      <h1 
+        ref={logoRef} 
+        id="hero-logo" 
+        className={styles.logo}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        fetchpriority="high"
+      >
         Tobías Moscatelli
       </h1>
     </header>

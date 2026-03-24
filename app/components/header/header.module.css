@@ -17,6 +17,7 @@
     transition: text-shadow 0.2s ease;
     text-rendering: optimizeSpeed; 
     font-display: swap; 
+    contain: layout paint;
 }
 
 @media (max-width: 768px) { 
