@@ -1,27 +1,31 @@
+"use client"
+
+import { useEffect, useRef } from "react"
 import styles from "./header.module.css"
 
 export function Header() {
+  const logoRef = useRef<HTMLHeadingElement>(null)
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!logoRef.current) return;
+      const val = Math.abs(e.clientX - window.innerWidth / 2) / window.innerWidth;
+      const intensity = 0.3 + val * 0.7;
+      logoRef.current.style.textShadow = `0 0 ${20 * intensity}px rgba(180,200,255,${intensity})`;
+    }
+
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
+
   return (
     <header className={styles.header}>
-      <h1 id="hero-logo" className={styles.logo}>
+      <h1 ref={logoRef} id="hero-logo" className={styles.logo}>
         Tobías Moscatelli
       </h1>
-      
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            if (window.matchMedia("(min-width: 769px)").matches) {
-              document.addEventListener("mousemove", function(e) {
-                var logo = document.getElementById("hero-logo");
-                if (!logo) return;
-                var val = Math.abs(e.clientX - window.innerWidth / 2) / window.innerWidth;
-                var intensity = 0.3 + val * 0.7;
-                logo.style.textShadow = "0 0 " + (20 * intensity) + "px rgba(180,200,255," + intensity + ")";
-              });
-            }
-          `
-        }}
-      />
     </header>
   )
 }

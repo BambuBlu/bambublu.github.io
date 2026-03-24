@@ -86,6 +86,7 @@ export const metadata: Metadata = {
     images: ['/img/pro.jpg'],
   },
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -96,7 +97,6 @@ export default function RootLayout({
       lang="es"
       className={`${geistSans.variable} ${geistMono.variable} ${disolveFont.variable} h-full antialiased`}
     >
-      <head> <link rel="preload" href="/fonts/disolve.woff2" as="font" type="font/woff2" crossOrigin="anonymous" /> </head>
       <body className="min-h-full flex flex-col font-sans">
         <script
           type="application/ld+json"

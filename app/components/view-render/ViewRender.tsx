@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { HeroView, ResumeeView } from "./components" 
+import { HeroView } from "./components"
 import dynamic from "next/dynamic"
 import styles from "./viewrender.module.css" 
 
-const ProjectsView = dynamic(() => import('./components').then(mod => mod.ProjectsView))
-const GameView = dynamic(() => import('./components').then(mod => mod.GameView))
+const ProjectsView = dynamic(() => import('./components').then(mod => mod.ProjectsView), { ssr: false })
+const GameView = dynamic(() => import('./components').then(mod => mod.GameView), { ssr: false })
+const ResumeeView = dynamic(() => import('./components').then(mod => mod.ResumeeView), { ssr: false })
 
 export function ViewRenderer() {
   const [view, setView] = useState("home")
@@ -20,13 +21,11 @@ export function ViewRenderer() {
   return (
     <div className={styles.container}>
       
-      <div className={`${styles.view} ${view === "home" ? styles.active : ""}`}>
-        <HeroView />
-      </div>
-
-      <div className={`${styles.view} ${view === "resumee" ? styles.active : ""}`}>
-        <ResumeeView />
-      </div>
+      {view === "home" && (
+        <div className={`${styles.view} ${styles.active}`}>
+          <HeroView />
+        </div>
+      )}
 
       {view === "projects" && (
         <div className={`${styles.view} ${styles.active}`}>
@@ -37,6 +36,12 @@ export function ViewRenderer() {
       {view === "game" && (
         <div className={`${styles.view} ${styles.active}`}>
           <GameView />
+        </div>
+      )}
+
+      {view === "resumee" && (
+        <div className={`${styles.view} ${styles.active}`}>
+          <ResumeeView />
         </div>
       )}
 
