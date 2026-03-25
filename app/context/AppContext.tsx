@@ -4,7 +4,7 @@
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
 import { HackerTerminal } from '../components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Trophy, X, Lock, ShoppingCart, Rocket, Cpu, CheckCircle2 } from 'lucide-react';
+import { Trophy, X, Lock, ShoppingCart, Rocket, Cpu, CheckCircle2, Terminal } from 'lucide-react';
 import styles from './appcontext.module.css';
 import { es } from './locales/es';
 import { en } from './locales/en';
@@ -24,6 +24,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isTouchDevice, setIsTouchDevice] = useState(false); 
   const [currentScore, setCurrentScore] = useState(0);
   const [purchasedItems, setPurchasedItems] = useState<string[]>([]);
+  const [showTerminalTip, setShowTerminalTip] = useState(false);
 
   const langToggles = useRef(0);
   const muteToggles = useRef(0);
@@ -51,6 +52,19 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       return newAchievements;
     });
   }, [lang]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const hasSeenTip = localStorage.getItem('portfolio_terminal_tip');
+      if (!hasSeenTip) {
+        setShowTerminalTip(true);
+        localStorage.setItem('portfolio_terminal_tip', 'true');
+        
+        setTimeout(() => setShowTerminalTip(false), 7000);
+      }
+    }, 4500); 
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -210,7 +224,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             <motion.div className={styles.panel_content} style={{ left: 0, borderRight: '1px solid rgba(255, 255, 255, 0.1)', borderLeft: 'none' }} initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }} transition={{ type: 'tween', duration: 0.3 }} >
               <div className={styles.panel_header}>
                 <h3 className={styles.panel_title} style={{ color: '#fcd34d' }}><ShoppingCart color="#fcd34d" /> {t.shop.title}</h3>
-                <button className={styles.close_btn} onClick={() => setIsShopOpen(false)}><X size={24} /></button>
+                <button 
+                  className={styles.close_btn} 
+                  onClick={() => setIsShopOpen(false)}
+                  onTouchStart={(e) => e.stopPropagation()}
+                >
+                    <X size={24} />
+                </button>
               </div>
               <p style={{ color: 'rgba(255,255,255,0.7)', marginTop: '-10px', marginBottom: '20px' }}>{t.shop.desc}</p>
               
@@ -263,6 +283,42 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
               <p className={styles.toast_title}>{activeToast.title}</p>
               <p className={styles.toast_desc}>{activeToast.desc}</p>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showTerminalTip && (
+          <motion.div 
+            className={styles.toast_container} 
+            style={{ borderColor: '#4ade80', boxShadow: '0 10px 30px rgba(74, 222, 128, 0.2)' }}
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0 }} 
+          >
+            <div className={styles.toast_icon} style={{ background: 'rgba(74, 222, 128, 0.2)' }}>
+              <Terminal size={24} color="#4ade80" />
+            </div>
+            <div>
+              <p className={styles.toast_label} style={{ color: '#4ade80' }}>
+                {lang === 'es' ? 'SISTEMA' : 'SYSTEM'}
+              </p>
+              <p className={styles.toast_title}>
+                {lang === 'es' ? 'Acceso Root' : 'Root Access'}
+              </p>
+              <p className={styles.toast_desc} style={{ maxWidth: '220px' }}>
+                {lang === 'es' 
+                  ? 'Haz clic en el ícono superior izquierdo para acceder a la terminal.' 
+                  : 'Click the top-left icon to access the hacker terminal.'}
+              </p>
+            </div>
+            
+            <button 
+              onClick={() => setShowTerminalTip(false)}
+              style={{ position: 'absolute', top: '10px', right: '10px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}
+            >
+              <X size={16} />
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
