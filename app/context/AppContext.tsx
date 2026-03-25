@@ -290,16 +290,52 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       <AnimatePresence>
         {showTerminalTip && (
           <motion.div 
-            className={styles.toast_container} 
-            style={{ borderColor: '#4ade80', boxShadow: '0 10px 30px rgba(74, 222, 128, 0.2)' }}
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            exit={{ opacity: 0 }} 
+            style={{
+              position: 'fixed',
+              top: isTouchDevice ? '60px' : '20px',
+              left: isTouchDevice ? '16px' : '85px',
+              zIndex: 99999999,
+              background: '#141419',
+              border: '1px solid #4ade80',
+              borderRadius: '16px',
+              padding: '16px 20px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '16px',
+              boxShadow: '0 10px 30px rgba(74, 222, 128, 0.2)',
+              maxWidth: isTouchDevice ? 'calc(100vw - 32px)' : '400px',
+            }}
+            initial={{ opacity: 0, x: isTouchDevice ? 0 : -20, y: isTouchDevice ? -20 : 0, scale: 0.9 }} 
+            animate={{ opacity: 1, x: 0, y: 0, scale: 1 }} 
+            exit={{ opacity: 0, scale: 0.9 }} 
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
           >
+            <div style={{
+              position: 'absolute',
+              width: '16px',
+              height: '16px',
+              background: '#141419',
+              border: '1px solid #4ade80',
+              ...(isTouchDevice ? {
+                top: '-9px',
+                left: '16px',
+                borderBottom: 'none',
+                borderRight: 'none',
+                transform: 'rotate(45deg)',
+              } : {
+                left: '-9px',
+                top: '24px',
+                borderTop: 'none',
+                borderRight: 'none',
+                transform: 'rotate(45deg)',
+              })
+            }} />
+            
             <div className={styles.toast_icon} style={{ background: 'rgba(74, 222, 128, 0.2)' }}>
               <Terminal size={24} color="#4ade80" />
             </div>
-            <div>
+            
+            <div style={{ zIndex: 1 }}>
               <p className={styles.toast_label} style={{ color: '#4ade80' }}>
                 {lang === 'es' ? 'SISTEMA' : 'SYSTEM'}
               </p>
@@ -308,14 +344,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
               </p>
               <p className={styles.toast_desc} style={{ maxWidth: '220px' }}>
                 {lang === 'es' 
-                  ? 'Haz clic en el ícono superior izquierdo para acceder a la terminal.' 
-                  : 'Click the top-left icon to access the hacker terminal.'}
+                  ? 'Haz clic en el ícono para acceder a la terminal.' 
+                  : 'Click the icon to access the hacker terminal.'}
               </p>
             </div>
             
             <button 
               onClick={() => setShowTerminalTip(false)}
-              style={{ position: 'absolute', top: '10px', right: '10px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}
+              style={{ position: 'absolute', top: '10px', right: '10px', background: 'transparent', border: 'none', color: 'rgba(255,255,255,0.5)', cursor: 'pointer', zIndex: 2 }}
             >
               <X size={16} />
             </button>
