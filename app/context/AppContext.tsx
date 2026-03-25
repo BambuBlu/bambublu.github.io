@@ -55,14 +55,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      const hasSeenTip = localStorage.getItem('portfolio_terminal_tip');
-      if (!hasSeenTip) {
+      const lastSeen = localStorage.getItem('portfolio_terminal_tip_time');
+      const now = Date.now();
+      const cooldown = /* 24 * 60 * 60 * */ 1000; 
+
+      if (!lastSeen || (now - parseInt(lastSeen)) > cooldown) {
         setShowTerminalTip(true);
-        localStorage.setItem('portfolio_terminal_tip', 'true');
-        
-        setTimeout(() => setShowTerminalTip(false), 7000);
+        localStorage.setItem('portfolio_terminal_tip_time', now.toString());
+        setTimeout(() => setShowTerminalTip(false), 5000);
       }
     }, 4500); 
+    
     return () => clearTimeout(timer);
   }, []);
 
