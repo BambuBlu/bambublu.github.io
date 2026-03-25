@@ -57,7 +57,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     const timer = setTimeout(() => {
       const lastSeen = localStorage.getItem('portfolio_terminal_tip_time');
       const now = Date.now();
-      const cooldown = /* 24 * 60 * 60 * */ 1000; 
+      const cooldown = 24 * 60 * 60 * 1000; 
 
       if (!lastSeen || (now - parseInt(lastSeen)) > cooldown) {
         setShowTerminalTip(true);
