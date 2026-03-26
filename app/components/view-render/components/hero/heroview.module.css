@@ -35,8 +35,8 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: clamp(20px, 4vh, 60px) clamp(20px, 4vw, 40px);
-  border-radius: clamp(20px, 4vh, 40px);
+  padding: clamp(24px, min(5vw, 5vh), 60px) clamp(20px, min(5vw, 5vh), 40px);
+  border-radius: clamp(24px, min(4vw, 4vh), 40px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
   overflow-y: auto;
   scrollbar-width: none;
@@ -47,19 +47,20 @@
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: clamp(4px, 1vh, 6px) clamp(12px, 2vw, 16px);
+  /* 💧 LÍQUIDO */
+  padding: clamp(4px, 1vh, 6px) clamp(12px, min(3vw, 3vh), 16px);
   border-radius: 999px;
-  font-size: clamp(0.7rem, 2vh, 0.8rem);
+  font-size: clamp(0.65rem, 1.5vh, 0.8rem);
   color: #a0a0ff;
   margin-top: -10px; 
-  margin-bottom: clamp(12px, 3vh, 24px);
+  margin-bottom: clamp(12px, min(3vw, 3vh), 24px);
   letter-spacing: 1px;
   text-transform: uppercase;
   animation: fadeInDown 0.8s ease-out;
 }
 
 .title {
-  font-size: clamp(2rem, min(7vw, 7vh), 5rem);
+  font-size: clamp(1.8rem, min(8vw, 8vh), 5rem);
   font-weight: 800;
   color: white;
   line-height: 1.1;
@@ -77,10 +78,10 @@
 }
 
 .role {
-  font-size: clamp(1rem, min(3.5vw, 3.5vh), 2rem);
+  font-size: clamp(1rem, min(4vw, 4vh), 2rem);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.9);
-  margin-top: clamp(8px, 2vh, 12px);
+  margin-top: clamp(8px, min(2vw, 2vh), 12px);
   letter-spacing: -0.5px;
 }
 
@@ -91,9 +92,9 @@
 }
 
 .subtitle {
-  margin-top: clamp(16px, 4vh, 24px);
-  font-size: clamp(0.95rem, 2vh, 1.1rem);
-  line-height: 1.6;
+  margin-top: clamp(12px, min(3vw, 3vh), 24px);
+  font-size: clamp(0.85rem, min(2.5vw, 2.5vh), 1.1rem);
+  line-height: clamp(1.4, min(3vw, 3vh), 1.6);
   color: rgba(255, 255, 255, 0.6);
   max-width: 600px;
   text-rendering: optimizeSpeed;
@@ -110,17 +111,17 @@
 
 .actions {
   display: flex;
-  gap: clamp(12px, 2vw, 16px);
-  margin-top: clamp(20px, 5vh, 32px);
+  gap: clamp(8px, min(2vw, 2vh), 16px);
+  margin-top: clamp(16px, min(4vw, 4vh), 32px);
 }
 
 .primary_btn, .secondary_btn {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: clamp(10px, 2vh, 12px) clamp(20px, 3vw, 28px);
-  border-radius: 14px;
-  font-size: clamp(0.85rem, 1.5vh, 0.95rem);
+  gap: clamp(6px, 1.5vh, 10px);
+  padding: clamp(10px, min(2vw, 2vh), 14px) clamp(16px, min(4vw, 4vh), 28px);
+  border-radius: clamp(10px, 2vh, 14px);
+  font-size: clamp(0.8rem, min(1.5vw, 1.5vh), 0.95rem);
   font-weight: 500;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -157,9 +158,9 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: clamp(16px, 3vw, 28px);
-  margin-top: clamp(24px, 6vh, 40px);
-  padding-top: clamp(16px, 4vh, 24px);
+  gap: clamp(12px, min(3vw, 3vh), 28px);
+  margin-top: clamp(16px, min(5vw, 5vh), 40px);
+  padding-top: clamp(12px, min(3vw, 3vh), 24px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   width: 100%;
 }
@@ -175,8 +176,8 @@
 .tech_icon_wrapper svg {
   color: rgba(255, 255, 255, 0.3);
   transition: color 0.3s ease, filter 0.3s ease;
-  width: clamp(18px, 3vh, 20px);
-  height: clamp(18px, 3vh, 20px);
+  width: clamp(16px, min(3vw, 3vh), 20px);
+  height: clamp(16px, min(3vw, 3vh), 20px);
 }
 
 .tech_icon_wrapper:hover {
@@ -189,30 +190,17 @@
 }
 
 @media (max-width: 768px) {
-  .desktop_only {
-    display: none;
-  }
-
+  .desktop_only { display: none; }
+  .glow { display: none; }
   .name {
     animation: none;
     background-size: 100% auto;
     will-change: auto;
   }
-
-  .subtitle {
-    margin-top: 16px;
-    line-height: 1.4;
-    max-width: 100%;
-  }
-
-  .glow { display: none; }
   
   .content { 
-    padding: 32px 20px; 
-    border-radius: 28px;
-    width: 90%;
-    max-width: 90%;
-    margin-bottom: 0;
+    width: 95%;
+    max-width: 95%;
     background: rgba(20, 20, 20, 0.85); 
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -221,15 +209,10 @@
   .actions {
     flex-direction: row; 
     width: 100%;
-    gap: 8px;
-    margin-top: 12px;
   }
 
   .primary_btn, .secondary_btn {
     flex: 1; 
-    padding: 10px 12px;
-    font-size: 0.8rem;
-    border-radius: 10px;
     justify-content: center;
   }
 
@@ -238,15 +221,7 @@
   }
   
   .tech_stack {
-    gap: 16px;
-    margin-top: 0;
-    padding-top: 12px;
     border-top: none;
-    max-width: 280px;
-  }
-
-  .tech_stack svg {
-    width: 18px;
-    height: 18px;
+    max-width: 320px;
   }
 }
