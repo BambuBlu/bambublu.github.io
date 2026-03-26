@@ -36,7 +36,7 @@ export function HeroView() {
       <Crosshair />
       <div className={styles.glow} style={{ left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%` }} />
       <div className={styles.content}>
-        <div className={styles.scroll_content} style={{ padding: 'clamp(24px, min(5vw, 5vh), 60px) clamp(20px, min(5vw, 5vh), 40px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className={styles.scroll_content} >
           <div className={styles.badge}>{t.hero.badge}</div>
           <h1 className={styles.title}>{t.hero.hi} <span className={styles.name}>Tobias</span></h1>
           <h2 className={styles.role}>Software Engineer <span className={styles.separator}>&</span> Game Developer</h2>
