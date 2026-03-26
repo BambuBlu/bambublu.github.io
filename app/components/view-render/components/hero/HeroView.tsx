@@ -36,23 +36,25 @@ export function HeroView() {
       <Crosshair />
       <div className={styles.glow} style={{ left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%` }} />
       <div className={styles.content}>
-        <div className={styles.badge}>{t.hero.badge}</div>
-        <h1 className={styles.title}>{t.hero.hi} <span className={styles.name}>Tobias</span></h1>
-        <h2 className={styles.role}>Software Engineer <span className={styles.separator}>&</span> Game Developer</h2>
-        <p className={styles.subtitle}>
-          {t.hero.subtitle}
-          <span className={styles.desktop_only}>{t.hero.desktopOnly}</span>
-        </p>
-        <div className={styles.actions}>
-          <button aria-label="View Projects" data-ui onClick={() => changeView("projects")} className={styles.primary_btn}>{t.hero.viewWork}</button>
-          <button aria-label="View Resumee" data-ui onClick={() => changeView("resumee")} className={styles.secondary_btn}>{t.hero.viewResume}</button>
-        </div>
-        <div className={styles.tech_stack}>
-          {techs.map((tech, i) => (
-            <div key={i} className={styles.tech_icon_wrapper} title={tech.name}>
-              <tech.Icon size={20} strokeWidth={1.5} />
-            </div>
-          ))}
+        <div className={styles.scroll_content} style={{ padding: 'clamp(24px, min(5vw, 5vh), 60px) clamp(20px, min(5vw, 5vh), 40px)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <div className={styles.badge}>{t.hero.badge}</div>
+          <h1 className={styles.title}>{t.hero.hi} <span className={styles.name}>Tobias</span></h1>
+          <h2 className={styles.role}>Software Engineer <span className={styles.separator}>&</span> Game Developer</h2>
+          <p className={styles.subtitle}>
+            {t.hero.subtitle}
+            <span className={styles.desktop_only}>{t.hero.desktopOnly}</span>
+          </p>
+          <div className={styles.actions}>
+            <button aria-label="View Projects" data-ui onClick={() => changeView("projects")} className={styles.primary_btn}>{t.hero.viewWork}</button>
+            <button aria-label="View Resumee" data-ui onClick={() => changeView("resumee")} className={styles.secondary_btn}>{t.hero.viewResume}</button>
+          </div>
+          <div className={styles.tech_stack}>
+            {techs.map((tech, i) => (
+              <div key={i} className={styles.tech_icon_wrapper} title={tech.name}>
+                <tech.Icon size={20} strokeWidth={1.5} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
