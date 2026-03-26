@@ -154,6 +154,7 @@
   align-items: center;
   gap: clamp(8px, 1.5vh, 12px);
   width: 100%;
+  padding-top: clamp(4px, 3.2vh, 28px);
 }
 
 .play_btn {
