@@ -114,8 +114,7 @@ export function ProjectsView() {
                     alt={selectedProject.title}
                     fill
                     sizes="(max-width: 768px) 100vw, 700px"
-                    style={{ objectFit: "cover", borderTopLeftRadius: "24px", borderTopRightRadius: "24px" }}
-                    borderRadius="24px 24px 0 0"
+                    style={{ objectFit: "cover" }}
                   />
                   <div className={styles.modal_image_gradient}></div>
                 </div>

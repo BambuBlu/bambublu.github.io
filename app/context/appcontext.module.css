@@ -324,8 +324,8 @@
 
 @media (max-width: 768px) {
   .shop_btn {
-    top: 70px;
-    left: 16px;
+    top: 16px;
+    left: 64px;
     width: 32px;
     height: 32px;
   }

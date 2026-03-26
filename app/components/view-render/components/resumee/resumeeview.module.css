@@ -36,7 +36,7 @@
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  padding: 0 20px;
+  padding: 0 clamp(16px, 4vw, 20px);
   box-sizing: border-box;
 }
 
@@ -46,15 +46,15 @@
   max-width: 900px;
   height: 100%;
   position: relative;
-  border-radius: 8px;
+  border-radius: clamp(8px, 1.5vw, 16px);
   box-sizing: border-box;
 }
 
 .paper_controls {
   position: absolute;
-  top: 15px; 
-  left: 25px;
-  right: 25px; 
+  top: clamp(12px, 2vh, 20px); 
+  left: clamp(16px, 3vw, 25px);
+  right: clamp(16px, 3vw, 25px); 
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -63,13 +63,13 @@
 
 .lang_group {
   display: flex;
-  gap: 8px;
+  gap: clamp(6px, 1vw, 8px);
 }
 
 .lang_btn {
   background: #ffffff;
   border: 1px solid #d1d5db;
-  padding: 6px;
+  padding: clamp(4px, 1vh, 6px);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -95,9 +95,9 @@
 .download_btn {
   background: #111827;
   color: #ffffff;
-  padding: 8px 16px;
+  padding: clamp(6px, 1.5vh, 8px) clamp(12px, 2vw, 16px);
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: clamp(0.8rem, 1.5vh, 0.85rem);
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -135,34 +135,34 @@
   width: 100%;
   min-height: 100%;
   box-sizing: border-box;
-  padding: 80px 70px 100px 70px; 
-  border-radius: 8px;
+  padding: clamp(60px, 10vh, 80px) clamp(20px, 8vw, 70px) clamp(80px, 12vh, 100px); 
+  border-radius: clamp(8px, 1.5vw, 16px);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 .header { 
-  margin-bottom: 30px; 
-  padding-top: 20px; 
+  margin-bottom: clamp(20px, 4vh, 30px); 
+  padding-top: clamp(16px, 3vh, 20px); 
   border-bottom: 2px solid #e5e7eb; 
-  padding-bottom: 24px;
+  padding-bottom: clamp(16px, 3vh, 24px);
 }
 
 .header_content {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: clamp(16px, 3vw, 24px);
 }
 
 .profile_image_container {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: clamp(80px, 12vw, 100px);
+  height: clamp(80px, 12vw, 100px);
   flex-shrink: 0;
-  border-radius: 24px; 
+  border-radius: clamp(16px, 3vw, 24px); 
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
-  border: 4px solid #ffffff; 
+  border: clamp(2px, 0.5vw, 4px) solid #ffffff; 
 }
 
 .header_info {
@@ -172,7 +172,7 @@
 }
 
 .name { 
-  font-size: 2.4rem; 
+  font-size: clamp(1.6rem, 5vw, 2.4rem); 
   font-weight: 800; 
   margin-bottom: 4px; 
   color: #111827; 
@@ -181,81 +181,99 @@
 }
 
 .location, .contact { 
-  font-size: 0.95rem; 
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem); 
   color: #4b5563; 
   margin: 2px 0; 
   overflow-wrap: break-word; 
   word-wrap: break-word; 
 }
 
-.section { margin-bottom: 24px; }
-.section_title { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; color: #111827; border-bottom: 2px solid #e5e7eb; padding-bottom: 4px; margin-bottom: 12px; }
-.skills_list { list-style: none; padding: 0; font-size: 0.95rem; line-height: 1.6; color: #374151; }
+.section { margin-bottom: clamp(20px, 3vh, 24px); }
+
+.section_title { 
+  font-size: clamp(1rem, 2vw, 1.1rem); 
+  font-weight: 700; 
+  text-transform: uppercase; 
+  color: #111827; 
+  border-bottom: 2px solid #e5e7eb; 
+  padding-bottom: 4px; 
+  margin-bottom: clamp(8px, 1.5vh, 12px); 
+}
+
+.skills_list { 
+  list-style: none; 
+  padding: 0; 
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem); 
+  line-height: 1.6; 
+  color: #374151; 
+}
+
 .skills_list li { margin-bottom: 4px; }
-.role_entry, .education_entry { margin-bottom: 20px; }
-.role_header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.role_title, .institution { font-size: 1rem; font-weight: 600; color: #111827; margin: 0; }
+
+.role_entry, .education_entry { 
+  margin-bottom: clamp(16px, 2.5vh, 20px); 
+}
+
+.role_header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: baseline; 
+  margin-bottom: clamp(4px, 1vh, 6px); 
+}
+
+.role_title, .institution { 
+  font-size: clamp(0.95rem, 1.8vw, 1rem); 
+  font-weight: 600; 
+  color: #111827; 
+  margin: 0; 
+}
+
 .company { font-weight: 700; }
-.role_period { font-size: 0.9rem; color: #6b7280; font-weight: 500; white-space: nowrap; }
-.bullet_list { padding-left: 20px; font-size: 0.95rem; line-height: 1.5; color: #374151; }
+
+.role_period { 
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem); 
+  color: #6b7280; 
+  font-weight: 500; 
+  white-space: nowrap; 
+}
+
+.bullet_list { 
+  padding-left: clamp(16px, 3vw, 20px); 
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem); 
+  line-height: 1.5; 
+  color: #374151; 
+}
+
 .bullet_list li { margin-bottom: 4px; }
-.degree { font-size: 0.95rem; color: #4b5563; margin: 0; }
+
+.degree { 
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem); 
+  color: #4b5563; 
+  margin: 0; 
+}
+
+.summary_text, .reference_text {
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  line-height: 1.5;
+  color: #374151;
+}
 
 @media (max-width: 768px) {
-  .wrapper {
-    padding: 0 16px; 
-  }
-
-  .cv_frame {
-    width: 100%;
-    height: 100%;
-  }
-
-  .paper {
-    padding: 60px 20px 80px 20px; 
-    border-radius: 8px; 
-  }
-
-  .scroll_container {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 96%);
-    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 96%);
-  }
-
-  .paper_controls { 
-    top: 15px; 
-    left: 15px; 
-    right: 15px; 
-  }
-
-  .lang_btn { padding: 4px; }
-  .lang_btn img { width: 20px; height: 15px; }
-  
-  .download_btn { padding: 6px 10px; font-size: 0.8rem; }
   .download_btn :global(span) { display: none; }
 
   .header_content {
     flex-direction: column;
     text-align: center;
-    gap: 16px;
-    margin-top: 20px;
+    gap: 12px;
   }
 
-  .profile_image_container {
-    width: 90px;
-    height: 90px;
-    border-radius: 20px;
-    margin: 0 auto;
+  .role_header { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 4px; 
   }
-
-  .name { font-size: 1.8rem; margin-top: 0; } 
-  .header_info p { font-size: 0.85rem; }
-  .section_title { font-size: 1rem; }
-
-  .role_header { flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 8px; }
+  
   .role_title, .institution { line-height: 1.3; }
   .role_dash { display: none; } 
   .company { display: block; font-size: 1.1rem; color: #000; } 
-  .role_period { font-size: 0.8rem; color: #6b7280; }
-  .summary_text, .reference_text, .bullet_list, .skills_list, .degree { font-size: 0.85rem; }
-  .bullet_list { padding-left: 16px; }
 }
