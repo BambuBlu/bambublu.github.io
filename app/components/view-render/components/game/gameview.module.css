@@ -193,6 +193,16 @@
 
 
 @media (max-width: 768px) {
+  .glass_container { 
+    width: 95%;
+    max-width: 95%;
+    background: rgba(20, 20, 20, 0.85); 
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 28px;
+    margin: 0 auto;
+  }
+
   .tutorial_grid { 
     grid-template-columns: 1fr; 
   }
