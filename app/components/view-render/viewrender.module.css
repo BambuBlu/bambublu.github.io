@@ -24,6 +24,9 @@
   align-items: center;
   box-sizing: border-box;
   padding: 100px 0 90px 0;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
   animation: fadeInView 0.3s ease-out forwards;
 }
 

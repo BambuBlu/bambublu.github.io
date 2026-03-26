@@ -208,7 +208,7 @@
 
   .cv_frame {
     width: 100%;
-    height: calc(100vh - 240px); 
+    height: 100%;
   }
 
   .paper {
