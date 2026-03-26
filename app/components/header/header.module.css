@@ -3,7 +3,6 @@
     top: 0;
     width: 100%;
     z-index: 10;
-    padding-top: 24px;
     display: flex;
     justify-content: center;
 }
