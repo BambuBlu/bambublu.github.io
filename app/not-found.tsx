@@ -4,7 +4,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { AlertTriangle, Terminal, Rocket, Globe } from 'lucide-react'
-import styles from './not-found.module.css'
+import styles from './notfound.module.css'
 import { Crosshair } from './components/crosshair' 
 
 const translations = {
