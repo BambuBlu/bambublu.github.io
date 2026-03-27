@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 
@@ -113,7 +114,6 @@ export function BottomMenu() {
             performFadeIn(audio);
         }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMuted, performFadeOutAndSwitch, performFadeIn]);
 
   useEffect(() => {
@@ -256,8 +256,7 @@ export function BottomMenu() {
   };
 
   return (
-    <div className={styles["bottom-menu"]}>
-      <div className={styles["mobile-label"]}>{items.find(i => i.id === currentView)?.label}</div>
+    <>
       <div className={styles["controls"]}>
         <button aria-label="Download Template" data-ui onClick={() => window.open("https://github.com/BambuBlu/bambublu.github.io", "_blank")} className={styles["control-btn"]} style={{ color: "#f5f5f5" }} title={lang === 'es' ? 'Descargar Plantilla (GitHub)' : 'Download Template (GitHub)'}>
           <Code size={16} />
@@ -272,19 +271,23 @@ export function BottomMenu() {
           {isIdle ? <Play size={16} /> : <Pause size={16} />}
         </button>
       </div>
-      <div className={styles["score"]}>
-        {score} <span style={{ opacity: 0.5, fontSize: '10px', marginLeft: '6px' }} suppressHydrationWarning>HI: {highScore}</span>
+
+      <div className={styles["bottom-menu"]}>
+        <div className={styles["mobile-label"]}>{items.find(i => i.id === currentView)?.label}</div>
+        <div className={styles["score"]}>
+          {score} <span style={{ opacity: 0.5, fontSize: '10px', marginLeft: '6px' }} suppressHydrationWarning>HI: {highScore}</span>
+        </div>
+        {items.map((item) => (
+          <button 
+            aria-label="Menu Button" key={item.id} data-ui onClick={() => handleItemClick(item)}
+            className={`${styles["menu-item"]} ${currentView === item.id ? styles.active : ""}`} rel="noopener noreferrer"
+          >
+            <span className={styles["tooltip"]}>{item.label}</span>
+            <span className={styles["icon-wrapper"]}>{item.icon}</span>
+            {!item.url && <div className={styles["active-pill"]} />}
+          </button>
+        ))}
       </div>
-      {items.map((item) => (
-        <button 
-          aria-label="Menu Button" key={item.id} data-ui onClick={() => handleItemClick(item)}
-          className={`${styles["menu-item"]} ${currentView === item.id ? styles.active : ""}`} rel="noopener noreferrer"
-        >
-          <span className={styles["tooltip"]}>{item.label}</span>
-          <span className={styles["icon-wrapper"]}>{item.icon}</span>
-          {!item.url && <div className={styles["active-pill"]} />}
-        </button>
-      ))}
-    </div>
+    </>
   );
 }

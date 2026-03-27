@@ -75,8 +75,8 @@
 }
 
 .controls {
-  position: absolute;
-  top: -45px; 
+  position: fixed;
+  bottom: 95px; 
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -189,6 +189,7 @@
     top: 16px;
     right: 56px; 
     left: auto;
+    bottom: auto;
     transform: none;
     gap: 8px;
     z-index: 9000;
@@ -226,6 +227,5 @@
   
   .controls {
     gap: 12px;
-    top: -50px;
   }
 }
