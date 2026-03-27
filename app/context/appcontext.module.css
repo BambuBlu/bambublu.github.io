@@ -209,36 +209,6 @@
   font-size: 0.85rem;
 }
 
-@media (max-width: 768px) {
-  .trophy_btn {
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    padding: 8px;
-  }
-
-  .panel_content {
-    max-width: 100%;
-    padding: 24px 16px 120px 16px; 
-  }
-
-  .panel_title { font-size: 1.2rem; }
-  .achievement_card { padding: 12px; gap: 12px; }
-  .card_info h4 { font-size: 0.95rem; }
-  .card_info p { font-size: 0.8rem; }
-  .icon_unlocked, .icon_locked { padding: 10px; }
-
-  .toast_container {
-    top: 70px;
-    right: 16px;
-    left: 16px;
-    width: auto;
-    max-width: none;
-    padding: 12px 16px;
-  }
-}
-
 .shop_btn {
   position: fixed;
   top: 80px;
@@ -323,10 +293,39 @@
 }
 
 @media (max-width: 768px) {
-  .shop_btn {
+  .trophy_btn {
     top: 16px;
-    left: 64px;
+    right: 16px;
     width: 32px;
     height: 32px;
+    padding: 6px; 
+  }
+
+  .shop_btn {
+    top: 16px; 
+    left: 56px;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+  }
+
+  .panel_content {
+    max-width: 100%;
+    padding: 24px 16px 120px 16px; 
+  }
+
+  .panel_title { font-size: 1.2rem; }
+  .achievement_card { padding: 12px; gap: 12px; }
+  .card_info h4 { font-size: 0.95rem; }
+  .card_info p { font-size: 0.8rem; }
+  .icon_unlocked, .icon_locked { padding: 10px; }
+
+  .toast_container {
+    top: 70px;
+    right: 16px;
+    left: 16px;
+    width: auto;
+    max-width: none;
+    padding: 12px 16px;
   }
 }

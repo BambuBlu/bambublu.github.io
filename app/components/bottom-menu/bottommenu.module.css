@@ -185,14 +185,19 @@
   }
 
   .controls {
-    top: -676px;
-    left: 249px;
-    gap: 16px;
+    position: fixed;
+    top: 16px;
+    right: 56px; 
+    left: auto;
+    transform: none;
+    gap: 8px;
+    z-index: 9000;
   }
   
   .control-btn {
     width: 32px;
     height: 32px;
+    padding: 6px; 
   }
 
   .mobile-label {
