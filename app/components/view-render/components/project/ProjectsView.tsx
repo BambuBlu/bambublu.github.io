@@ -10,11 +10,23 @@ import { X, ExternalLink, Github, BookOpen } from "lucide-react"
 import { useAppContext } from "@/app/context/AppContext"
 import styles from "./projectsview.module.css"
 import ImageWithSkeleton from "@/app/components/skeleton/ImageWithSkeleton";
+import { Crosshair } from "@/app/components/crosshair"
 
 export function ProjectsView() {
   const { t, lang, unlockAchievement } = useAppContext();
   const [selectedProject, setSelectedProject] = useState<any>(null);
   const [mounted, setMounted] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight })
+    }
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
 
   const viewedProjects = useRef(new Set<number>());
 
@@ -45,6 +57,8 @@ export function ProjectsView() {
   return (
     <>
       <section className={styles.wrapper}>
+        <Crosshair />
+        <div className={styles.glow} style={{ left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%` }} />
         <div className={styles.center_wrapper}>
           <div className={styles.glass_container} data-ui>
             <div className={styles.scroll_content}>

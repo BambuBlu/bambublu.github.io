@@ -9,6 +9,17 @@ import { Crosshair } from "@/app/components/crosshair"
 export function GameView() {
   const { t } = useAppContext();
   const [isPlaying, setIsPlaying] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0.5, y: 0.5 })
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    if (isMobile) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight })
+    }
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [])
 
   useEffect(() => {
     const handleViewChange = (e: Event) => {
@@ -31,6 +42,7 @@ export function GameView() {
   return (
     <section className={styles.wrapper}>
       <Crosshair />
+      <div className={styles.glow} style={{ left: `${mousePos.x * 100}%`, top: `${mousePos.y * 100}%` }} />
       <div className={styles.glass_container} data-ui>
         <div className={styles.scroll_content}>
           <div className={styles.content_inner}>
