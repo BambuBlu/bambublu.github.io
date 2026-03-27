@@ -152,8 +152,9 @@
   gap: clamp(8px, 1.5vh, 12px);
   width: 100%;
   padding: clamp(16px, 3vh, 24px) clamp(20px, min(5vw, 5vh), 40px);
-  background: rgba(10, 10, 10, 0.6);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(to bottom, rgba(20, 20, 20, 0.4) 0%, rgba(10, 10, 10, 0.8) 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   flex-shrink: 0;
   z-index: 10;
@@ -164,9 +165,9 @@
   align-items: center;
   justify-content: center;
   gap: clamp(6px, 1vw, 10px);
-  background: #ef4444;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
   color: white;
-  border: none;
+  border: 1px solid rgba(255, 150, 150, 0.2);
   padding: clamp(10px, 2vh, 14px) clamp(16px, 4vw, 36px);
   border-radius: clamp(10px, 2vw, 14px);
   font-size: clamp(0.95rem, 2vh, 1.1rem);
@@ -175,30 +176,31 @@
   letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.15);
   width: 100%;
   max-width: 400px;
 }
 
 .play_btn:hover {
-  background: #dc2626;
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 15px 40px rgba(239, 68, 68, 0.6);
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(239, 68, 68, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 150, 150, 0.4);
 }
 
 .play_btn:active {
-  transform: translateY(0) scale(0.98);
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3), inset 0 0px 4px rgba(0, 0, 0, 0.2);
 }
 
 .footer_note {
   text-align: center;
-  color: #ef4444;
-  font-size: clamp(0.65rem, 1.2vh, 0.9rem);
+  color: #f87171;
+  font-size: clamp(0.65rem, 1.2vh, 0.85rem);
   font-weight: 500;
   opacity: 0.8;
   margin: 0;
 }
-
 
 @media (max-width: 768px) {
   .glass_container { 
