@@ -58,14 +58,14 @@ export function GameView() {
                 <div className={styles.card_text}><h3>{t.game.record}</h3><p>{t.game.recordDesc}</p></div>
               </div>
             </div>
-
-            <div className={styles.action_area}>
-              <button aria-label="Start Mini Game" onClick={() => setIsPlaying(true)} className={styles.play_btn}>
-                <Play fill="currentColor" size={20} /> {t.game.start}
-              </button>
-              <p className={styles.footer_note}>{t.game.exitNote}</p>
-            </div>
           </div>
+        </div>
+
+        <div className={styles.action_area}>
+          <button aria-label="Start Mini Game" onClick={() => setIsPlaying(true)} className={styles.play_btn}>
+            <Play fill="currentColor" size={20} /> {t.game.start}
+          </button>
+          <p className={styles.footer_note}>{t.game.exitNote}</p>
         </div>
       </div>
     </section>
