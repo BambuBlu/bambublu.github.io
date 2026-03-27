@@ -31,6 +31,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const t = translations[lang];
 
+  useEffect(() => {
+    const savedLang = localStorage.getItem('portfolio_lang');
+    if (savedLang === 'es' || savedLang === 'en') {
+      setLang(savedLang);
+    } else {
+      const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
+      setLang(browserLang);
+    }
+
+    const handleExternalLangChange = (e: Event) => {
+      const newLang = (e as CustomEvent).detail;
+      if (newLang === 'es' || newLang === 'en') setLang(newLang);
+    };
+    window.addEventListener('languageChanged', handleExternalLangChange);
+    return () => window.removeEventListener('languageChanged', handleExternalLangChange);
+  }, []);
+
   const unlockAchievement = useCallback((id: AchievementId) => {
     setUnlockedAchievements(prev => {
       if (prev.includes(id)) return prev; 
@@ -134,7 +151,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [isTouchDevice, unlockAchievement]);
 
   const toggleLanguage = () => {
-    setLang(prev => prev === 'es' ? 'en' : 'es');
+    setLang(prev => {
+      const newLang = prev === 'es' ? 'en' : 'es';
+      localStorage.setItem('portfolio_lang', newLang);
+      return newLang;
+    });
     langToggles.current += 1;
     if (langToggles.current === 3) unlockAchievement('polyglot');
   };
