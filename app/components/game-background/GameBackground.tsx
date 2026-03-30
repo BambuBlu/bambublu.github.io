@@ -63,6 +63,10 @@ export const GameBackground = memo(function GameBackground() {
     let lastInputTime = Date.now()
     let isTouching = false
     let animationId: number
+    let aiVx = 0;
+    let aiVy = 0;
+    let aiShootCooldown = 0;
+    let aiBurstCount = 0;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)()
@@ -149,94 +153,129 @@ export const GameBackground = memo(function GameBackground() {
       const idleTime = Date.now() - lastInputTime;
       if (idleTime > 2000 && !isTouching && !isIdle) {
         
-        let target: {x: number, y: number} | null = null;
+        let target: {x: number, y: number, isBoss?: boolean, isAsteroid?: boolean} | null = null;
         
         if (bosses.length > 0) {
-          target = bosses[0]; 
+          target = { ...bosses[0], isBoss: true }; 
         } else if (asteroids.length > 0) {
           let minDist = Infinity;
           for (const a of asteroids) {
-            const dist = (a.x - shipX)**2 + (a.y - shipY)**2;
-            if (dist < minDist) { minDist = dist; target = a; }
+            const dist = Math.hypot(a.x - shipX, a.y - shipY);
+            if (dist < minDist) { minDist = dist; target = { ...a, isAsteroid: true }; }
           }
         }
 
         if (target) {
-          angle = Math.atan2(target.y - shipY, target.x - shipX);
-
-          let evX = 0;
-          let evY = 0;
           const dx = target.x - shipX;
           const dy = target.y - shipY;
           const dist = Math.hypot(dx, dy);
+          
+          const targetAngle = Math.atan2(dy, dx);
+          
+          let angleDiff = targetAngle - angle;
+          while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+          while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+          angle += angleDiff * 0.15; // 0.15 es la velocidad de giro
 
-          if (bosses.length > 0) {
-             if (dist > 300) { evX += (dx / dist) * 4; evY += (dy / dist) * 4; } // Acercarse si está lejos
-             else if (dist < 200) { evX -= (dx / dist) * 5; evY -= (dy / dist) * 5; } // Retroceder si está muy cerca
+          let forceX = 0;
+          let forceY = 0;
+
+          if (target.isBoss) {
+             if (dist > 300) { forceX += (dx / dist) * 0.4; forceY += (dy / dist) * 0.4; } // Empuja hacia adelante
+             else if (dist < 200) { forceX -= (dx / dist) * 0.6; forceY -= (dy / dist) * 0.6; } // Evasión fuerte atrás
              
-             evX += (-dy / dist) * 3;
-             evY += (dx / dist) * 3;
+             forceX += (-dy / dist) * 0.3;
+             forceY += (dx / dist) * 0.3;
           } else {
-             if (dist > 150) { evX += (dx / dist) * 4; evY += (dy / dist) * 4; }
-             else if (dist < 100) { evX -= (dx / dist) * 4; evY -= (dy / dist) * 4; }
+             if (dist > 150) { forceX += (dx / dist) * 0.5; forceY += (dy / dist) * 0.5; }
+             else if (dist < 80) { forceX -= (dx / dist) * 0.8; forceY -= (dy / dist) * 0.8; }
           }
 
           for (const bb of bossBullets) {
               const bdx = shipX - bb.x;
               const bdy = shipY - bb.y;
               const bdist = Math.hypot(bdx, bdy);
-              if (bdist < 120) {
-                  evX += (bdx / bdist) * 8; 
-                  evY += (bdy / bdist) * 8;
+              if (bdist < 150) {
+                  const evasionStrength = (150 - bdist) / 150;
+                  forceX += (bdx / bdist) * evasionStrength * 1.5; 
+                  forceY += (bdy / bdist) * evasionStrength * 1.5;
               }
           }
 
-          for (const a of asteroids) {
-              if (a === target && bosses.length === 0) continue; 
-              const adx = shipX - a.x;
-              const ady = shipY - a.y;
-              const adist = Math.hypot(adx, ady);
-              if (adist < a.size + 80) {
-                  evX += (adx / adist) * 6;
-                  evY += (ady / adist) * 6;
-              }
-          }
+          aiVx += forceX;
+          aiVy += forceY;
+          aiVx *= 0.92; 
+          aiVy *= 0.92;
 
-          const margin = 50;
-          if (shipX < margin) evX += 5;
-          if (shipX > width - margin) evX -= 5;
-          if (shipY < margin) evY += 5;
-          if (shipY > height - margin) evY -= 5;
-
-          const currentSpeed = Math.hypot(evX, evY);
-          const maxSpeed = 9;
+          const currentSpeed = Math.hypot(aiVx, aiVy);
+          const maxSpeed = target.isBoss ? 7 : 5;
           if (currentSpeed > maxSpeed) {
-              evX = (evX / currentSpeed) * maxSpeed;
-              evY = (evY / currentSpeed) * maxSpeed;
+              aiVx = (aiVx / currentSpeed) * maxSpeed;
+              aiVy = (aiVy / currentSpeed) * maxSpeed;
           }
 
-          shipX += evX;
-          shipY += evY;
+          shipX += aiVx;
+          shipY += aiVy;
 
-          mouseX = shipX + Math.cos(angle) * 100;
-          mouseY = shipY + Math.sin(angle) * 100;
-          bgMouseX = (mouseX - width / 2) * 0.05;
-          bgMouseY = (mouseY - height / 2) * 0.05;
+          const isAimed = Math.abs(angleDiff) < 0.3;
+          
+          if (aiShootCooldown > 0) aiShootCooldown--;
 
-          const fireRate = bosses.length > 0 ? 0.25 : 0.08;
-          if (Math.random() < fireRate) { shoot(); playShootSound(); }
+          if (isAimed && dist < 450 && aiShootCooldown <= 0) {
+             shoot();
+             playShootSound();
+             aiBurstCount++;
+             
+             if (aiBurstCount >= 3) {
+                 aiShootCooldown = target.isBoss ? 20 : 30; 
+                 aiBurstCount = 0;
+             } else {
+                 aiShootCooldown = 5; 
+             }
+          }
 
         } else {
-          mouseX = width / 2 + Math.sin(Date.now() * 0.001) * 100;
-          mouseY = height / 2 + Math.cos(Date.now() * 0.001) * 100;
-          angle = Math.atan2(mouseY - shipY, mouseX - shipX);
-          shipX += (mouseX - shipX) * 0.05;
-          shipY += (mouseY - shipY) * 0.05;
+          const targetCenterX = width / 2 + Math.sin(Date.now() * 0.0005) * 150;
+          const targetCenterY = height / 2 + Math.cos(Date.now() * 0.0003) * 100;
+          
+          const dx = targetCenterX - shipX;
+          const dy = targetCenterY - shipY;
+          
+          const targetAngle = Math.atan2(dy, dx);
+          let angleDiff = targetAngle - angle;
+          while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
+          while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
+          angle += angleDiff * 0.05;
+
+          aiVx += dx * 0.001;
+          aiVy += dy * 0.001;
+          aiVx *= 0.95;
+          aiVy *= 0.95;
+          
+          shipX += aiVx;
+          shipY += aiVy;
+          
+          aiBurstCount = 0;
         }
 
-        return true;
+        const margin = 30;
+        if (shipX < margin) { shipX = margin; aiVx *= -0.5; }
+        if (shipX > width - margin) { shipX = width - margin; aiVx *= -0.5; }
+        if (shipY < margin) { shipY = margin; aiVy *= -0.5; }
+        if (shipY > height - margin) { shipY = height - margin; aiVy *= -0.5; }
+
+        mouseX = shipX + Math.cos(angle) * 50;
+        mouseY = shipY + Math.sin(angle) * 50;
+        bgMouseX = (mouseX - width / 2) * 0.05;
+        bgMouseY = (mouseY - height / 2) * 0.05;
+
+        return true; 
       }
-      return false;
+      
+      aiVx = 0;
+      aiVy = 0;
+      aiBurstCount = 0;
+      return false; 
     }
 
     function drawMatrixRain() {
