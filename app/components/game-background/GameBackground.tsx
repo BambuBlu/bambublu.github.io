@@ -153,7 +153,7 @@ export const GameBackground = memo(function GameBackground() {
       const idleTime = Date.now() - lastInputTime;
       if (idleTime > 2000 && !isTouching && !isIdle) {
         
-        let target: {x: number, y: number, isBoss?: boolean, isAsteroid?: boolean} | null = null;
+        let target: {x: number, y: number, vx: number, vy: number, isBoss?: boolean, isAsteroid?: boolean} | null = null;
         
         if (bosses.length > 0) {
           target = { ...bosses[0], isBoss: true }; 
@@ -166,29 +166,40 @@ export const GameBackground = memo(function GameBackground() {
         }
 
         if (target) {
-          const dx = target.x - shipX;
-          const dy = target.y - shipY;
-          const dist = Math.hypot(dx, dy);
+          const distToTarget = Math.hypot(target.x - shipX, target.y - shipY);
+          const bulletSpeed = 6;
+          const timeToHit = distToTarget / bulletSpeed; 
+          
+          const futureX = target.x + (target.vx * timeToHit);
+          const futureY = target.y + (target.vy * timeToHit);
+
+          const dx = futureX - shipX;
+          const dy = futureY - shipY;
           
           const targetAngle = Math.atan2(dy, dx);
           
           let angleDiff = targetAngle - angle;
           while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
           while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-          angle += angleDiff * 0.15; // 0.15 es la velocidad de giro
+          angle += angleDiff * 0.12;
 
           let forceX = 0;
           let forceY = 0;
 
+          const wobble = Math.sin(Date.now() * 0.002) * 0.5;
+
           if (target.isBoss) {
-             if (dist > 300) { forceX += (dx / dist) * 0.4; forceY += (dy / dist) * 0.4; } // Empuja hacia adelante
-             else if (dist < 200) { forceX -= (dx / dist) * 0.6; forceY -= (dy / dist) * 0.6; } // Evasión fuerte atrás
+             if (distToTarget > 300) { forceX += Math.cos(targetAngle) * 0.5; forceY += Math.sin(targetAngle) * 0.5; } 
+             else if (distToTarget < 200) { forceX -= Math.cos(targetAngle) * 0.6; forceY -= Math.sin(targetAngle) * 0.6; } 
              
-             forceX += (-dy / dist) * 0.3;
-             forceY += (dx / dist) * 0.3;
+             forceX += Math.cos(targetAngle + Math.PI/2) * (0.4 + wobble);
+             forceY += Math.sin(targetAngle + Math.PI/2) * (0.4 + wobble);
           } else {
-             if (dist > 150) { forceX += (dx / dist) * 0.5; forceY += (dy / dist) * 0.5; }
-             else if (dist < 80) { forceX -= (dx / dist) * 0.8; forceY -= (dy / dist) * 0.8; }
+             if (distToTarget > 180) { forceX += Math.cos(targetAngle) * 0.6; forceY += Math.sin(targetAngle) * 0.6; }
+             else if (distToTarget < 100) { forceX -= Math.cos(targetAngle) * 0.7; forceY -= Math.sin(targetAngle) * 0.7; }
+             
+             forceX += Math.cos(targetAngle + Math.PI/2.5) * wobble;
+             forceY += Math.sin(targetAngle + Math.PI/2.5) * wobble;
           }
 
           for (const bb of bossBullets) {
@@ -197,18 +208,18 @@ export const GameBackground = memo(function GameBackground() {
               const bdist = Math.hypot(bdx, bdy);
               if (bdist < 150) {
                   const evasionStrength = (150 - bdist) / 150;
-                  forceX += (bdx / bdist) * evasionStrength * 1.5; 
-                  forceY += (bdy / bdist) * evasionStrength * 1.5;
+                  forceX += (bdx / bdist) * evasionStrength * 2.5; 
+                  forceY += (bdy / bdist) * evasionStrength * 2.5;
               }
           }
 
           aiVx += forceX;
           aiVy += forceY;
-          aiVx *= 0.92; 
-          aiVy *= 0.92;
+          aiVx *= 0.88; 
+          aiVy *= 0.88;
 
           const currentSpeed = Math.hypot(aiVx, aiVy);
-          const maxSpeed = target.isBoss ? 7 : 5;
+          const maxSpeed = target.isBoss ? 6 : 4.5;
           if (currentSpeed > maxSpeed) {
               aiVx = (aiVx / currentSpeed) * maxSpeed;
               aiVy = (aiVy / currentSpeed) * maxSpeed;
@@ -217,26 +228,30 @@ export const GameBackground = memo(function GameBackground() {
           shipX += aiVx;
           shipY += aiVy;
 
-          const isAimed = Math.abs(angleDiff) < 0.3;
+          const isAimed = Math.abs(angleDiff) < 0.15; 
           
           if (aiShootCooldown > 0) aiShootCooldown--;
 
-          if (isAimed && dist < 450 && aiShootCooldown <= 0) {
+          if (isAimed && distToTarget < 350 && aiShootCooldown <= 0) {
              shoot();
              playShootSound();
              aiBurstCount++;
              
-             if (aiBurstCount >= 3) {
-                 aiShootCooldown = target.isBoss ? 20 : 30; 
+             const burstLimit = target.isBoss ? 3 : 2;
+             
+             if (aiBurstCount >= burstLimit) {
+                 aiShootCooldown = target.isBoss ? 40 : 50; 
                  aiBurstCount = 0;
              } else {
-                 aiShootCooldown = 5; 
+                 aiShootCooldown = 8; 
              }
+          } else if (!isAimed) {
+             aiBurstCount = 0;
           }
 
         } else {
           const targetCenterX = width / 2 + Math.sin(Date.now() * 0.0005) * 150;
-          const targetCenterY = height / 2 + Math.cos(Date.now() * 0.0003) * 100;
+          const targetCenterY = height / 2 + Math.sin(Date.now() * 0.00025) * 100;
           
           const dx = targetCenterX - shipX;
           const dy = targetCenterY - shipY;
@@ -245,10 +260,10 @@ export const GameBackground = memo(function GameBackground() {
           let angleDiff = targetAngle - angle;
           while (angleDiff > Math.PI) angleDiff -= Math.PI * 2;
           while (angleDiff < -Math.PI) angleDiff += Math.PI * 2;
-          angle += angleDiff * 0.05;
+          angle += angleDiff * 0.03;
 
-          aiVx += dx * 0.001;
-          aiVy += dy * 0.001;
+          aiVx += dx * 0.0005;
+          aiVy += dy * 0.0005;
           aiVx *= 0.95;
           aiVy *= 0.95;
           
@@ -258,7 +273,7 @@ export const GameBackground = memo(function GameBackground() {
           aiBurstCount = 0;
         }
 
-        const margin = 30;
+        const margin = 40;
         if (shipX < margin) { shipX = margin; aiVx *= -0.5; }
         if (shipX > width - margin) { shipX = width - margin; aiVx *= -0.5; }
         if (shipY < margin) { shipY = margin; aiVy *= -0.5; }
