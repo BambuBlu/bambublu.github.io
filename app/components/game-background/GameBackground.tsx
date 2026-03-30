@@ -149,11 +149,23 @@ export const GameBackground = memo(function GameBackground() {
       if (isIdle) return
       const idleTime = Date.now() - lastInputTime
       if (idleTime > 2000 && !isTouching) {
-        const target = asteroids[0] || bosses[0]
+        let target: {x: number, y: number} | null = null;
+        
+        if (bosses.length > 0) {
+          target = bosses[0]; 
+        } else if (asteroids.length > 0) {
+          let minDist = Infinity;
+          for (const a of asteroids) {
+            const dist = (a.x - shipX)**2 + (a.y - shipY)**2;
+            if (dist < minDist) { minDist = dist; target = a; }
+          }
+        }
+
         if (target) {
           mouseX += (target.x - mouseX) * 0.05
           mouseY += (target.y - mouseY) * 0.05
-          if (Math.random() < 0.05) shoot()
+          const fireRate = bosses.length > 0 ? 0.15 : 0.05;
+          if (Math.random() < fireRate) shoot();
         } else {
           mouseX += Math.sin(Date.now() * 0.001) * 2
           mouseY += Math.cos(Date.now() * 0.001) * 2
@@ -289,8 +301,10 @@ export const GameBackground = memo(function GameBackground() {
           const globalDy = shipY + dY;
           if (!isIdle && droneShootTimer <= 0) {
               let closest: {x: number, y: number} | null = null;
-              let minDist = 300 * 300;
-              const targets = [...asteroids, ...bosses];
+              let minDist = 400 * 400;
+              
+              const targets = bosses.length > 0 ? bosses : asteroids;
+
               for (const t of targets) {
                  const dist = (t.x - globalDx)**2 + (t.y - globalDy)**2;
                  if (dist < minDist) { 
@@ -301,8 +315,8 @@ export const GameBackground = memo(function GameBackground() {
 
               if (closest) {
                  const a = Math.atan2(closest.y - globalDy, closest.x - globalDx);
-                 bullets.push({ x: globalDx, y: globalDy, vx: Math.cos(a)*8, vy: Math.sin(a)*8, life: 40, isDrone: true });
-                 droneShootTimer = 30;
+                 bullets.push({ x: globalDx, y: globalDy, vx: Math.cos(a)*8, vy: Math.sin(a)*8, life: 50, isDrone: true });
+                 droneShootTimer = bosses.length > 0 ? 20 : 30;
               }
           }
           if (droneShootTimer > 0) droneShootTimer--;
