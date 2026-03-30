@@ -145,10 +145,10 @@ export const GameBackground = memo(function GameBackground() {
       });
     }
 
-    function autoPlay() {
-      if (isIdle) return
-      const idleTime = Date.now() - lastInputTime
-      if (idleTime > 2000 && !isTouching) {
+    function autoPlay(): boolean {
+      const idleTime = Date.now() - lastInputTime;
+      if (idleTime > 2000 && !isTouching && !isIdle) {
+        
         let target: {x: number, y: number} | null = null;
         
         if (bosses.length > 0) {
@@ -162,15 +162,81 @@ export const GameBackground = memo(function GameBackground() {
         }
 
         if (target) {
-          mouseX += (target.x - mouseX) * 0.05
-          mouseY += (target.y - mouseY) * 0.05
-          const fireRate = bosses.length > 0 ? 0.15 : 0.05;
-          if (Math.random() < fireRate) shoot();
+          angle = Math.atan2(target.y - shipY, target.x - shipX);
+
+          let evX = 0;
+          let evY = 0;
+          const dx = target.x - shipX;
+          const dy = target.y - shipY;
+          const dist = Math.hypot(dx, dy);
+
+          if (bosses.length > 0) {
+             if (dist > 300) { evX += (dx / dist) * 4; evY += (dy / dist) * 4; } // Acercarse si está lejos
+             else if (dist < 200) { evX -= (dx / dist) * 5; evY -= (dy / dist) * 5; } // Retroceder si está muy cerca
+             
+             evX += (-dy / dist) * 3;
+             evY += (dx / dist) * 3;
+          } else {
+             if (dist > 150) { evX += (dx / dist) * 4; evY += (dy / dist) * 4; }
+             else if (dist < 100) { evX -= (dx / dist) * 4; evY -= (dy / dist) * 4; }
+          }
+
+          for (const bb of bossBullets) {
+              const bdx = shipX - bb.x;
+              const bdy = shipY - bb.y;
+              const bdist = Math.hypot(bdx, bdy);
+              if (bdist < 120) {
+                  evX += (bdx / bdist) * 8; 
+                  evY += (bdy / bdist) * 8;
+              }
+          }
+
+          for (const a of asteroids) {
+              if (a === target && bosses.length === 0) continue; 
+              const adx = shipX - a.x;
+              const ady = shipY - a.y;
+              const adist = Math.hypot(adx, ady);
+              if (adist < a.size + 80) {
+                  evX += (adx / adist) * 6;
+                  evY += (ady / adist) * 6;
+              }
+          }
+
+          const margin = 50;
+          if (shipX < margin) evX += 5;
+          if (shipX > width - margin) evX -= 5;
+          if (shipY < margin) evY += 5;
+          if (shipY > height - margin) evY -= 5;
+
+          const currentSpeed = Math.hypot(evX, evY);
+          const maxSpeed = 9;
+          if (currentSpeed > maxSpeed) {
+              evX = (evX / currentSpeed) * maxSpeed;
+              evY = (evY / currentSpeed) * maxSpeed;
+          }
+
+          shipX += evX;
+          shipY += evY;
+
+          mouseX = shipX + Math.cos(angle) * 100;
+          mouseY = shipY + Math.sin(angle) * 100;
+          bgMouseX = (mouseX - width / 2) * 0.05;
+          bgMouseY = (mouseY - height / 2) * 0.05;
+
+          const fireRate = bosses.length > 0 ? 0.25 : 0.08;
+          if (Math.random() < fireRate) { shoot(); playShootSound(); }
+
         } else {
-          mouseX += Math.sin(Date.now() * 0.001) * 2
-          mouseY += Math.cos(Date.now() * 0.001) * 2
+          mouseX = width / 2 + Math.sin(Date.now() * 0.001) * 100;
+          mouseY = height / 2 + Math.cos(Date.now() * 0.001) * 100;
+          angle = Math.atan2(mouseY - shipY, mouseX - shipX);
+          shipX += (mouseX - shipX) * 0.05;
+          shipY += (mouseY - shipY) * 0.05;
         }
+
+        return true;
       }
+      return false;
     }
 
     function drawMatrixRain() {
@@ -609,15 +675,19 @@ export const GameBackground = memo(function GameBackground() {
         ctx.clearRect(0, 0, width, height); drawBackground();
       }
 
-      autoPlay()
+      // 👇 DECISIÓN DE CONTROL (Usuario vs IA)
+      const isAutoPlaying = autoPlay();
+
+      if (!isAutoPlaying) {
+        // Control Normal de Usuario
+        shipX += (mouseX - shipX) * 0.12
+        shipY += (mouseY - shipY) * 0.12
+        angle = Math.atan2(mouseY - shipY, mouseX - shipX)
+      }
 
       if (shake > 0) {
         ctx.save(); ctx.translate(Math.random() * shake - shake / 2, Math.random() * shake - shake / 2); shake *= 0.9;
       }
-
-      shipX += (mouseX - shipX) * 0.12
-      shipY += (mouseY - shipY) * 0.12
-      angle = Math.atan2(mouseY - shipY, mouseX - shipX)
 
       const distToMouse = Math.hypot(mouseX - shipX, mouseY - shipY);
       if (distToMouse > 5 && Math.random() < 0.6) {
