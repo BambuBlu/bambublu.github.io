@@ -108,6 +108,7 @@
   color: rgba(255, 255, 255, 0.6);
   max-width: 600px;
   text-rendering: optimizeSpeed;
+  text-align: center;
 }
 
 @keyframes shine {
