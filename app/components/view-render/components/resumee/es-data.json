@@ -1,0 +1,101 @@
+{
+  "download": "Descargar PDF",
+
+  "header": {
+    "name": "Tobias Moscatelli",
+    "location": "Buenos Aires, Argentina",
+    "contact": "moscatellitobias@gmail.com | +54 9 3484 20-5897",
+    "website": "https://tobiasmoscatelli.com"
+  },
+
+  "sections": {
+    "summary": {
+      "title": "Resumen Profesional",
+      "text": "Desarrollador Mobile y Full Stack con más de 4 años de experiencia en JavaScript, TypeScript, Kotlin, React y React Native. Experiencia construyendo y optimizando aplicaciones móviles y web escalables utilizando REST APIs, Node.js y bases de datos SQL/NoSQL. Fuerte enfoque en arquitectura limpia, optimización de rendimiento y código mantenible. También cuenta con experiencia en enseñanza de programación, destacándose por sus habilidades de comunicación y trabajo colaborativo en entornos ágiles."
+    },
+
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "items": [
+        {
+          "label": "Lenguajes y Base Técnica",
+          "value": "JavaScript, TypeScript, Kotlin, C#, SQL, Desarrollo Mobile, Desarrollo Full Stack"
+        },
+        {
+          "label": "Frontend y Mobile",
+          "value": "React, React Native, Angular, Android, Figma, UX/UI"
+        },
+        {
+          "label": "Backend y Datos",
+          "value": "Node.js, REST APIs, GraphQL, Supabase, SQLite, Room, Arquitectura Limpia, Git, Agile/Scrum, Testing, Optimización de Rendimiento"
+        }
+      ]
+    },
+
+    "experience": {
+      "title": "Experiencia Profesional",
+      "roles": [
+        {
+          "title": "Desarrollador Front-end",
+          "company": "Coppel Arg",
+          "location": "(Híbrido)",
+          "period": "Ago 2025 - Presente",
+          "points": [
+            "Desarrollo de soluciones frontend escalables y componentes reutilizables para una plataforma e-commerce de alto tráfico.",
+            "Liderazgo del desarrollo frontend de flujos de solicitud de crédito e integraciones API.",
+            "Rediseño de interfaces PDP, PLP y Product Card, mejorando usabilidad y consistencia.",
+            "Reducción de deuda técnica mediante refactorización de código legacy y reestructuración de proyectos."
+          ]
+        },
+
+        {
+          "title": "Profesor en Diplomatura de Desarrollo de Videojuegos",
+          "company": "Universidad Nacional de Quilmes",
+          "location": "(Remoto)",
+          "period": "Feb 2025 - Presente",
+          "points": [
+            "Diseño y dictado de contenidos de programación y desarrollo de videojuegos.",
+            "Gestión de cursos online y grupos de estudiantes.",
+            "Aplicación de metodologías de aprendizaje activo para educación técnica."
+          ]
+        },
+
+        {
+          "title": "Desarrollador Mobile",
+          "company": "Lightvessel",
+          "location": "(Remoto)",
+          "period": "Ene 2022 - Mar 2025",
+          "points": [
+            "Desarrollo de aplicaciones móviles con React Native y Kotlin para productos con más de 20M+ descargas.",
+            "Integración de APIs REST y soluciones de almacenamiento local.",
+            "Colaboración con equipos UX/UI y stakeholders interdisciplinarios.",
+            "Mejora de rendimiento y entrega de funcionalidades en aplicaciones productivas."
+          ]
+        }
+      ]
+    },
+
+    "education": {
+      "title": "Educación",
+      "items": [
+        {
+          "institution": "Digital House",
+          "degree": "Certificación Profesional - Front End Specialist",
+          "period": "2025 - 2026"
+        },
+
+        {
+          "institution": "Universidad Tecnológica Nacional",
+          "degree": "Tecnicatura Superior en Programación",
+          "period": "2022 - 2024"
+        },
+
+        {
+          "institution": "Escuela de Ciencias Informáticas",
+          "degree": "Curso - Diseño de Sistemas Interactivos Centrados en el Usuario",
+          "period": "2023"
+        }
+      ]
+    }
+  }
+}

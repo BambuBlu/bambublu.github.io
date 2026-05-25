@@ -1,0 +1,101 @@
+{
+  "download": "Download PDF",
+
+  "header": {
+    "name": "Tobias Moscatelli",
+    "location": "Buenos Aires, Argentina",
+    "contact": "moscatellitobias@gmail.com | +54 9 3484 20-5897",
+    "website": "https://tobiasmoscatelli.com"
+  },
+
+  "sections": {
+    "summary": {
+      "title": "Professional Summary",
+      "text": "Dynamic Mobile & Full Stack Developer with 4+ years of experience in JavaScript, TypeScript, Kotlin, React, and React Native. Experienced in building and optimizing scalable mobile and web applications, leveraging REST APIs, Node.js, and SQL/NoSQL databases. Strong focus on clean architecture, performance optimization, and maintainable code."
+    },
+
+    "skills": {
+      "title": "Technical Skills",
+      "items": [
+        {
+          "label": "Languages & Core",
+          "value": "JavaScript, TypeScript, Kotlin, C#, SQL, Mobile Development, Full Stack Development"
+        },
+        {
+          "label": "Frontend & Mobile",
+          "value": "React, React Native, Angular, Android, Figma, UX/UI"
+        },
+        {
+          "label": "Backend & Data",
+          "value": "Node.js, REST APIs, GraphQL, Supabase, SQLite, Room, Clean Architecture, Git, Agile/Scrum, Testing, Performance Optimization"
+        }
+      ]
+    },
+
+    "experience": {
+      "title": "Professional Experience",
+      "roles": [
+        {
+          "title": "Front-end Developer",
+          "company": "Coppel Arg",
+          "location": "(Hybrid)",
+          "period": "Aug 2025 - Present",
+          "points": [
+            "Develop scalable frontend solutions and reusable components for a high-traffic e-commerce platform.",
+            "Led frontend development of customer credit application flows and API integrations.",
+            "Redesigned PDP, PLP and Product Card interfaces improving usability and consistency.",
+            "Reduced technical debt through legacy refactors and project restructuring."
+          ]
+        },
+
+        {
+          "title": "Professor on Diploma in Video Game Development",
+          "company": "Universidad Nacional de Quilmes",
+          "location": "(Remote)",
+          "period": "Feb 2025 - Present",
+          "points": [
+            "Designed and delivered programming and game development curriculum.",
+            "Managed online courses and student groups.",
+            "Applied active learning methodologies for technical education."
+          ]
+        },
+
+        {
+          "title": "Mobile Developer",
+          "company": "Lightvessel",
+          "location": "(Remote)",
+          "period": "Jan 2022 - Mar 2025",
+          "points": [
+            "Developed React Native and Kotlin mobile apps with 20M+ downloads.",
+            "Integrated REST APIs and local storage solutions.",
+            "Collaborated with UX/UI teams and cross-functional stakeholders.",
+            "Improved performance and feature delivery in production apps."
+          ]
+        }
+      ]
+    },
+
+    "education": {
+      "title": "Education",
+      "items": [
+        {
+          "institution": "Digital House",
+          "degree": "Professional Certificate - Front End Specialist",
+          "period": "2025 - 2026"
+        },
+
+        {
+          "institution": "Universidad Tecnológica Nacional",
+          "degree": "Higher Technician in Programming",
+          "period": "2022 - 2024"
+        },
+
+        {
+          "institution": "Escuela de Ciencias Informáticas",
+          "degree": "Course - User-Centered Interactive Systems Design",
+          "period": "2023"
+        }
+      ]
+    }
+  }
+}
