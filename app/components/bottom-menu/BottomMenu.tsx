@@ -258,16 +258,19 @@ export function BottomMenu() {
   return (
     <>
       <div className={styles["controls"]}>
-        <button aria-label="Download Template" data-ui onClick={() => window.open("https://github.com/BambuBlu/bambublu.github.io", "_blank")} className={styles["control-btn"]} style={{ color: "#f5f5f5" }} title={lang === 'es' ? 'Descargar Plantilla (GitHub)' : 'Download Template (GitHub)'}>
+        <button aria-label="Download Template" data-ui onClick={() => window.open("https://github.com/BambuBlu/bambublu.github.io", "_blank")} className={styles["control-btn"]} title={lang === 'es' ? 'Descargar Plantilla (GitHub)' : 'Download Template (GitHub)'}>
           <Code size={16} />
         </button>
-        <button aria-label="Change language" data-ui onClick={toggleLanguage} className={styles["control-btn"]} style={{ color: "#788cff" }}>
+        
+        <button aria-label="Change language" data-ui onClick={toggleLanguage} className={styles["control-btn"]} style={{ color: "var(--text-main)" }}>
           <span style={{ fontSize: '9px', fontWeight: '800' }}>{lang === 'es' ? 'EN' : 'ES'}</span>
         </button>
-        <button aria-label="Change volume" data-ui onClick={toggleMute} className={styles["control-btn"]} style={{ color: isMuted ? "#ff4b4b" : "#4ade80" }}>
+
+        <button aria-label="Change volume" data-ui onClick={toggleMute} className={styles["control-btn"]} style={{ color: isMuted ? "var(--accent)" : "var(--text-main)" }}>
           {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
         </button>
-        <button aria-label="Pause Mini Game" data-ui onClick={toggleIdle} className={styles["control-btn"]} style={{ color: isIdle ? "#f39c12" : "#fff" }}>
+
+        <button aria-label="Pause Mini Game" data-ui onClick={toggleIdle} className={styles["control-btn"]} style={{ color: isIdle ? "var(--accent)" : "var(--text-main)" }}>
           {isIdle ? <Play size={16} /> : <Pause size={16} />}
         </button>
       </div>
