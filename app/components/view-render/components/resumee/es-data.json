@@ -11,35 +11,6 @@
       "title": "Resumen Profesional",
       "text": "Desarrollador Mobile y Full Stack con más de 4 años de experiencia en el desarrollo de aplicaciones web y móviles en producción. Experiencia con React Native, Flutter, Kotlin, Compose, React y TypeScript, con foco en desarrollo mobile, código mantenible y experiencia de usuario. Actualmente profundizando en Flutter, arquitectura mobile y desarrollo backend."
     },
-    "skills": {
-      "title": "Habilidades Técnicas",
-      "items": [
-        {
-          "label": "Mobile",
-          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
-        },
-        {
-          "label": "Frontend",
-          "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
-        },
-        {
-          "label": "Backend y APIs",
-          "value": "REST APIs, GraphQL, Node.js, Spring Boot, Firebase, MySQL, MongoDB"
-        },
-        {
-          "label": "Arquitectura y DevOps",
-          "value": "Clean Architecture, Microservicios, BFF, AWS, Docker, GitHub Actions, CI/CD"
-        },
-        {
-          "label": "Ingeniería",
-          "value": "Arquitectura de Software, Code Review, Refactoring, Optimización de Rendimiento, Debugging, Agile"
-        },
-        {
-          "label": "Idiomas",
-          "value": "Español (Nativo), Inglés (B2)"
-        }
-      ]
-    },
     "experience": {
       "title": "Experiencia Profesional",
       "roles": [
@@ -97,6 +68,35 @@
           "institution": "Digital House",
           "degree": "Certificado Profesional - Especialista en Front End",
           "period": "2025-02 - 2026-02"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Habilidades Técnicas",
+      "items": [
+        {
+          "label": "Mobile",
+          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
+        },
+        {
+          "label": "Frontend",
+          "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
+        },
+        {
+          "label": "Backend y APIs",
+          "value": "REST APIs, GraphQL, Node.js, Spring Boot, Firebase, MySQL, MongoDB"
+        },
+        {
+          "label": "Arquitectura y DevOps",
+          "value": "Clean Architecture, Microservicios, BFF, GitHub Actions, CI/CD"
+        },
+        {
+          "label": "Ingeniería",
+          "value": "Arquitectura de Software, Code Review, Refactoring, Optimización de Rendimiento, Debugging, Agile"
+        },
+        {
+          "label": "Idiomas",
+          "value": "Español (Nativo), Inglés (B2)"
         }
       ]
     }

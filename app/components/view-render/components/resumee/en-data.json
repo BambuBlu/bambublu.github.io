@@ -11,43 +11,6 @@
       "title": "Professional Summary",
       "text": "Mobile & Full Stack Developer with 4+ years of experience building production web and mobile applications. Experienced with React Native, Flutter, Kotlin, Compose, React, and TypeScript, with a focus on mobile development, maintainable code, and user experience. Currently deepening my expertise in Flutter, mobile architecture, and backend development."
     },
-    "skills": {
-      "title": "Technical Skills",
-      "items": [
-        {
-          "label": "Mobile",
-          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
-        },
-        {
-          "label": "Frontend",
-          "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
-        },
-        {
-          "label": "Backend & APIs",
-          "value": "REST APIs, GraphQL, Node.js, API Integration, Authentication, Spring Boot"
-        },
-        {
-          "label": "Data & Services",
-          "value": "Firebase, MySQL, MongoDB, SQLite, SQL Server, Local Storage"
-        },
-        {
-          "label": "Architecture & Engineering",
-          "value": "Software Architecture, Clean Architecture, Microservices, BFF, Event-Driven Architecture, Code Review, Refactoring, Performance Optimization, Debugging"
-        },
-        {
-          "label": "Cloud & DevOps",
-          "value": "AWS, Docker, GitHub Actions, CI/CD"
-        },
-        {
-          "label": "Professional Competencies",
-          "value": "Technical Leadership, Cross-functional Collaboration, Technical Mentoring, Problem Solving, Technical Planning"
-        },
-        {
-          "label": "Languages",
-          "value": "Spanish (Native), English (B2)"
-        }
-      ]
-    },
     "experience": {
       "title": "Professional Experience",
       "roles": [
@@ -105,6 +68,39 @@
           "institution": "Digital House",
           "degree": "Professional Certificate - Front End Specialist",
           "period": "2025-02 - 2026-02"
+        }
+      ]
+    },
+    "skills": {
+      "title": "Technical Skills",
+      "items": [
+        {
+          "label": "Mobile",
+          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
+        },
+        {
+          "label": "Frontend",
+          "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
+        },
+        {
+          "label": "Backend & APIs",
+          "value": "REST APIs, GraphQL, Node.js, API Integration, Authentication, Spring Boot"
+        },
+        {
+          "label": "Data & Services",
+          "value": "Firebase, MySQL, MongoDB, SQLite, SQL Server, Local Storage"
+        },
+        {
+          "label": "Architecture & Engineering",
+          "value": "Software Architecture, Clean Architecture, Microservices, BFF, Event-Driven Architecture, Code Review, Refactoring, Performance Optimization, Debugging, GitHub Actions, CI/CD"
+        },
+        {
+          "label": "Professional Competencies",
+          "value": "Technical Leadership, Cross-functional Collaboration, Technical Mentoring, Problem Solving, Technical Planning"
+        },
+        {
+          "label": "Languages",
+          "value": "Spanish (Native), English (B2)"
         }
       ]
     }
