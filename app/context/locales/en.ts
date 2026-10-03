@@ -75,7 +75,7 @@ terminal: {
     catSecret: "ACCESS DENIED. 256-bit AES Encryption level.",
     contact: " Email: moscatellitobias@gmail.com\n Phone: +54 9 3484 20-5897\n Location: Buenos Aires, Argentina",
     opening: "Opening {link} in a new tab...",
-    neofetch: "       /\\_/\\ \n      ( o.o )\n       > ^ < \n\nOS: PortfolioOS v1.0\nKernel: React Native/Next.js\nUptime: 99.99%\nShell: HackerTerm\nDeveloper: Tobias Moscatelli",
+    neofetch: "       /\\_/\\ \n      ( o.o )\n       > ^ < \n\nOS: PortfolioOS v2.0\nKernel: Flutter/RN/Spring\nUptime: 99.99%\nShell: HackerTerm\nDeveloper: Tobias Moscatelli",
     matrix: "Wake up, Neo...",
     pingErr: "Usage: ping <host> (e.g. ping google.com)",
     coffee: "Brewing coffee... \n\n      {  }\n     _{__}_\n  .-'      '-.\n (            )\n  '--......--'\n",

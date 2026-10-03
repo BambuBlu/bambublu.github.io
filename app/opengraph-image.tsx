@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
  
 export const runtime = 'edge'
-export const alt = 'Tobias Moscatelli - Software Engineer & Game Dev'
+export const alt = 'Tobias Moscatelli - Mobile & Full Stack Developer'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
  
@@ -30,7 +30,7 @@ export default async function Image() {
         </h1>
         
         <h2 style={{ fontSize: 36, color: '#788cff', marginTop: 20, fontWeight: 'normal' }}>
-          Software Engineer & Game Developer
+          Mobile & Full Stack Developer
         </h2>
 
         <div style={{ 

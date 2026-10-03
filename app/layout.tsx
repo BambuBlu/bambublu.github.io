@@ -35,14 +35,14 @@ export const metadata: Metadata = {
     canonical: '/',
   },
   title: {
-    default: 'Tobias Moscatelli | Software Engineer & Game Developer',
+    default: 'Tobias Moscatelli | Mobile & Full Stack Developer',
     template: '%s | Tobias Moscatelli',
   },
-  description: 'Portfolio interactivo de Tobias Moscatelli. Construyendo universos digitales a través de código escalable y experiencias inmersivas en React, Next.js y Godot.',
-  keywords: ['Software Engineer', 'Game Developer', 'React', 'Next.js', 'Godot', 'Portfolio', 'TypeScript', 'Frontend', 'Tobias Moscatelli'],
-  authors: [{ name: 'Tobias Moscatelli', url: SITE_URL }], 
+  description: 'Portfolio interactivo de Tobias Moscatelli. Desarrollador Mobile y Full Stack con experiencia en producción construyendo aplicaciones escalables con Flutter, React Native, Kotlin, React y Node.js.',
+  keywords: ['Mobile Developer', 'Full Stack Developer', 'Flutter', 'React Native', 'Kotlin', 'React', 'Next.js', 'Spring Boot', 'TypeScript', 'Tobias Moscatelli'],
+  authors: [{ name: 'Tobias Moscatelli', url: SITE_URL }],
   creator: 'Tobias Moscatelli',
-  publisher: 'Tobias Moscatelli', 
+  publisher: 'Tobias Moscatelli',
   
   robots: {
     index: true,
@@ -67,8 +67,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     alternateLocale: 'es_ES',
     url: SITE_URL,
-    title: 'Tobias Moscatelli | Software Engineer & Game Developer',
-    description: 'Portfolio interactivo espacial construido con Next.js y Canvas. Explora mis proyectos, artículos y mi universo digital.',
+    title: 'Tobias Moscatelli | Mobile & Full Stack Developer',
+    description: 'Portfolio interactivo espacial de Tobias Moscatelli. Explorando arquitecturas móviles y desarrollo backend.',
     siteName: 'Tobias Moscatelli - Portfolio',
     images: [
       {
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tobias Moscatelli | Software Engineer & Game Developer',
+    title: 'Tobias Moscatelli | Mobile & Full Stack Developer',
     description: 'Portfolio interactivo espacial construido con Next.js y Canvas.',
     images: ['/img/pro.jpg'],
   },
