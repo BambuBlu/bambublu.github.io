@@ -83,7 +83,7 @@ export function ResumeeView() {
               <div className={styles.header_content}>
                 <div className={styles.profile_image_container} onClick={handleSecretClick} style={{ cursor: 'pointer' }}>
                   <Image 
-                    src="/img/pro.jpg" 
+                    src="/img/personalPhoto.webp" 
                     alt="Tobias Moscatelli" 
                     fill 
                     style={{ objectFit: "cover" }}

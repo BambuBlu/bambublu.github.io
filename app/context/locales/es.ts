@@ -25,16 +25,16 @@ export const es = {
   },
   projects: {
     title: "Mis Proyectos",
-    subtitle: "Una selección de mis trabajos en desarrollo web, móvil y videojuegos.",
+    subtitle: "Una selección de mi mundo (:.",
     code: "Repositorio",
     live: "PlayStore",
     blog: "Ver Devlog",
     items: [
-      { id: 1, title: "Password Manager App", category: "Mobile App", shortDesc: "App móvil segura para almacenar contraseñas encriptadas localmente.", fullDesc: "Una aplicación Android segura en desarrollo. Documento las decisiones técnicas sobre encriptación de datos, arquitectura de almacenamiento local, flujo de autenticación y prácticas modernas de desarrollo en Android." },
-      { id: 2, title: "SpaceX Launch Tracker", category: "Mobile App", shortDesc: "App en React Native para buscar y filtrar lanzamientos de SpaceX.", fullDesc: "Aplicación móvil construida con React Native diseñada para interactuar con la API oficial de SpaceX. Permite a los usuarios acceder a información detallada de misiones, líneas de tiempo, vehículos y cargas útiles." },
-      { id: 3, title: "BattleCats Survivors", category: "Game Dev", shortDesc: "Juego móvil roguelite de disparos arcade con escuadrones de gatos.", fullDesc: "BattleCats Survivors te sumerge en una experiencia arcade shooter roguelite. Toma el mando de un escuadrón de gatos para derrotar oleadas interminables de adversarios. Combina héroes estratégicamente para desbloquear sinergias únicas." },
-      { id: 4, title: "Sexy or Ugly Detector", category: "Mobile App", shortDesc: "Aplicación de broma que simula leer la huella dactilar.", fullDesc: "Una divertida aplicación de broma para jugar con amigos. Simula escanear tu dedo para detectar qué tan atractivo eres. ¡Solo una simulación para reírse un rato!" },
-      { id: 5, title: "Gun Idle Clicker", category: "Game Dev", shortDesc: "Juego casual incremental sobre construir y mejorar armas.", fullDesc: "Gun Idle Clicker es un juego casual donde construyes y mejoras armas poderosas simplemente tocando la pantalla. Gana monedas, desbloquea nuevas armas y sube de nivel tu arsenal para pasar el tiempo." }
+      { id: 1, title: "Personal Finance App", category: "Mobile App", shortDesc: "Aplicación multiplataforma para el seguimiento de gastos y gestión de finanzas personales.", fullDesc: "Una aplicación móvil desarrollada con Flutter y Dart para ayudar a los usuarios a gestionar sus finanzas. Implementa Clean Architecture, gestión de estado eficiente y persistencia de datos, garantizando una experiencia rápida, segura y escalable en múltiples plataformas." },
+      { id: 2, title: "BattleCats Survivors", category: "Game Dev", shortDesc: "Juego móvil roguelite de disparos arcade con escuadrones de gatos.", fullDesc: "BattleCats Survivors te sumerge en una experiencia arcade shooter roguelite. Toma el mando de un escuadrón de gatos para derrotar oleadas interminables de adversarios. Combina héroes estratégicamente para desbloquear sinergias únicas." },
+      { id: 3, title: "Dementus Dementatus", category: "Game Jam", shortDesc: "Juego web desarrollado para la GOTO Jam 2022 utilizando Godot Engine.", fullDesc: "Un juego desarrollado en el marco de la GOTO Jam 2022. Creado con Godot Engine, este proyecto demuestra habilidades de prototipado rápido, exportación para navegadores web con soporte táctil, y desarrollo ágil bajo las estrictas restricciones de tiempo de una Game Jam." },
+      { id: 4, title: "Password Manager App", category: "Mobile App", shortDesc: "App móvil segura para almacenar contraseñas encriptadas localmente.", fullDesc: "Una aplicación Android segura en desarrollo. Documento las decisiones técnicas sobre encriptación de datos, arquitectura de almacenamiento local, flujo de autenticación y prácticas modernas de desarrollo en Android." },
+      { id: 5, title: "SpaceX Launch Tracker", category: "Mobile App", shortDesc: "App en React Native para buscar y filtrar lanzamientos de SpaceX.", fullDesc: "Aplicación móvil construida con React Native diseñada para interactuar con la API oficial de SpaceX. Permite a los usuarios acceder a información detallada de misiones, líneas de tiempo, vehículos y cargas útiles." },
     ]
   },
   blog: {

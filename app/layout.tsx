@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: 'Tobias Moscatelli - Portfolio',
     images: [
       {
-        url: '/img/pro.jpg',
+        url: '/img/personalPhoto.webp',
         width: 1200,
         height: 630,
         alt: 'Previsualización del Portfolio de Tobias Moscatelli',
@@ -83,7 +83,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Tobias Moscatelli | Mobile & Full Stack Developer',
     description: 'Portfolio interactivo espacial construido con Next.js y Canvas.',
-    images: ['/img/pro.jpg'],
+    images: ['/img/personalPhoto.webp'],
   },
 };
 

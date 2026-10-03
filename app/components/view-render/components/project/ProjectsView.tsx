@@ -36,11 +36,11 @@ export function ProjectsView() {
   }, []);
 
   const projectsData = [
-    { id: 1, image: "/img/passManagerApp.jpeg", tags: ["Android", "Kotlin", "Security", "Mobile"], links: { blog: "/blog/password-manager-app", github: "https://github.com/BambuBlu" } },
-    { id: 2, image: "/img/spaceXApi.jpg", tags: ["React Native", "API", "Mobile", "SpaceX"], links: { blog: "/blog/spacex-launch-tracker", github: "https://github.com/BambuBlu/spacex-launch-tracker-app" } },
-    { id: 3, image: "/img/portfolio1.png", tags: ["Godot Engine", "Game Dev", "Mobile", "Roguelite"], links: { live: "https://play.google.com/store/apps/details?id=com.battlecats.survivors" } },
-    { id: 4, image: "/img/portfolio2.jpg", tags: ["Android", "Prank App", "Mobile"], links: { live: "https://play.google.com/store/apps/details?id=com.fingerscanner.sexyhotnessscan" } },
-    { id: 5, image: "/img/portfolio3.jpg", tags: ["Idle Game", "Mobile", "Game Dev"], links: { live: "https://play.google.com/store/apps/details?id=com.guntapgames.machinegunclicker" } }
+    { id: 1, image: "/img/personalFinance.webp", tags: ["Flutter", "Dart", "Fintech", "Clean Arch"], links: { blog: "/blog/personal-finance-app", github: "https://github.com/BambuBlu/personal-finance-app" } },
+    { id: 2, image: "/img/battleCats.webp", tags: ["Godot Engine", "Game Dev", "Mobile", "Roguelite"], links: { live: "https://play.google.com/store/apps/details?id=com.battlecats.survivors" } },
+    { id: 3, image: "/img/dementusDementatus.webp", tags: ["Godot Engine", "Game Dev", "Game Jam", "Web"], links: { live: "https://r4nkf1v3.itch.io/dementus-dementatus", github: "https://github.com/R4nKF1v3/GOTOJam2022-Entry" } },
+    { id: 4, image: "/img/passManagerApp.webp", tags: ["Android", "Kotlin", "Security", "Mobile"], links: { github: "https://github.com/BambuBlu" } },
+    { id: 5, image: "/img/spaceXApi.webp", tags: ["React Native", "API", "Mobile", "SpaceX"], links: { github: "https://github.com/BambuBlu/spacex-launch-tracker-app" } },
   ];
 
   const mergedProjects = t.projects.items.map((item: any) => ({

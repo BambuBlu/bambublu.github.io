@@ -25,16 +25,16 @@ export const en = {
   },
   projects: {
     title: "My Projects",
-    subtitle: "A selection of my work in web, mobile, and game development.",
+    subtitle: "A selection of my world (:.",
     code: "Repository",
     live: "PlayStore",
     blog: "Read Devlog",
     items: [
-      { id: 1, title: "Password Manager App", category: "Mobile App", shortDesc: "A secure mobile app for storing encrypted passwords locally.", fullDesc: "An ongoing secure Android-based Password Manager App. Documenting technical decisions regarding data encryption, local storage architecture, user authentication flow, and implementation using modern Android development practices." },
-      { id: 2, title: "SpaceX Launch Tracker", category: "Mobile App", shortDesc: "Browse and filter SpaceX launches in real time using React Native.", fullDesc: "Mobile application built with React Native designed to interact with the official SpaceX API. The app retrieves and displays structured data about rocket launches, providing users with access to detailed mission information." },
-      { id: 3, title: "BattleCats Survivors", category: "Game Dev", shortDesc: "Arcade shooter roguelite mobile game with a cat squadron.", fullDesc: "BattleCats Survivors immerses you in an arcade shooter roguelite experience. Command a formidable cat squadron to strike down nearby adversaries. Strategically combine heroes to unlock exclusive class bonuses and synergies." },
-      { id: 4, title: "Sexy or Ugly Detector", category: "Mobile App", shortDesc: "Prank app that simulates a fingerprint scan to rate attractiveness.", fullDesc: "Sexy or Ugly Detector is a prank app for you to have fun playing with friends. It simulates reading your finger to detect if you're attractive, but it's just a joke simulation. Prank your friends!" },
-      { id: 5, title: "Gun Idle Clicker", category: "Game Dev", shortDesc: "Casual tap game where you build and upgrade powerful weapons.", fullDesc: "Gun Idle Clicker is a casual tap game where you build and upgrade powerful weapons just by tapping the screen. Earn coins, unlock new guns, and level up your arsenal in this addictive simulation." }
+      { id: 1, title: "Personal Finance App", category: "Mobile App", shortDesc: "Cross-platform mobile application for expense tracking and personal finance management.", fullDesc: "A mobile application built with Flutter and Dart to help users manage their finances. It implements Clean Architecture, efficient state management, and data persistence, ensuring a fast, secure, and scalable experience across multiple platforms." },
+      { id: 2, title: "BattleCats Survivors", category: "Game Dev", shortDesc: "Arcade shooter roguelite mobile game with a cat squadron.", fullDesc: "BattleCats Survivors immerses you in an arcade shooter roguelite experience. Command a formidable cat squadron to strike down nearby adversaries. Strategically combine heroes to unlock exclusive class bonuses and synergies." },
+      { id: 3, title: "Dementus Dementatus", category: "Game Jam", shortDesc: "Web game developed for the GOTO Jam 2022 using Godot Engine.", fullDesc: "A game developed during the GOTO Jam 2022. Built with Godot Engine, this project demonstrates rapid prototyping skills, browser export with touch support, and effective development under the strict time constraints of a Game Jam." },
+      { id: 4, title: "Password Manager App", category: "Mobile App", shortDesc: "A secure mobile app for storing encrypted passwords locally.", fullDesc: "An ongoing secure Android-based Password Manager App. Documenting technical decisions regarding data encryption, local storage architecture, user authentication flow, and implementation using modern Android development practices." },
+      { id: 5, title: "SpaceX Launch Tracker", category: "Mobile App", shortDesc: "Browse and filter SpaceX launches in real time using React Native.", fullDesc: "Mobile application built with React Native designed to interact with the official SpaceX API. The app retrieves and displays structured data about rocket launches, providing users with access to detailed mission information." },
     ]
   },
   blog: {
