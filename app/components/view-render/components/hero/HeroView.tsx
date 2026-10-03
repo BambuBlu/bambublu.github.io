@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useAppContext } from "@/app/context/AppContext"
-import { Atom, FileType, Zap, Database, Smartphone, Gamepad2, Palette, Users } from "lucide-react"
+import { Atom, Smartphone, Server, Database, Cloud, Layers, FileCode, Code2 } from "lucide-react"
 import styles from "./heroview.module.css"
 import { Crosshair } from "@/app/components/crosshair"
 
@@ -25,10 +25,14 @@ export function HeroView() {
   }
 
   const techs = [
-    { Icon: Atom, name: "React" }, { Icon: Zap, name: "Next.js" },
-    { Icon: Palette, name: "UI Design" }, { Icon: Users, name: "UX" },
-    { Icon: FileType, name: "TypeScript" }, { Icon: Database, name: "Data" },
-    { Icon: Smartphone, name: "Mobile" }, { Icon: Gamepad2, name: "Game Dev" },
+    { Icon: Smartphone, name: "Mobile (Flutter & RN)" },
+    { Icon: Atom, name: "React & Next.js" },
+    { Icon: Server, name: "Backend & APIs" },
+    { Icon: Database, name: "Data & Firebase" },
+    { Icon: Layers, name: "Architecture" },
+    { Icon: Cloud, name: "AWS & DevOps" },
+    { Icon: FileCode, name: "TypeScript" },
+    { Icon: Code2, name: "Kotlin" },
   ];
 
   return (
@@ -39,7 +43,7 @@ export function HeroView() {
         <div className={styles.scroll_content} >
           <div className={styles.badge}>{t.hero.badge}</div>
           <h1 className={styles.title}>{t.hero.hi} <span className={styles.name}>Tobias</span></h1>
-          <h2 className={styles.role}>Software Engineer <span className={styles.separator}>&</span> Game Developer</h2>
+          <h2 className={styles.role}>Mobile <span className={styles.separator}>&</span> Full Stack Developer</h2>
           <p className={styles.subtitle}>
             {t.hero.subtitle}
             <span className={styles.desktop_only}>{t.hero.desktopOnly}</span>

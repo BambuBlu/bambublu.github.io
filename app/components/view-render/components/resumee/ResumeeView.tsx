@@ -129,7 +129,7 @@ export function ResumeeView() {
                 <div key={i} className={styles.role_entry}>
                   <div className={styles.role_header}>
                     <h3 className={styles.role_title}>
-                      <span className={styles.company}>{role.company}</span> <span className={styles.role_dash}>-</span> {role.title} {role.location}
+                      <span className={styles.company}>{role.company}</span> <span className={styles.role_dash}>-</span> {role.title} {role.location && ` ${role.location}`}
                     </h3>
                     <span className={styles.role_period}>{role.period}</span>
                   </div>

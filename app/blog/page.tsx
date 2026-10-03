@@ -36,7 +36,7 @@ export default function BlogIndex() {
             "@type": "Person",
             "name": "Tobias Moscatelli",
             "url": "https://www.tobiasmoscatelli.com",
-            "jobTitle": "Software Engineer & Game Developer",
+            "jobTitle": "Mobile & Full Stack Developer",
             "sameAs": [
               "https://github.com/BambuBlu",
               "https://www.linkedin.com/in/tobiasmoscatelli"

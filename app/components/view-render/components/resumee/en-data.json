@@ -1,99 +1,116 @@
 {
   "download": "Download PDF",
-
   "header": {
     "name": "Tobias Moscatelli",
     "location": "Buenos Aires, Argentina",
     "contact": "moscatellitobias@gmail.com | +54 9 3484 20-5897",
-    "website": "https://tobiasmoscatelli.com"
+    "website": "https://tobiasmoscatelli.com",
+    "social_networks": [
+      {
+        "network": "LinkedIn",
+        "username": "tobiasmoscatelli"
+      }
+    ]
   },
-
   "sections": {
     "summary": {
       "title": "Professional Summary",
-      "text": "Dynamic Mobile & Full Stack Developer with 4+ years of experience in JavaScript, TypeScript, Kotlin, React, and React Native. Experienced in building and optimizing scalable mobile and web applications, leveraging REST APIs, Node.js, and SQL/NoSQL databases. Strong focus on clean architecture, performance optimization, and maintainable code."
+      "text": "Mobile & Full Stack Developer with 4+ years of experience building production web and mobile applications. Experienced with React Native, Flutter, Kotlin, Compose, React, and TypeScript, with a focus on mobile development, maintainable code, and user experience. Currently deepening my expertise in Flutter, mobile architecture, and backend development."
     },
-
     "skills": {
       "title": "Technical Skills",
       "items": [
         {
-          "label": "Languages & Core",
-          "value": "JavaScript, TypeScript, Kotlin, C#, SQL, Mobile Development, Full Stack Development"
+          "label": "Mobile",
+          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
         },
         {
-          "label": "Frontend & Mobile",
-          "value": "React, React Native, Angular, Android, Figma, UX/UI"
+          "label": "Frontend",
+          "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
         },
         {
-          "label": "Backend & Data",
-          "value": "Node.js, REST APIs, GraphQL, Supabase, SQLite, Room, Clean Architecture, Git, Agile/Scrum, Testing, Performance Optimization"
+          "label": "Backend & APIs",
+          "value": "REST APIs, GraphQL, Node.js, API Integration, Authentication, Spring Boot"
+        },
+        {
+          "label": "Data & Services",
+          "value": "Firebase, MySQL, MongoDB, SQLite, SQL Server, Local Storage"
+        },
+        {
+          "label": "Architecture & Engineering",
+          "value": "Software Architecture, Clean Architecture, Microservices, BFF, Event-Driven Architecture, Code Review, Refactoring, Performance Optimization, Debugging"
+        },
+        {
+          "label": "Cloud & DevOps",
+          "value": "AWS, Docker, GitHub Actions, CI/CD"
+        },
+        {
+          "label": "Professional Competencies",
+          "value": "Technical Leadership, Cross-functional Collaboration, Technical Mentoring, Problem Solving, Technical Planning"
+        },
+        {
+          "label": "Languages",
+          "value": "Spanish (Native), English (B2)"
         }
       ]
     },
-
     "experience": {
       "title": "Professional Experience",
       "roles": [
         {
-          "title": "Front-end Developer",
+          "title": "Full Stack Developer",
           "company": "Coppel Arg",
-          "location": "(Hybrid)",
-          "period": "Aug 2025 - Present",
+          "period": "2025-08 - present",
           "points": [
-            "Develop scalable frontend solutions and reusable components for a high-traffic e-commerce platform.",
-            "Led frontend development of customer credit application flows and API integrations.",
-            "Redesigned PDP, PLP and Product Card interfaces improving usability and consistency.",
-            "Reduced technical debt through legacy refactors and project restructuring."
+            "Led end-to-end business features across frontend and backend services, integrating REST APIs, VTEX, internal platforms, and third-party systems for a high-traffic e-commerce platform.",
+            "Led the technical implementation of the online credit application flow, including biometric identity validation and the complete frontend experience.",
+            "Led the continuous evolution of checkout, covering cart management, payment, shipping, and order confirmation.",
+            "Refactored and modularized legacy monolithic applications, improving maintainability, scalability, and development velocity.",
+            "Contributed to software architecture, BFFs, microservices, event-driven communication, Clean Architecture, CI/CD, code reviews, and technical planning."
           ]
         },
-
-        {
-          "title": "Professor on Diploma in Video Game Development",
-          "company": "Universidad Nacional de Quilmes",
-          "location": "(Remote)",
-          "period": "Feb 2025 - Present",
-          "points": [
-            "Designed and delivered programming and game development curriculum.",
-            "Managed online courses and student groups.",
-            "Applied active learning methodologies for technical education."
-          ]
-        },
-
         {
           "title": "Mobile Developer",
           "company": "Lightvessel",
-          "location": "(Remote)",
-          "period": "Jan 2022 - Mar 2025",
+          "period": "2023-03 - 2025-08",
           "points": [
-            "Developed React Native and Kotlin mobile apps with 20M+ downloads.",
-            "Integrated REST APIs and local storage solutions.",
-            "Collaborated with UX/UI teams and cross-functional stakeholders.",
-            "Improved performance and feature delivery in production apps."
+            "Developed and maintained production mobile applications using React Native, Flutter, and Compose for products reaching more than 20 million users worldwide.",
+            "Built end-to-end mobile features integrating REST APIs, Firebase, and local storage.",
+            "Improved performance, stability, and maintainability by resolving production issues, optimizing critical flows, and refactoring legacy code.",
+            "Contributed to software architecture, code reviews, Agile ceremonies, and engineering best practices across multiple projects."
+          ]
+        },
+        {
+          "title": "UX/UI Designer",
+          "company": "Lightvessel",
+          "period": "2022-01 - 2023-03",
+          "points": [
+            "Designed user-centered mobile interfaces and flows for Android and iOS, collaborating with developers on implementation and reusable design systems."
+          ]
+        },
+        {
+          "title": "Programming Instructor",
+          "company": "Universidad Nacional de Quilmes",
+          "period": "2025-02 - present",
+          "points": [
+            "Designed and evolved the curriculum for a university-level Diploma in Game Development, covering programming, software engineering, and game development.",
+            "Taught programming with Godot and C#, developed project-based materials, and mentored students through complete software projects."
           ]
         }
       ]
     },
-
     "education": {
       "title": "Education",
       "items": [
         {
+          "institution": "Universidad Tecnológica Nacional",
+          "degree": "Higher Technician in Computer Programming",
+          "period": "2022-03 - 2024-11"
+        },
+        {
           "institution": "Digital House",
           "degree": "Professional Certificate - Front End Specialist",
-          "period": "2025 - 2026"
-        },
-
-        {
-          "institution": "Universidad Tecnológica Nacional",
-          "degree": "Higher Technician in Programming",
-          "period": "2022 - 2024"
-        },
-
-        {
-          "institution": "Escuela de Ciencias Informáticas",
-          "degree": "Course - User-Centered Interactive Systems Design",
-          "period": "2023"
+          "period": "2025-02 - 2026-02"
         }
       ]
     }

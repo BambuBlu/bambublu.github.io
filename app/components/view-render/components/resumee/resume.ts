@@ -27,7 +27,7 @@ export interface ResumeData {
       roles: {
         title: string
         company: string
-        location: string
+        location?: string
         period: string
         points: string[]
       }[]
