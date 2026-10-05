@@ -9,7 +9,7 @@
   "sections": {
     "summary": {
       "title": "Professional Summary",
-      "text": "Mobile & Full Stack Developer with 4+ years of experience building production web and mobile applications. Experienced with React Native, Flutter, Kotlin, Compose, React, and TypeScript, with a focus on mobile development, maintainable code, and user experience. Currently deepening my expertise in Flutter, mobile architecture, and backend development."
+      "text": "Full Stack Developer with 4+ years of experience building production web and mobile applications. Experienced with React Native, Flutter, Kotlin, Compose, React, and TypeScript, with a focus on mobile development, maintainable code, and user experience. Currently deepening my expertise in Flutter, mobile architecture, and backend development."
     },
     "experience": {
       "title": "Professional Experience",
@@ -75,20 +75,20 @@
       "title": "Technical Skills",
       "items": [
         {
-          "label": "Mobile",
-          "value": "Flutter, Dart, Kotlin, Jetpack Compose, React Native"
-        },
-        {
           "label": "Frontend",
           "value": "React, Next.js, TypeScript, JavaScript, HTML5, CSS3"
         },
         {
           "label": "Backend & APIs",
-          "value": "REST APIs, GraphQL, Node.js, API Integration, Authentication, Spring Boot"
+          "value": "REST APIs, Node.js, API Integration, Authentication, Spring Boot"
         },
         {
           "label": "Data & Services",
           "value": "Firebase, MySQL, MongoDB, SQLite, SQL Server, Local Storage"
+        },
+        {
+          "label": "Mobile",
+          "value": "React Native, Flutter, Dart, Kotlin, Jetpack Compose"
         },
         {
           "label": "Architecture & Engineering",
@@ -96,7 +96,7 @@
         },
         {
           "label": "Professional Competencies",
-          "value": "Technical Leadership, Cross-functional Collaboration, Technical Mentoring, Problem Solving, Technical Planning"
+          "value": "Cross-functional Collaboration, Technical Mentoring, Problem Solving, Technical Planning"
         },
         {
           "label": "Languages",

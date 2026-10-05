@@ -43,7 +43,7 @@ export function HeroView() {
         <div className={styles.scroll_content} >
           <div className={styles.badge}>{t.hero.badge}</div>
           <h1 className={styles.title}>{t.hero.hi} <span className={styles.name}>Tobias</span></h1>
-          <h2 className={styles.role}>Mobile <span className={styles.separator}>&</span> Full Stack Developer</h2>
+          <h2 className={styles.role}>Full Stack Developer<span className={styles.separator}>&</span> Mobile </h2>
           <p className={styles.subtitle}>
             {t.hero.subtitle}
             <span className={styles.desktop_only}>{t.hero.desktopOnly}</span>

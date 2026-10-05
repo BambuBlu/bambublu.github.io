@@ -75,7 +75,7 @@ async function BlogPostFetcher({ slug }: { slug: string }) {
         "@type": "Person",
         "name": "Tobias Moscatelli",
         "url": "https://www.tobiasmoscatelli.com",
-        "jobTitle": "Mobile & Full Stack Developer"
+        "jobTitle": "Full Stack Developer & Mobile"
     }]
   };
 
